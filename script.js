@@ -198,4 +198,31 @@ elementos.forEach((elemento) => {
 
     observador.observe(elemento);
 
+/* =====================================================
+   NAVEGACIÓN INTERNA
+===================================================== */
+
+document.querySelectorAll('a[href^="#"]').forEach((enlace) => {
+
+    enlace.addEventListener("click", function (evento) {
+
+        const destino = this.getAttribute("href");
+
+        if (!destino || destino === "#") return;
+
+        const seccion = document.querySelector(destino);
+
+        if (seccion) {
+
+            evento.preventDefault();
+
+            seccion.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+    });
+
 
