@@ -7,6 +7,80 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("LinguaGo iniciado correctamente 🚀");
 
+
+    /* =================================================
+       NAVEGACIÓN INTERNA
+    ================================================= */
+
+    document.querySelectorAll('a[href^="#"]').forEach((enlace) => {
+
+        enlace.addEventListener("click", function (evento) {
+
+            const destino = this.getAttribute("href");
+
+            if (!destino || destino === "#") return;
+
+            const seccion = document.querySelector(destino);
+
+            if (seccion) {
+
+                evento.preventDefault();
+
+                seccion.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        });
+
+    });
+
+
+    /* =================================================
+       ANIMACIÓN SUAVE AL ENTRAR EN PANTALLA
+    ================================================= */
+
+    const elementos = document.querySelectorAll(
+        ".idioma-card, .curso, .juego, .premium-box"
+    );
+
+    const observador = new IntersectionObserver(
+
+        (entradas) => {
+
+            entradas.forEach((entrada) => {
+
+                if (entrada.isIntersecting) {
+
+                    entrada.target.style.opacity = "1";
+                    entrada.target.style.transform = "translateY(0)";
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.15
+        }
+
+    );
+
+
+    elementos.forEach((elemento) => {
+
+        elemento.style.opacity = "0";
+        elemento.style.transform = "translateY(25px)";
+        elemento.style.transition =
+            "opacity .6s ease, transform .6s ease";
+
+        observador.observe(elemento);
+
+    });
+
 });
 
 
@@ -27,7 +101,6 @@ function abrirMenu() {
     } else {
 
         nav.style.display = "flex";
-
         nav.style.flexDirection = "column";
         nav.style.position = "absolute";
         nav.style.top = "75px";
@@ -35,7 +108,8 @@ function abrirMenu() {
         nav.style.padding = "20px";
         nav.style.background = "white";
         nav.style.borderRadius = "15px";
-        nav.style.boxShadow = "0 15px 35px rgba(0,0,0,.12)";
+        nav.style.boxShadow =
+            "0 15px 35px rgba(0,0,0,.12)";
     }
 }
 
@@ -156,73 +230,3 @@ document.addEventListener("keydown", (evento) => {
     }
 
 });
-
-
-/* =====================================================
-   ANIMACIÓN SUAVE AL ENTRAR EN PANTALLA
-===================================================== */
-
-const elementos = document.querySelectorAll(
-    ".idioma-card, .curso, .juego, .premium-box"
-);
-
-const observador = new IntersectionObserver(
-
-    (entradas) => {
-
-        entradas.forEach((entrada) => {
-
-            if (entrada.isIntersecting) {
-
-                entrada.target.style.opacity = "1";
-                entrada.target.style.transform = "translateY(0)";
-
-            }
-
-        });
-
-    },
-
-    {
-        threshold: 0.15
-    }
-
-);
-
-
-elementos.forEach((elemento) => {
-
-    elemento.style.opacity = "0";
-    elemento.style.transform = "translateY(25px)";
-    elemento.style.transition = "opacity .6s ease, transform .6s ease";
-
-    observador.observe(elemento);
-
-/* =====================================================
-   NAVEGACIÓN INTERNA
-===================================================== */
-
-document.querySelectorAll('a[href^="#"]').forEach((enlace) => {
-
-    enlace.addEventListener("click", function (evento) {
-
-        const destino = this.getAttribute("href");
-
-        if (!destino || destino === "#") return;
-
-        const seccion = document.querySelector(destino);
-
-        if (seccion) {
-
-            evento.preventDefault();
-
-            seccion.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        }
-
-    });
-
-
