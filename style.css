@@ -19,17 +19,20 @@ body {
     background: #f7f9fc;
     color: #172033;
     line-height: 1.6;
-    overflow-x: hidden;
+}
+
+button,
+a {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
 }
 
 a {
     text-decoration: none;
     color: inherit;
-}
-
-button {
-    font-family: inherit;
-    cursor: pointer;
 }
 
 
@@ -50,23 +53,16 @@ button {
 
     padding: 15px 7%;
 
-    background: rgba(255, 255, 255, .97);
+    background: rgba(255,255,255,.97);
 
     box-shadow:
-        0 5px 25px rgba(0, 0, 0, .08);
+        0 5px 25px rgba(0,0,0,.08);
 }
-
-
-/* =====================================================
-   LOGO
-===================================================== */
 
 .logo {
     display: flex;
     align-items: center;
     gap: 9px;
-
-    cursor: pointer;
 
     font-weight: 900;
 
@@ -80,12 +76,9 @@ button {
 .logo-icon {
     display: inline-block;
 
-    font-size: 2.35rem;
+    font-size: 2.4rem;
 
     animation: mundoFlotando 3s ease-in-out infinite;
-
-    filter:
-        drop-shadow(0 5px 8px rgba(0, 0, 0, .12));
 }
 
 .logo-text {
@@ -94,18 +87,11 @@ button {
     font-weight: 900;
 
     letter-spacing: 2px;
-
-    line-height: 1;
 }
 
 .logo-text strong {
     color: #ff7a00;
 }
-
-
-/* =====================================================
-   NAV
-===================================================== */
 
 .navbar nav {
     display: flex;
@@ -114,44 +100,16 @@ button {
 }
 
 .navbar nav a {
-    position: relative;
-
     font-size: 15px;
     font-weight: 700;
 
-    transition: color .3s ease;
-}
-
-.navbar nav a::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: -7px;
-
-    width: 0;
-    height: 3px;
-
-    border-radius: 5px;
-
-    background: #ff7a00;
-
-    transition: width .3s ease;
+    transition: .3s;
 }
 
 .navbar nav a:hover {
     color: #ff7a00;
+    transform: translateY(-2px);
 }
-
-.navbar nav a:hover::after {
-    width: 100%;
-}
-
-
-/* =====================================================
-   BOTÓN MENÚ
-===================================================== */
 
 .btn-menu {
     display: none;
@@ -171,6 +129,46 @@ button {
 
 
 /* =====================================================
+   ANIMACIONES
+===================================================== */
+
+@keyframes mundoFlotando {
+
+    0%,100% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-5px) rotate(8deg);
+    }
+}
+
+@keyframes flotar {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes aparecer {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =====================================================
    HERO
 ===================================================== */
 
@@ -181,26 +179,26 @@ button {
     align-items: center;
     justify-content: space-between;
 
-    gap: 60px;
+    gap: 50px;
 
     padding: 80px 8%;
 
     background:
         radial-gradient(
             circle at 90% 20%,
-            rgba(255, 193, 7, .18),
+            rgba(255,193,7,.18),
             transparent 30%
         ),
         radial-gradient(
             circle at 10% 90%,
-            rgba(0, 188, 212, .15),
+            rgba(0,188,212,.15),
             transparent 30%
         ),
-        #ffffff;
+        #fff;
 }
 
 .hero-contenido {
-    max-width: 680px;
+    max-width: 650px;
 }
 
 .etiqueta {
@@ -220,7 +218,7 @@ button {
 }
 
 .hero h1 {
-    font-size: clamp(45px, 6vw, 76px);
+    font-size: clamp(45px,6vw,76px);
 
     line-height: 1.05;
 
@@ -231,12 +229,11 @@ button {
 
 .hero h1 span {
     display: block;
-
     color: #ff7a00;
 }
 
 .hero p {
-    max-width: 620px;
+    max-width: 600px;
 
     font-size: 19px;
 
@@ -265,10 +262,7 @@ button {
 
     font-weight: 800;
 
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
+    transition: .3s;
 }
 
 .btn:hover {
@@ -280,11 +274,7 @@ button {
     color: white;
 
     box-shadow:
-        0 10px 25px rgba(255, 122, 0, .25);
-}
-
-.btn.principal:hover {
-    background: #e96900;
+        0 10px 25px rgba(255,122,0,.25);
 }
 
 .btn.secundario {
@@ -292,32 +282,22 @@ button {
     color: white;
 }
 
-.btn.secundario:hover {
-    background: #27344c;
-}
-
 .btn.pequeño {
-    padding: 11px 18px;
-    font-size: 14px;
+    padding: 10px 17px;
 
     background: #172033;
     color: white;
+
+    font-size: 14px;
 }
 
 .btn.pequeño:hover {
     background: #ff7a00;
 }
 
-
-/* =====================================================
-   ESTADÍSTICAS
-===================================================== */
-
 .estadisticas {
     display: flex;
-
     gap: 40px;
-
     margin-top: 45px;
 }
 
@@ -353,7 +333,7 @@ button {
     background: white;
 
     box-shadow:
-        0 25px 60px rgba(0, 0, 0, .10);
+        0 25px 60px rgba(0,0,0,.10);
 
     animation: flotar 3s ease-in-out infinite;
 }
@@ -377,13 +357,12 @@ button {
 }
 
 .personaje-placeholder h3 {
-    font-size: 26px;
+    font-size: 25px;
+    margin: 15px 0 5px;
 }
 
 .personaje-placeholder p {
     color: #718096;
-
-    margin-bottom: 12px;
 }
 
 .burbuja {
@@ -401,35 +380,6 @@ button {
 
 
 /* =====================================================
-   ANIMACIONES
-===================================================== */
-
-@keyframes mundoFlotando {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0);
-    }
-
-    50% {
-        transform: translateY(-5px) rotate(8deg);
-    }
-}
-
-@keyframes flotar {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-12px);
-    }
-}
-
-
-/* =====================================================
    SECCIONES
 ===================================================== */
 
@@ -437,8 +387,8 @@ button {
     padding: 100px 8%;
 }
 
-.seccion.alterna {
-    background: #f0f4f8;
+.alterna {
+    background: #eef3f7;
 }
 
 .titulo {
@@ -462,7 +412,7 @@ button {
 .titulo h2 {
     margin: 12px 0;
 
-    font-size: clamp(32px, 4vw, 50px);
+    font-size: clamp(32px,4vw,50px);
 
     line-height: 1.1;
 }
@@ -477,16 +427,16 @@ button {
 ===================================================== */
 
 .tarjetas {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 25px;
-
     max-width: 1100px;
 
     margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 25px;
 }
 
 .tarjeta {
@@ -499,34 +449,28 @@ button {
     border-radius: 22px;
 
     box-shadow:
-        0 12px 35px rgba(0, 0, 0, .07);
+        0 12px 35px rgba(0,0,0,.07);
 
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease;
+    transition: .3s;
 }
 
 .tarjeta:hover {
     transform: translateY(-8px);
-
-    box-shadow:
-        0 20px 45px rgba(0, 0, 0, .11);
 }
 
 .icono {
     font-size: 55px;
-
     margin-bottom: 15px;
 }
 
 .tarjeta h3 {
-    font-size: 23px;
-
+    font-size: 24px;
     margin-bottom: 10px;
 }
 
 .tarjeta p {
     color: #68758a;
+    margin-bottom: 20px;
 }
 
 
@@ -535,16 +479,16 @@ button {
 ===================================================== */
 
 .curso-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 25px;
-
     max-width: 1100px;
 
     margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 25px;
 }
 
 .curso {
@@ -557,18 +501,24 @@ button {
     border-radius: 22px;
 
     box-shadow:
-        0 12px 35px rgba(0, 0, 0, .06);
+        0 12px 35px rgba(0,0,0,.06);
 
-    transition: transform .3s ease;
+    transition: .3s;
 }
 
 .curso:hover {
     transform: translateY(-7px);
 }
 
-.nivel {
-    display: inline-block;
+.curso-icon {
+    display: block;
 
+    font-size: 50px;
+
+    margin-bottom: 15px;
+}
+
+.nivel {
     font-size: 11px;
 
     font-weight: 900;
@@ -576,22 +526,16 @@ button {
     color: #007c91;
 }
 
-.curso-icon {
-    font-size: 50px;
-
-    margin: 15px 0;
-}
-
 .curso h3 {
     font-size: 24px;
 
-    margin-bottom: 10px;
+    margin: 8px 0;
 }
 
 .curso p {
     color: #68758a;
 
-    min-height: 75px;
+    min-height: 70px;
 }
 
 .progreso {
@@ -612,11 +556,71 @@ button {
     height: 100%;
 
     background: #ff7a00;
-
-    border-radius: inherit;
 }
 
-.curso button {
+
+/* =====================================================
+   JUEGOS
+===================================================== */
+
+.juegos {
+    background:
+        linear-gradient(
+            135deg,
+            #fff8ef,
+            #eef8ff
+        );
+}
+
+.juegos-grid {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 25px;
+}
+
+.juego {
+    padding: 35px;
+
+    text-align: center;
+
+    border-radius: 22px;
+
+    background: white;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.07);
+
+    transition: .3s;
+}
+
+.juego:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.juego > div {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.juego h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.juego p {
+    color: #68758a;
+    margin-bottom: 20px;
+}
+
+.juego button,
+.premium-box button {
     border: none;
 
     padding: 12px 20px;
@@ -631,77 +635,10 @@ button {
     transition: .3s;
 }
 
-.curso button:hover {
+.juego button:hover,
+.premium-box button:hover {
     background: #ff7a00;
-}
-
-
-/* =====================================================
-   JUEGOS
-===================================================== */
-
-.juegos {
-    background:
-        linear-gradient(
-            135deg,
-            #fff8ef,
-            #f7fbff
-        );
-}
-
-.juegos-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 25px;
-
-    max-width: 1100px;
-
-    margin: auto;
-}
-
-.juego {
-    padding: 35px;
-
-    text-align: center;
-
-    border-radius: 22px;
-
-    background: white;
-
-    box-shadow:
-        0 12px 35px rgba(0, 0, 0, .07);
-
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease;
-}
-
-.juego:hover {
-    transform: translateY(-8px);
-
-    box-shadow:
-        0 20px 45px rgba(0, 0, 0, .12);
-}
-
-.juego-icono {
-    font-size: 60px;
-
-    margin-bottom: 15px;
-}
-
-.juego h3 {
-    font-size: 22px;
-
-    margin-bottom: 10px;
-}
-
-.juego p {
-    color: #68758a;
-
-    margin-bottom: 20px;
+    transform: translateY(-2px);
 }
 
 
@@ -711,11 +648,14 @@ button {
 
 .clases {
     background: #172033;
-
     color: white;
 }
 
 .clases-contenido {
+    max-width: 1100px;
+
+    margin: auto;
+
     display: grid;
 
     grid-template-columns:
@@ -724,10 +664,6 @@ button {
     gap: 70px;
 
     align-items: center;
-
-    max-width: 1100px;
-
-    margin: auto;
 }
 
 .clases-contenido > div:first-child > span {
@@ -739,7 +675,7 @@ button {
 }
 
 .clases h2 {
-    font-size: clamp(35px, 5vw, 58px);
+    font-size: clamp(35px,5vw,58px);
 
     line-height: 1.1;
 
@@ -756,7 +692,7 @@ button {
     display: grid;
 
     grid-template-columns:
-        repeat(2, 1fr);
+        repeat(2,1fr);
 
     gap: 15px;
 }
@@ -766,7 +702,7 @@ button {
 
     border-radius: 18px;
 
-    background: rgba(255, 255, 255, .07);
+    background: rgba(255,255,255,.07);
 
     display: flex;
 
@@ -779,6 +715,52 @@ button {
 
 .clase-beneficios strong {
     font-size: 15px;
+}
+
+
+/* =====================================================
+   PREMIUM
+===================================================== */
+
+.premium-section {
+    background: #fff8ef;
+}
+
+.premium-box {
+    max-width: 900px;
+
+    margin: auto;
+
+    text-align: center;
+
+    padding: 65px 30px;
+
+    border-radius: 30px;
+
+    background: white;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.08);
+}
+
+.premium-box > span {
+    color: #ff7a00;
+
+    font-weight: 900;
+}
+
+.premium-box h2 {
+    font-size: clamp(32px,4vw,48px);
+
+    margin: 15px 0;
+}
+
+.premium-box p {
+    max-width: 650px;
+
+    margin: 0 auto 25px;
+
+    color: #68758a;
 }
 
 
@@ -797,7 +779,7 @@ button {
 }
 
 .cta h2 {
-    font-size: clamp(35px, 5vw, 60px);
+    font-size: clamp(35px,5vw,60px);
 
     line-height: 1.1;
 
@@ -806,7 +788,6 @@ button {
 
 .cta p {
     font-size: 20px;
-
     margin-bottom: 30px;
 }
 
@@ -854,10 +835,6 @@ footer {
     margin-bottom: 10px;
 }
 
-footer p {
-    color: #9ca7b8;
-}
-
 .footer-links {
     display: flex;
 
@@ -873,15 +850,17 @@ footer p {
 }
 
 .copyright {
+    color: #9ca7b8;
     font-size: 13px;
 }
 
 
 /* =====================================================
-   VENTANA
+   VENTANA DE MENSAJE
 ===================================================== */
 
-.mensaje {
+.mensaje,
+.juego-modal {
     position: fixed;
 
     inset: 0;
@@ -895,23 +874,19 @@ footer p {
 
     padding: 20px;
 
-    background: rgba(0, 0, 0, .65);
-
-    backdrop-filter: blur(4px);
+    background: rgba(0,0,0,.65);
 }
 
-.mensaje.activo {
+.mensaje.activo,
+.juego-modal.activo {
     display: flex;
 }
 
-.mensaje-contenido {
+.mensaje-contenido,
+.juego-ventana {
     position: relative;
 
-    width: min(560px, 100%);
-
-    max-height: 90vh;
-
-    overflow-y: auto;
+    width: min(500px,100%);
 
     padding: 40px;
 
@@ -922,48 +897,24 @@ footer p {
     text-align: center;
 
     box-shadow:
-        0 30px 80px rgba(0, 0, 0, .25);
+        0 25px 70px rgba(0,0,0,.25);
 
-    animation: aparecerModal .25s ease;
+    animation: aparecer .3s ease;
 }
 
-@keyframes aparecerModal {
-
-    from {
-        opacity: 0;
-        transform: scale(.92);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+.mensaje-icono {
+    font-size: 55px;
+    margin-bottom: 10px;
 }
 
 .mensaje-contenido h3 {
     font-size: 28px;
-
     margin-bottom: 15px;
 }
 
 .mensaje-contenido p {
     color: #68758a;
-
     margin-bottom: 25px;
-}
-
-.mensaje-contenido button:not(.cerrar) {
-    border: none;
-
-    padding: 12px 22px;
-
-    border-radius: 10px;
-
-    background: #ff7a00;
-
-    color: white;
-
-    font-weight: 800;
 }
 
 .cerrar {
@@ -976,130 +927,89 @@ footer p {
 
     background: none;
 
-    font-size: 32px;
+    font-size: 30px;
 
     color: #68758a;
+}
 
-    z-index: 2;
+.cerrar:hover {
+    color: #ff7a00;
 }
 
 
 /* =====================================================
-   CONTROLES DE JUEGO
+   JUEGOS INTERNOS
 ===================================================== */
 
-.juego-panel {
-    display: flex;
+.juego-ventana {
+    width: min(650px,100%);
 
-    flex-direction: column;
+    min-height: 300px;
 
-    gap: 15px;
+    padding: 45px 30px 30px;
 }
 
-.juego-puntuacion {
-    display: flex;
-
-    justify-content: space-between;
-
-    padding: 10px 15px;
-
-    border-radius: 12px;
-
-    background: #f0f4f8;
-
-    font-weight: 800;
+.juego-titulo {
+    font-size: 30px;
+    margin-bottom: 8px;
 }
 
-.juego-palabra {
-    font-size: 42px;
-
+.juego-puntos {
     font-weight: 900;
-
-    color: #172033;
-
-    margin: 15px 0;
+    color: #ff7a00;
+    margin-bottom: 20px;
 }
 
-.juego-opciones {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 10px;
-}
-
-.opcion-juego {
-    border: 2px solid #e7edf3 !important;
-
-    background: white !important;
-
-    color: #172033 !important;
-
-    padding: 14px !important;
-
-    border-radius: 12px !important;
-
+.pregunta {
+    font-size: 24px;
     font-weight: 800;
-
-    transition: .2s;
-}
-
-.opcion-juego:hover {
-    border-color: #ff7a00 !important;
-
-    background: #fff8ef !important;
-}
-
-.resultado-juego {
-    font-size: 20px;
-
-    font-weight: 800;
-
-    margin: 10px 0;
-}
-
-.memoria-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 10px;
-
     margin: 20px 0;
 }
 
-.carta-memoria {
-    min-height: 70px;
+.opciones {
+    display: grid;
 
-    border: none;
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+.opcion {
+    border: 2px solid #e4e9ef;
+
+    background: #f8fafc;
+
+    padding: 15px;
 
     border-radius: 12px;
 
-    background: #172033;
-
-    color: white;
-
-    font-size: 25px;
-
-    font-weight: 900;
+    font-weight: 800;
 
     transition: .2s;
 }
 
-.carta-memoria:hover {
-    transform: scale(1.04);
-
-    background: #ff7a00;
+.opcion:hover {
+    border-color: #ff7a00;
+    transform: translateY(-2px);
 }
 
-.carta-memoria.revelada {
-    background: #ff7a00;
+.opcion.correcta {
+    background: #d9f8e5;
+    border-color: #2dbf68;
 }
 
-.carta-memoria.completada {
-    background: #16a085;
+.opcion.incorrecta {
+    background: #ffe0e0;
+    border-color: #e05252;
+}
+
+.resultado {
+    font-size: 24px;
+    font-weight: 900;
+    margin: 25px 0;
 }
 
 
@@ -1109,69 +1019,8 @@ footer p {
 
 @media (max-width: 1000px) {
 
-    .navbar {
-        padding-left: 5%;
-        padding-right: 5%;
-    }
-
-    .navbar nav {
-        gap: 15px;
-    }
-
-    .hero {
-        padding-left: 6%;
-        padding-right: 6%;
-    }
-
-    .seccion {
-        padding-left: 6%;
-        padding-right: 6%;
-    }
-
-    .tarjetas,
-    .curso-grid,
-    .juegos-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-    .clases-contenido {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-@media (max-width: 750px) {
-
     .navbar nav {
         display: none;
-
-        position: absolute;
-
-        top: 72px;
-        left: 5%;
-        right: 5%;
-
-        padding: 20px;
-
-        flex-direction: column;
-
-        gap: 15px;
-
-        background: white;
-
-        border-radius: 15px;
-
-        box-shadow:
-            0 15px 35px rgba(0, 0, 0, .15);
-    }
-
-    .navbar nav.menu-abierto {
-        display: flex;
-    }
-
-    .navbar nav a {
-        padding: 8px;
     }
 
     .btn-menu {
@@ -1180,14 +1029,16 @@ footer p {
 
     .hero {
         flex-direction: column;
-
         text-align: center;
-
-        padding-top: 60px;
     }
 
     .hero-contenido {
-        max-width: 100%;
+        max-width: 800px;
+    }
+
+    .hero p {
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .hero-botones {
@@ -1198,13 +1049,23 @@ footer p {
         justify-content: center;
     }
 
-    .personaje-placeholder {
-        width: min(330px, 100%);
+    .curso-grid,
+    .juegos-grid,
+    .tarjetas {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .clases-contenido {
+        grid-template-columns: 1fr;
     }
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
+
+    .navbar {
+        padding: 12px 5%;
+    }
 
     .logo-icon {
         font-size: 1.8rem;
@@ -1212,21 +1073,16 @@ footer p {
 
     .logo-text {
         font-size: 1.65rem;
-
-        letter-spacing: 1px;
     }
 
     .hero,
-    .seccion,
-    .cta {
+    .seccion {
         padding-left: 5%;
         padding-right: 5%;
     }
 
     .hero {
-        min-height: auto;
-
-        padding-top: 55px;
+        padding-top: 60px;
         padding-bottom: 70px;
     }
 
@@ -1234,17 +1090,18 @@ footer p {
         letter-spacing: -2px;
     }
 
-    .hero p {
-        font-size: 17px;
+    .personaje-placeholder {
+        width: 100%;
+        min-width: 0;
     }
 
     .estadisticas {
         gap: 20px;
     }
 
-    .tarjetas,
     .curso-grid,
-    .juegos-grid {
+    .juegos-grid,
+    .tarjetas {
         grid-template-columns: 1fr;
     }
 
@@ -1252,47 +1109,11 @@ footer p {
         grid-template-columns: 1fr 1fr;
     }
 
-    .memoria-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .juego-opciones {
+    .opciones {
         grid-template-columns: 1fr;
-    }
-
-    .mensaje-contenido {
-        padding: 35px 20px 25px;
     }
 
     .footer-links {
         flex-wrap: wrap;
     }
-}
 
-
-@media (max-width: 380px) {
-
-    .logo-text {
-        font-size: 1.4rem;
-    }
-
-    .estadisticas {
-        gap: 12px;
-    }
-
-    .estadisticas strong {
-        font-size: 23px;
-    }
-
-    .personaje {
-        width: 150px;
-        height: 150px;
-
-        font-size: 75px;
-    }
-
-    .clase-beneficios {
-        grid-template-columns: 1fr;
-    }
-}
