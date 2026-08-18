@@ -7,18 +7,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("LinguaGo iniciado correctamente 🚀");
 
-
     /* =================================================
-       NAVEGACIÓN INTERNA
+       NAVEGACIÓN SUAVE
     ================================================= */
 
-    document.querySelectorAll('a[href^="#"]').forEach((enlace) => {
+    const enlaces = document.querySelectorAll(
+        '.navbar nav a[href^="#"]'
+    );
 
-        enlace.addEventListener("click", function (evento) {
+    enlaces.forEach((enlace) => {
 
-            const destino = this.getAttribute("href");
+        enlace.addEventListener("click", (evento) => {
 
-            if (!destino || destino === "#") return;
+            const destino = enlace.getAttribute("href");
+
+            if (!destino || destino === "#") {
+                return;
+            }
 
             const seccion = document.querySelector(destino);
 
@@ -39,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =================================================
-       ANIMACIÓN SUAVE AL ENTRAR EN PANTALLA
+       ANIMACIÓN DE TARJETAS
     ================================================= */
 
     const elementos = document.querySelectorAll(
@@ -55,7 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (entrada.isIntersecting) {
 
                     entrada.target.style.opacity = "1";
-                    entrada.target.style.transform = "translateY(0)";
+                    entrada.target.style.transform =
+                        "translateY(0)";
 
                 }
 
@@ -68,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     );
-
 
     elementos.forEach((elemento) => {
 
@@ -110,7 +115,9 @@ function abrirMenu() {
         nav.style.borderRadius = "15px";
         nav.style.boxShadow =
             "0 15px 35px rgba(0,0,0,.12)";
+
     }
+
 }
 
 
@@ -129,6 +136,7 @@ function mostrarMensaje(curso) {
         `Has seleccionado "${curso}". Próximamente podrás comenzar este curso.`;
 
     ventana.classList.add("activo");
+
 }
 
 
@@ -139,6 +147,7 @@ function cerrarMensaje() {
     if (!ventana) return;
 
     ventana.classList.remove("activo");
+
 }
 
 
@@ -157,11 +166,12 @@ function juegoProximamente() {
         "🎮 Los juegos de LinguaGo están en desarrollo. Aquí podrás practicar idiomas mientras juegas.";
 
     ventana.classList.add("activo");
+
 }
 
 
 /* =====================================================
-   CLASES VIRTUALES
+   CLASES
 ===================================================== */
 
 function solicitarClase() {
@@ -175,6 +185,7 @@ function solicitarClase() {
         "👨‍🏫 Muy pronto podrás solicitar una clase virtual de español o inglés.";
 
     ventana.classList.add("activo");
+
 }
 
 
@@ -193,28 +204,34 @@ function mostrarPremium() {
         "⭐ LinguaGo Premium permitirá acceder a cursos, materiales y funciones exclusivas.";
 
     ventana.classList.add("activo");
+
 }
 
 
 /* =====================================================
-   CERRAR VENTANA AL HACER CLIC FUERA
+   CERRAR MENSAJE AL HACER CLIC AFUERA
 ===================================================== */
 
-const ventanaMensaje = document.getElementById("mensaje");
+document.addEventListener("DOMContentLoaded", () => {
 
-if (ventanaMensaje) {
+    const ventanaMensaje =
+        document.getElementById("mensaje");
 
-    ventanaMensaje.addEventListener("click", (evento) => {
+    if (ventanaMensaje) {
 
-        if (evento.target === ventanaMensaje) {
+        ventanaMensaje.addEventListener("click", (evento) => {
 
-            cerrarMensaje();
+            if (evento.target === ventanaMensaje) {
 
-        }
+                cerrarMensaje();
 
-    });
+            }
 
-}
+        });
+
+    }
+
+});
 
 
 /* =====================================================
