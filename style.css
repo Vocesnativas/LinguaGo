@@ -1117,3 +1117,69 @@ footer {
         flex-wrap: wrap;
     }
 
+/* =====================================================
+   TABLERO DE MEMORIA
+===================================================== */
+
+.memoria-tablero {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    max-width: 480px;
+
+    margin: 25px auto;
+}
+
+.carta-memoria {
+    min-height: 75px;
+
+    border: 2px solid #e4e9ef;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+    transition: .2s;
+}
+
+.carta-memoria:hover {
+    border-color: #ff7a00;
+
+    transform: scale(1.04);
+}
+
+.carta-memoria.seleccionada,
+.carta-memoria.encontrada {
+    background: #fff2e6;
+
+    border-color: #ff7a00;
+}
+
+#memoriaMensaje {
+    margin-top: 15px;
+
+    font-weight: 800;
+
+    color: #ff7a00;
+}
+
+
+@media (max-width: 500px) {
+
+    .memoria-tablero {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    .carta-memoria {
+        min-height: 65px;
+    }
+
