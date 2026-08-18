@@ -1,1 +1,613 @@
-<!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>LinguaGo | Aprende Español e Inglés</title> <meta name="description" content="LinguaGo: aprende español e inglés con cursos, juegos y clases virtuales."> <link rel="stylesheet" href="style.css"> </head> <body> <!-- ===================================================== BARRA DE NAVEGACIÓN ===================================================== --> <header class="navbar"> <div class="logo"> <span class="logo-icon">🌎</span> <span class="logo-text">LINGUA<strong>GO</strong></span> </div> <nav> <a href="#inicio">Inicio</a> <a href="#espanol">Español</a> <a href="#ingles">English</a> <a href="#cursos">Cursos</a> <a href="#juegos">Juegos</a> <a href="#clases">Clases</a> </nav> <button class="btn-menu" onclick="abrirMenu()" aria-label="Abrir menú"> ☰ </button> </header> <!-- ===================================================== HERO ===================================================== --> <section class="hero" id="inicio"> <div class="hero-contenido"> <span class="etiqueta"> 🌎 APRENDE SIN FRONTERAS </span> <h1> Aprende idiomas. <span>Habla el mundo.</span> </h1> <p> Aprende español e inglés mediante cursos, juegos, actividades interactivas y clases virtuales. </p> <div class="hero-botones"> <a href="#cursos" class="btn principal"> 🚀 Comenzar a aprender </a> <a href="#juegos" class="btn secundario"> 🎮 Jugar y aprender </a> </div> </div> </section> <!-- ===================================================== ESPAÑOL ===================================================== --> <section class="seccion" id="espanol"> <div class="titulo"> <span>🇪🇸 IDIOMA</span> <h2>Aprende Español</h2> <p> Mejora tu lectura, escritura, vocabulario y comunicación en español. </p> </div> <div class="tarjetas"> <article class="tarjeta"> <div class="icono">📖</div> <h3>Lectura</h3> <p> Comprende textos y desarrolla tus habilidades de lectura. </p> </article> <article class="tarjeta"> <div class="icono">✍️</div> <h3>Escritura</h3> <p> Aprende ortografía, gramática y expresión escrita. </p> </article> <article class="tarjeta"> <div class="icono">🗣️</div> <h3>Comunicación</h3> <p> Practica expresiones y situaciones de comunicación cotidiana. </p> </article> </div> </section> <!-- ===================================================== INGLÉS ===================================================== --> <section class="seccion alterna" id="ingles"> <div class="titulo"> <span>🇬🇧 LANGUAGE</span> <h2>Learn English</h2> <p> Aprende inglés de forma sencilla, práctica y divertida. </p> </div> <div class="tarjetas"> <article class="tarjeta"> <div class="icono">🔤</div> <h3>Vocabulary</h3> <p> Aprende nuevas palabras y expresiones en inglés. </p> </article> <article class="tarjeta"> <div class="icono">🎧</div> <h3>Listening</h3> <p> Entrena tu comprensión auditiva con actividades interactivas. </p> </article> <article class="tarjeta"> <div class="icono">💬</div> <h3>Speaking</h3> <p> Practica conversaciones y expresiones útiles. </p> </article> </div> </section> <!-- ===================================================== CURSOS ===================================================== --> <section class="seccion" id="cursos"> <div class="titulo"> <span>🚀 APRENDE A TU RITMO</span> <h2>Cursos de LinguaGo</h2> <p> Elige un curso y comienza tu aventura para aprender idiomas. </p> </div> <div class="cursos"> <article class="curso"> <span class="curso-icono">🇪🇸</span> <h3>Español Básico</h3> <p> Aprende palabras, frases, lectura y escritura. </p> <a href="#" class="btn pequeño"> Comenzar </a> </article> <article class="curso"> <span class="curso-icono">🇬🇧</span> <h3>English Basic</h3> <p> Aprende vocabulario y expresiones esenciales en inglés. </p> <a href="#" class="btn pequeño"> Start </a> </article> <article class="curso"> <span class="curso-icono">🌎</span> <h3>Español + English</h3> <p> Combina los dos idiomas y aprende jugando. </p> <a href="#" class="btn pequeño"> Explorar </a> </article> </div> </section> <!-- ===================================================== JUEGOS ===================================================== --> <section class="seccion juegos" id="juegos"> <div class="titulo"> <span>🎮 APRENDE JUGANDO</span> <h2>Juegos de idiomas</h2> <p> Aprende nuevas palabras mientras superas retos y consigues puntos. </p> </div> <div class="tarjetas"> <article class="tarjeta juego"> <div class="icono">🧠</div> <h3>Memoria de palabras</h3> <p> Encuentra las parejas correctas y demuestra cuánto sabes. </p> <button class="btn pequeño" onclick="iniciarJuego('memoria')"> 🎮 Jugar </button> </article> <article class="tarjeta juego"> <div class="icono">⚡</div> <h3>Reto rápido</h3> <p> Responde correctamente antes de que termine el tiempo. </p> <button class="btn pequeño" onclick="iniciarJuego('rapido')"> ⚡ Jugar </button> </article> <article class="tarjeta juego"> <div class="icono">🔤</div> <h3>Palabra correcta</h3> <p> Elige la palabra adecuada y acumula puntos. </p> <button class="btn pequeño" onclick="iniciarJuego('palabras')"> 🏆 Jugar </button> </article> </div> </section> <!-- ===================================================== CLASES ===================================================== --> <section class="seccion alterna" id="clases"> <div class="titulo"> <span>👨‍🏫 APRENDE CON NOSOTROS</span> <h2>Clases virtuales</h2> <p> Próximamente podrás participar en clases virtuales de español e inglés. </p> </div> <div class="clases-contenido"> <div class="clase-info"> <h3>🌎 Una nueva forma de aprender</h3> <p> LinguaGo busca ofrecer una experiencia educativa dinámica, sencilla y divertida. </p> <ul> <li>📚 Material educativo</li> <li>🎮 Actividades interactivas</li> <li>🗣️ Práctica de idiomas</li> <li>🏆 Retos y recompensas</li> </ul> </div> </div> </section> <!-- ===================================================== LLAMADO FINAL ===================================================== --> <section class="llamado"> <div> <h2> 🚀 Tu aventura lingüística comienza aquí </h2> <p> Aprende. Practica. Juega. Habla. </p> <a href="#cursos" class="btn principal"> Comenzar ahora </a> </div> </section> <!-- ===================================================== PIE DE PÁGINA ===================================================== --> <footer class="footer"> <div class="logo"> <span class="logo-icon">🌎</span> <span class="logo-text">LINGUA<strong>GO</strong></span> </div> <p> © 2026 LinguaGo. Aprende idiomas sin fronteras. </p> </footer> <!-- ===================================================== JAVASCRIPT ===================================================== --> <script src="script.js"></script> </body> </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LinguaGo | Aprende Español e Inglés</title>
+
+    <meta name="description"
+          content="LinguaGo: aprende español e inglés mediante cursos, juegos y actividades interactivas.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =====================================================
+     NAVEGACIÓN
+===================================================== -->
+
+<header class="navbar">
+
+    <a href="#inicio" class="logo" aria-label="LinguaGo inicio">
+        <span class="logo-icon">🌎</span>
+        <span class="logo-text">LINGUA<strong>GO</strong></span>
+    </a>
+
+    <nav id="menu-principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#espanol">Español</a>
+        <a href="#ingles">English</a>
+        <a href="#cursos">Cursos</a>
+        <a href="#juegos">Juegos</a>
+        <a href="#clases">Clases</a>
+    </nav>
+
+    <button
+        class="btn-menu"
+        id="btn-menu"
+        type="button"
+        onclick="abrirMenu()"
+        aria-label="Abrir menú"
+        aria-expanded="false">
+        ☰
+    </button>
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero" id="inicio">
+
+    <div class="hero-contenido">
+
+        <span class="etiqueta">
+            🌎 APRENDE SIN FRONTERAS
+        </span>
+
+        <h1>
+            Aprende idiomas.
+            <span>Habla el mundo.</span>
+        </h1>
+
+        <p>
+            Aprende español e inglés mediante cursos,
+            juegos, actividades interactivas y retos
+            diseñados para aprender de forma divertida.
+        </p>
+
+        <div class="hero-botones">
+
+            <a href="#cursos" class="btn principal">
+                🚀 Comenzar a aprender
+            </a>
+
+            <a href="#juegos" class="btn secundario">
+                🎮 Jugar y aprender
+            </a>
+
+        </div>
+
+        <div class="estadisticas">
+
+            <div>
+                <strong>2</strong>
+                <span>Idiomas</span>
+            </div>
+
+            <div>
+                <strong>3</strong>
+                <span>Juegos</span>
+            </div>
+
+            <div>
+                <strong>∞</strong>
+                <span>Posibilidades</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="personaje-placeholder">
+
+        <div class="personaje" id="personaje">
+            🦉
+        </div>
+
+        <h3>¡Hola!</h3>
+
+        <p>
+            Soy tu compañero de aprendizaje.
+        </p>
+
+        <span class="burbuja">
+            Let's learn! 🚀
+        </span>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ESPAÑOL
+===================================================== -->
+
+<section class="seccion" id="espanol">
+
+    <div class="titulo">
+
+        <span>🇪🇸 IDIOMA</span>
+
+        <h2>Aprende Español</h2>
+
+        <p>
+            Mejora tu lectura, escritura, vocabulario
+            y comunicación.
+        </p>
+
+    </div>
+
+
+    <div class="tarjetas">
+
+        <article class="tarjeta">
+
+            <div class="icono">📖</div>
+
+            <h3>Lectura</h3>
+
+            <p>
+                Comprende textos y desarrolla
+                tus habilidades de lectura.
+            </p>
+
+        </article>
+
+
+        <article class="tarjeta">
+
+            <div class="icono">✍️</div>
+
+            <h3>Escritura</h3>
+
+            <p>
+                Aprende ortografía, gramática
+                y expresión escrita.
+            </p>
+
+        </article>
+
+
+        <article class="tarjeta">
+
+            <div class="icono">🗣️</div>
+
+            <h3>Comunicación</h3>
+
+            <p>
+                Practica expresiones y situaciones
+                de comunicación cotidiana.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     INGLÉS
+===================================================== -->
+
+<section class="seccion alterna" id="ingles">
+
+    <div class="titulo">
+
+        <span>🇬🇧 LANGUAGE</span>
+
+        <h2>Learn English</h2>
+
+        <p>
+            Aprende inglés de forma sencilla,
+            práctica y divertida.
+        </p>
+
+    </div>
+
+
+    <div class="tarjetas">
+
+        <article class="tarjeta">
+
+            <div class="icono">🔤</div>
+
+            <h3>Vocabulary</h3>
+
+            <p>
+                Aprende nuevas palabras y expresiones
+                en inglés.
+            </p>
+
+        </article>
+
+
+        <article class="tarjeta">
+
+            <div class="icono">🎧</div>
+
+            <h3>Listening</h3>
+
+            <p>
+                Entrena tu comprensión auditiva
+                con actividades.
+            </p>
+
+        </article>
+
+
+        <article class="tarjeta">
+
+            <div class="icono">💬</div>
+
+            <h3>Speaking</h3>
+
+            <p>
+                Practica conversaciones y expresiones
+                útiles.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CURSOS
+===================================================== -->
+
+<section class="seccion" id="cursos">
+
+    <div class="titulo">
+
+        <span>🚀 APRENDE A TU RITMO</span>
+
+        <h2>Cursos de LinguaGo</h2>
+
+        <p>
+            Elige una ruta de aprendizaje y comienza
+            tu aventura.
+        </p>
+
+    </div>
+
+
+    <div class="curso-grid">
+
+        <article class="curso">
+
+            <span class="nivel">NIVEL INICIAL</span>
+
+            <div class="curso-icon">🇪🇸</div>
+
+            <h3>Español Básico</h3>
+
+            <p>
+                Palabras, frases, lectura, escritura
+                y comunicación básica.
+            </p>
+
+            <div class="progreso">
+                <span style="width: 25%;"></span>
+            </div>
+
+            <button
+                type="button"
+                onclick="mostrarMensaje('Español Básico')">
+                Comenzar
+            </button>
+
+        </article>
+
+
+        <article class="curso">
+
+            <span class="nivel">BEGINNER</span>
+
+            <div class="curso-icon">🇬🇧</div>
+
+            <h3>English Basic</h3>
+
+            <p>
+                Vocabulario y expresiones esenciales
+                para comenzar a hablar inglés.
+            </p>
+
+            <div class="progreso">
+                <span style="width: 15%;"></span>
+            </div>
+
+            <button
+                type="button"
+                onclick="mostrarMensaje('English Basic')">
+                Start
+            </button>
+
+        </article>
+
+
+        <article class="curso">
+
+            <span class="nivel">MIX</span>
+
+            <div class="curso-icon">🌎</div>
+
+            <h3>Español + English</h3>
+
+            <p>
+                Combina los dos idiomas mediante
+                retos y actividades.
+            </p>
+
+            <div class="progreso">
+                <span style="width: 5%;"></span>
+            </div>
+
+            <button
+                type="button"
+                onclick="mostrarMensaje('Español + English')">
+                Explorar
+            </button>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     JUEGOS
+===================================================== -->
+
+<section class="seccion juegos" id="juegos">
+
+    <div class="titulo">
+
+        <span>🎮 APRENDE JUGANDO</span>
+
+        <h2>Juegos de idiomas</h2>
+
+        <p>
+            Juega, responde y consigue puntos.
+            Aquí sí se juega de verdad.
+        </p>
+
+    </div>
+
+
+    <div class="juegos-grid">
+
+        <article class="juego">
+
+            <div class="juego-icono">🧠</div>
+
+            <h3>Memoria de palabras</h3>
+
+            <p>
+                Encuentra las parejas correctas.
+            </p>
+
+            <button
+                class="btn pequeño"
+                type="button"
+                onclick="iniciarJuego('memoria')">
+                🎮 Jugar
+            </button>
+
+        </article>
+
+
+        <article class="juego">
+
+            <div class="juego-icono">⚡</div>
+
+            <h3>Reto rápido</h3>
+
+            <p>
+                Responde antes de que termine
+                el tiempo.
+            </p>
+
+            <button
+                class="btn pequeño"
+                type="button"
+                onclick="iniciarJuego('rapido')">
+                ⚡ Jugar
+            </button>
+
+        </article>
+
+
+        <article class="juego">
+
+            <div class="juego-icono">🔤</div>
+
+            <h3>Palabra correcta</h3>
+
+            <p>
+                Elige la traducción correcta
+                y acumula puntos.
+            </p>
+
+            <button
+                class="btn pequeño"
+                type="button"
+                onclick="iniciarJuego('palabras')">
+                🏆 Jugar
+            </button>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CLASES
+===================================================== -->
+
+<section class="seccion clases" id="clases">
+
+    <div class="clases-contenido">
+
+        <div>
+
+            <span>👨‍🏫 APRENDE CON NOSOTROS</span>
+
+            <h2>
+                Una nueva forma
+                de aprender idiomas.
+            </h2>
+
+            <p>
+                LinguaGo combina educación,
+                tecnología y juegos para hacer
+                que aprender sea más dinámico.
+            </p>
+
+            <button
+                class="btn principal"
+                type="button"
+                onclick="solicitarClase()">
+                👨‍🏫 Solicitar información
+            </button>
+
+        </div>
+
+
+        <div class="clase-beneficios">
+
+            <div>
+                📚
+                <strong>Material educativo</strong>
+            </div>
+
+            <div>
+                🎮
+                <strong>Actividades interactivas</strong>
+            </div>
+
+            <div>
+                🗣️
+                <strong>Práctica de idiomas</strong>
+            </div>
+
+            <div>
+                🏆
+                <strong>Retos y recompensas</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="cta">
+
+    <h2>
+        🚀 Tu aventura lingüística comienza aquí
+    </h2>
+
+    <p>
+        Aprende. Practica. Juega. Habla.
+    </p>
+
+    <a href="#cursos">
+        Comenzar ahora
+    </a>
+
+</section>
+
+
+<!-- =====================================================
+     VENTANA DE JUEGOS / MENSAJES
+===================================================== -->
+
+<div
+    class="mensaje"
+    id="mensaje"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="mensaje-titulo">
+
+    <div class="mensaje-contenido">
+
+        <button
+            class="cerrar"
+            type="button"
+            onclick="cerrarMensaje()"
+            aria-label="Cerrar">
+            ×
+        </button>
+
+        <div id="juego-contenido">
+
+            <h3 id="mensaje-titulo">
+                LinguaGo
+            </h3>
+
+            <p id="mensaje-texto">
+                Bienvenido a LinguaGo.
+            </p>
+
+            <button
+                id="mensaje-boton"
+                type="button"
+                onclick="cerrarMensaje()">
+                Continuar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-logo">
+        🌎 LINGUAGO
+    </div>
+
+    <div class="footer-links">
+
+        <a href="#inicio">Inicio</a>
+        <a href="#cursos">Cursos</a>
+        <a href="#juegos">Juegos</a>
+        <a href="#clases">Clases</a>
+
+    </div>
+
+    <p class="copyright">
+        © 2026 LinguaGo. Aprende idiomas sin fronteras.
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
