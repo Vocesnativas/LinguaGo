@@ -52,20 +52,123 @@ button {
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
 }
 
+/* =====================================================
+   LOGO LINGUAGO — GRANDE E INTERACTIVO
+===================================================== */
+
 .logo {
-    font-size: 27px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    cursor: pointer;
+
     font-weight: 900;
-    letter-spacing: -1px;
+
+    transition: transform .3s ease;
+    
+    animation: aparecerLogo .8s ease both;
 }
 
-.logo span {
-    color: #172033;
+.logo:hover {
+    transform: scale(1.08);
 }
 
-.logo strong {
+.logo-icon {
+    display: inline-block;
+
+    font-size: 2.5rem;
+
+    animation: mundoFlotando 3s ease-in-out infinite;
+
+    filter: drop-shadow(0 5px 8px rgba(0,0,0,.12));
+}
+
+.logo-text {
+    font-size: 2.45rem;
+
+    font-weight: 950;
+
+    letter-spacing: 2px;
+
+    line-height: 1;
+
+    transition:
+        letter-spacing .3s ease,
+        transform .3s ease;
+}
+
+.logo-text strong {
     color: #ff7a00;
+
+    font-weight: 950;
+
+    transition: color .3s ease;
 }
 
+.logo:hover .logo-text {
+    letter-spacing: 4px;
+}
+
+.logo:hover .logo-text strong {
+    color: #ff9a3c;
+}
+
+
+/* =====================================================
+   ANIMACIÓN DEL PLANETA
+===================================================== */
+
+@keyframes mundoFlotando {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-5px) rotate(8deg);
+    }
+}
+
+
+/* =====================================================
+   ENTRADA DEL LOGO
+===================================================== */
+
+@keyframes aparecerLogo {
+
+    from {
+        opacity: 0;
+        transform: translateX(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* =====================================================
+   LOGO EN CELULAR
+===================================================== */
+
+@media (max-width: 650px) {
+
+    .logo-icon {
+        font-size: 1.9rem;
+    }
+
+    .logo-text {
+        font-size: 1.85rem;
+        letter-spacing: 1px;
+    }
+
+    .logo:hover .logo-text {
+        letter-spacing: 2px;
+    }
+}
 .navbar nav {
     display: flex;
     gap: 25px;
