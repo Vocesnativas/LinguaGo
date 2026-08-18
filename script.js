@@ -3,131 +3,41 @@
    JavaScript principal
 ===================================================== */
 
-"use strict";
-
 
 /* =====================================================
-   VARIABLES GENERALES
+   VARIABLES
 ===================================================== */
 
 let juegoActual = null;
 let puntuacion = 0;
 let preguntaActual = 0;
-let tiempoRestante = 0;
+let tiempo = 10;
 let temporizador = null;
-
-const preguntasRapidas = [
-    {
-        pregunta: "¿Cómo se dice CASA en inglés?",
-        opciones: ["House", "School", "Book", "Water"],
-        correcta: "House"
-    },
-    {
-        pregunta: "¿Cómo se dice DOG en español?",
-        opciones: ["Gato", "Perro", "Pájaro", "Caballo"],
-        correcta: "Perro"
-    },
-    {
-        pregunta: "¿Cómo se dice LIBRO en inglés?",
-        opciones: ["Table", "Chair", "Book", "Door"],
-        correcta: "Book"
-    },
-    {
-        pregunta: "¿Cómo se dice WATER en español?",
-        opciones: ["Fuego", "Agua", "Tierra", "Aire"],
-        correcta: "Agua"
-    },
-    {
-        pregunta: "¿Cómo se dice ESCUELA en inglés?",
-        opciones: ["School", "House", "Garden", "Street"],
-        correcta: "School"
-    },
-    {
-        pregunta: "¿Cómo se dice FRIEND en español?",
-        opciones: ["Familia", "Amigo", "Maestro", "Vecino"],
-        correcta: "Amigo"
-    },
-    {
-        pregunta: "¿Cómo se dice COMIDA en inglés?",
-        opciones: ["Food", "Foot", "Book", "Fish"],
-        correcta: "Food"
-    },
-    {
-        pregunta: "¿Cómo se dice SUN en español?",
-        opciones: ["Luna", "Sol", "Estrella", "Nube"],
-        correcta: "Sol"
-    }
-];
-
-
-const palabras = [
-    {
-        palabra: "APPLE",
-        opciones: ["Manzana", "Naranja", "Banano", "Uva"],
-        correcta: "Manzana"
-    },
-    {
-        palabra: "BOOK",
-        opciones: ["Libro", "Mesa", "Lápiz", "Puerta"],
-        correcta: "Libro"
-    },
-    {
-        palabra: "WATER",
-        opciones: ["Agua", "Leche", "Jugo", "Café"],
-        correcta: "Agua"
-    },
-    {
-        palabra: "HOUSE",
-        opciones: ["Escuela", "Casa", "Calle", "Parque"],
-        correcta: "Casa"
-    },
-    {
-        palabra: "SUN",
-        opciones: ["Sol", "Luna", "Mar", "Cielo"],
-        correcta: "Sol"
-    },
-    {
-        palabra: "FRIEND",
-        opciones: ["Amigo", "Padre", "Hermano", "Profesor"],
-        correcta: "Amigo"
-    }
-];
 
 
 /* =====================================================
-   DOM READY
+   CUANDO CARGA LA PÁGINA
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
     console.log("LinguaGo iniciado correctamente 🚀");
 
-    configurarNavegacion();
 
-    configurarAnimaciones();
-
-    configurarCierreModal();
-
-    configurarTeclaEscape();
-
-});
-
-
-/* =====================================================
-   NAVEGACIÓN
-===================================================== */
-
-function configurarNavegacion() {
+    /* =================================================
+       NAVEGACIÓN SUAVE
+    ================================================= */
 
     const enlaces = document.querySelectorAll(
-        '.navbar nav a[href^="#"]'
+        'a[href^="#"]'
     );
 
     enlaces.forEach((enlace) => {
 
         enlace.addEventListener("click", (evento) => {
 
-            const destino = enlace.getAttribute("href");
+            const destino =
+                enlace.getAttribute("href");
 
             if (!destino || destino === "#") {
                 return;
@@ -153,82 +63,16 @@ function configurarNavegacion() {
 
     });
 
-}
 
-
-/* =====================================================
-   MENÚ RESPONSIVE
-===================================================== */
-
-function abrirMenu() {
-
-    const nav =
-        document.querySelector(".navbar nav");
-
-    const boton =
-        document.getElementById("btn-menu");
-
-    if (!nav) {
-        return;
-    }
-
-    nav.classList.toggle("menu-abierto");
-
-    if (boton) {
-
-        const abierto =
-            nav.classList.contains("menu-abierto");
-
-        boton.setAttribute(
-            "aria-expanded",
-            abierto ? "true" : "false"
-        );
-
-    }
-
-}
-
-
-function cerrarMenu() {
-
-    const nav =
-        document.querySelector(".navbar nav");
-
-    const boton =
-        document.getElementById("btn-menu");
-
-    if (!nav) {
-        return;
-    }
-
-    nav.classList.remove("menu-abierto");
-
-    if (boton) {
-
-        boton.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   ANIMACIONES
-===================================================== */
-
-function configurarAnimaciones() {
+    /* =================================================
+       ANIMACIÓN DE TARJETAS
+    ================================================= */
 
     const elementos =
         document.querySelectorAll(
-            ".tarjeta, .curso, .juego"
+            ".tarjeta, .curso, .juego, .premium-box"
         );
 
-    if (!("IntersectionObserver" in window)) {
-        return;
-    }
 
     const observador =
         new IntersectionObserver(
@@ -237,15 +81,20 @@ function configurarAnimaciones() {
 
                 entradas.forEach((entrada) => {
 
-                    if (
-                        entrada.isIntersecting &&
-                        !entrada.target.classList.contains(
-                            "visible"
-                        )
-                    ) {
+                    if (entrada.isIntersecting) {
 
                         entrada.target.classList.add(
                             "visible"
+                        );
+
+                        entrada.target.style.opacity =
+                            "1";
+
+                        entrada.target.style.transform =
+                            "translateY(0)";
+
+                        observador.unobserve(
+                            entrada.target
                         );
 
                     }
@@ -275,17 +124,165 @@ function configurarAnimaciones() {
 
     });
 
+
+    /* =================================================
+       CERRAR MENSAJE AL HACER CLIC AFUERA
+    ================================================= */
+
+    const ventanaMensaje =
+        document.getElementById("mensaje");
+
+    if (ventanaMensaje) {
+
+        ventanaMensaje.addEventListener(
+            "click",
+            (evento) => {
+
+                if (
+                    evento.target ===
+                    ventanaMensaje
+                ) {
+
+                    cerrarMensaje();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =================================================
+       CERRAR JUEGO AL HACER CLIC AFUERA
+    ================================================= */
+
+    const ventanaJuego =
+        document.getElementById("juegoModal");
+
+    if (ventanaJuego) {
+
+        ventanaJuego.addEventListener(
+            "click",
+            (evento) => {
+
+                if (
+                    evento.target ===
+                    ventanaJuego
+                ) {
+
+                    cerrarJuego();
+
+                }
+
+            }
+        );
+
+    }
+
+});
+
+
+/* =====================================================
+   MENÚ RESPONSIVE
+===================================================== */
+
+function abrirMenu() {
+
+    const nav =
+        document.getElementById("menuPrincipal");
+
+    const boton =
+        document.getElementById("btnMenu");
+
+    if (!nav) return;
+
+
+    if (nav.classList.contains("menu-abierto")) {
+
+        cerrarMenu();
+
+        return;
+
+    }
+
+
+    nav.classList.add("menu-abierto");
+
+    nav.style.display = "flex";
+    nav.style.flexDirection = "column";
+    nav.style.position = "absolute";
+    nav.style.top = "72px";
+    nav.style.right = "5%";
+    nav.style.padding = "20px";
+    nav.style.gap = "18px";
+    nav.style.background = "white";
+    nav.style.borderRadius = "15px";
+    nav.style.boxShadow =
+        "0 15px 35px rgba(0,0,0,.15)";
+
+    if (boton) {
+
+        boton.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+        boton.textContent = "✕";
+
+    }
+
 }
 
 
 /* =====================================================
-   CORRECCIÓN VISUAL DE ANIMACIONES
+   CERRAR MENÚ
 ===================================================== */
 
-document.addEventListener(
-    "animationstart",
-    () => {}
-);
+function cerrarMenu() {
+
+    const nav =
+        document.getElementById("menuPrincipal");
+
+    const boton =
+        document.getElementById("btnMenu");
+
+    if (!nav) return;
+
+    nav.classList.remove("menu-abierto");
+
+    if (window.innerWidth <= 1000) {
+
+        nav.style.display = "none";
+
+    } else {
+
+        nav.style.display = "";
+
+    }
+
+    nav.style.position = "";
+    nav.style.top = "";
+    nav.style.right = "";
+    nav.style.padding = "";
+    nav.style.gap = "";
+    nav.style.background = "";
+    nav.style.borderRadius = "";
+    nav.style.boxShadow = "";
+    nav.style.flexDirection = "";
+
+    if (boton) {
+
+        boton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        boton.textContent = "☰";
+
+    }
+
+}
 
 
 /* =====================================================
@@ -297,29 +294,24 @@ function mostrarMensaje(curso) {
     const ventana =
         document.getElementById("mensaje");
 
-    const titulo =
-        document.getElementById("mensaje-titulo");
-
     const texto =
         document.getElementById("mensaje-texto");
 
-    const boton =
-        document.getElementById("mensaje-boton");
+    const titulo =
+        document.getElementById("mensaje-titulo");
 
-    if (!ventana || !titulo || !texto) {
-        return;
+
+    if (!ventana || !texto) return;
+
+
+    if (titulo) {
+        titulo.textContent = curso;
     }
 
-    titulo.textContent =
-        "📚 " + curso;
 
     texto.textContent =
-        "Este curso está preparado para formar parte de la experiencia LinguaGo. Pronto podrás avanzar por sus lecciones y actividades.";
+        "Esta sección forma parte de LinguaGo. Estamos preparando nuevas actividades para que puedas aprender, practicar y avanzar.";
 
-    if (boton) {
-        boton.textContent = "Entendido";
-        boton.onclick = cerrarMensaje;
-    }
 
     ventana.classList.add("activo");
 
@@ -328,640 +320,12 @@ function mostrarMensaje(curso) {
 
 function cerrarMensaje() {
 
-    detenerTemporizador();
-
     const ventana =
         document.getElementById("mensaje");
 
-    if (!ventana) {
-        return;
-    }
+    if (!ventana) return;
 
     ventana.classList.remove("activo");
-
-    juegoActual = null;
-
-}
-
-
-/* =====================================================
-   INICIAR JUEGO
-===================================================== */
-
-function iniciarJuego(tipo) {
-
-    puntuacion = 0;
-    preguntaActual = 0;
-
-    juegoActual = tipo;
-
-    detenerTemporizador();
-
-    const ventana =
-        document.getElementById("mensaje");
-
-    const titulo =
-        document.getElementById("mensaje-titulo");
-
-    const contenido =
-        document.getElementById("juego-contenido");
-
-    if (!ventana || !titulo || !contenido) {
-        return;
-    }
-
-    ventana.classList.add("activo");
-
-    if (tipo === "memoria") {
-
-        iniciarMemoria();
-
-    } else if (tipo === "rapido") {
-
-        iniciarRetoRapido();
-
-    } else if (tipo === "palabras") {
-
-        iniciarPalabraCorrecta();
-
-    }
-
-}
-
-
-/* =====================================================
-   JUEGO 1 — MEMORIA
-===================================================== */
-
-function iniciarMemoria() {
-
-    const titulo =
-        document.getElementById("mensaje-titulo");
-
-    const contenido =
-        document.getElementById("juego-contenido");
-
-    titulo.textContent =
-        "🧠 Memoria de palabras";
-
-    const parejas = [
-        "🐶", "DOG",
-        "🐱", "CAT",
-        "🏠", "HOUSE",
-        "📖", "BOOK"
-    ];
-
-    const cartas =
-        [...parejas, ...parejas]
-            .sort(() => Math.random() - 0.5);
-
-    let primeraCarta = null;
-    let segundaCarta = null;
-    let bloqueado = false;
-    let parejasEncontradas = 0;
-
-    contenido.innerHTML = `
-
-        <h3>🧠 Memoria de palabras</h3>
-
-        <div class="juego-puntuacion">
-            <span>Puntos: <b id="memoria-puntos">0</b></span>
-            <span>Parejas: <b id="memoria-parejas">0</b>/4</span>
-        </div>
-
-        <div class="memoria-grid" id="memoria-grid"></div>
-
-        <button
-            class="btn pequeño"
-            type="button"
-            onclick="cerrarMensaje()">
-            Salir
-        </button>
-    `;
-
-    const tablero =
-        document.getElementById("memoria-grid");
-
-    cartas.forEach((valor, indice) => {
-
-        const carta =
-            document.createElement("button");
-
-        carta.className =
-            "carta-memoria";
-
-        carta.type = "button";
-
-        carta.textContent = "?";
-
-        carta.dataset.valor = valor;
-
-        carta.dataset.indice = indice;
-
-        carta.addEventListener(
-            "click",
-            () => {
-
-                if (
-                    bloqueado ||
-                    carta.classList.contains("revelada") ||
-                    carta.classList.contains("completada")
-                ) {
-                    return;
-                }
-
-                carta.classList.add("revelada");
-
-                carta.textContent = valor;
-
-                if (!primeraCarta) {
-
-                    primeraCarta = carta;
-
-                    return;
-                }
-
-                segundaCarta = carta;
-
-                bloqueado = true;
-
-                if (
-                    primeraCarta.dataset.valor ===
-                    segundaCarta.dataset.valor
-                ) {
-
-                    primeraCarta.classList.add(
-                        "completada"
-                    );
-
-                    segundaCarta.classList.add(
-                        "completada"
-                    );
-
-                    parejasEncontradas++;
-
-                    puntuacion += 10;
-
-                    actualizarMemoriaPuntos();
-
-                    primeraCarta = null;
-                    segundaCarta = null;
-                    bloqueado = false;
-
-                    if (parejasEncontradas === 4) {
-
-                        setTimeout(() => {
-
-                            mostrarResultado(
-                                "🎉 ¡Excelente memoria!",
-                                `Conseguiste ${puntuacion} puntos.`
-                            );
-
-                        }, 500);
-
-                    }
-
-                } else {
-
-                    setTimeout(() => {
-
-                        primeraCarta.classList.remove(
-                            "revelada"
-                        );
-
-                        segundaCarta.classList.remove(
-                            "revelada"
-                        );
-
-                        primeraCarta.textContent = "?";
-                        segundaCarta.textContent = "?";
-
-                        primeraCarta = null;
-                        segundaCarta = null;
-
-                        bloqueado = false;
-
-                    }, 800);
-
-                }
-
-            }
-        );
-
-        tablero.appendChild(carta);
-
-    });
-
-}
-
-
-function actualizarMemoriaPuntos() {
-
-    const puntos =
-        document.getElementById("memoria-puntos");
-
-    const parejas =
-        document.getElementById("memoria-parejas");
-
-    if (puntos) {
-        puntos.textContent = puntuacion;
-    }
-
-    if (parejas) {
-        const completadas =
-            document.querySelectorAll(
-                ".carta-memoria.completada"
-            ).length / 2;
-
-        parejas.textContent =
-            Math.floor(completadas);
-    }
-
-}
-
-
-/* =====================================================
-   JUEGO 2 — RETO RÁPIDO
-===================================================== */
-
-function iniciarRetoRapido() {
-
-    const titulo =
-        document.getElementById("mensaje-titulo");
-
-    const contenido =
-        document.getElementById("juego-contenido");
-
-    titulo.textContent =
-        "⚡ Reto rápido";
-
-    puntuacion = 0;
-    preguntaActual = 0;
-    tiempoRestante = 30;
-
-    contenido.innerHTML = `
-
-        <div class="juego-panel">
-
-            <h3>⚡ Reto rápido</h3>
-
-            <div class="juego-puntuacion">
-
-                <span>
-                    ⭐ Puntos:
-                    <b id="rapido-puntos">0</b>
-                </span>
-
-                <span>
-                    ⏱️ Tiempo:
-                    <b id="rapido-tiempo">30</b>
-                </span>
-
-            </div>
-
-            <div id="rapido-pregunta"></div>
-
-        </div>
-    `;
-
-    mostrarPreguntaRapida();
-
-    temporizador =
-        setInterval(() => {
-
-            tiempoRestante--;
-
-            const reloj =
-                document.getElementById(
-                    "rapido-tiempo"
-                );
-
-            if (reloj) {
-                reloj.textContent =
-                    tiempoRestante;
-            }
-
-            if (tiempoRestante <= 0) {
-
-                detenerTemporizador();
-
-                mostrarResultado(
-                    "⏰ ¡Tiempo terminado!",
-                    `Tu puntuación final fue de ${puntuacion} puntos.`
-                );
-
-            }
-
-        }, 1000);
-
-}
-
-
-function mostrarPreguntaRapida() {
-
-    if (preguntaActual >= preguntasRapidas.length) {
-
-        detenerTemporizador();
-
-        mostrarResultado(
-            "🏆 ¡Completaste el reto!",
-            `Conseguiste ${puntuacion} puntos.`
-        );
-
-        return;
-    }
-
-    const pregunta =
-        preguntasRapidas[preguntaActual];
-
-    const contenedor =
-        document.getElementById(
-            "rapido-pregunta"
-        );
-
-    if (!contenedor) {
-        return;
-    }
-
-    contenedor.innerHTML = `
-
-        <p class="juego-palabra">
-            ${pregunta.pregunta}
-        </p>
-
-        <div class="juego-opciones">
-
-            ${pregunta.opciones
-                .map(
-                    (opcion) => `
-                        <button
-                            class="opcion-juego"
-                            type="button"
-                            onclick="responderRapido('${escaparTexto(opcion)}')">
-                            ${opcion}
-                        </button>
-                    `
-                )
-                .join("")}
-
-        </div>
-    `;
-
-}
-
-
-function responderRapido(respuesta) {
-
-    if (
-        preguntaActual >=
-        preguntasRapidas.length
-    ) {
-        return;
-    }
-
-    const pregunta =
-        preguntasRapidas[preguntaActual];
-
-    if (respuesta === pregunta.correcta) {
-
-        puntuacion += 10;
-
-    }
-
-    const puntos =
-        document.getElementById(
-            "rapido-puntos"
-        );
-
-    if (puntos) {
-        puntos.textContent = puntuacion;
-    }
-
-    preguntaActual++;
-
-    mostrarPreguntaRapida();
-
-}
-
-
-/* =====================================================
-   JUEGO 3 — PALABRA CORRECTA
-===================================================== */
-
-function iniciarPalabraCorrecta() {
-
-    const titulo =
-        document.getElementById("mensaje-titulo");
-
-    const contenido =
-        document.getElementById("juego-contenido");
-
-    titulo.textContent =
-        "🔤 Palabra correcta";
-
-    puntuacion = 0;
-    preguntaActual = 0;
-
-    contenido.innerHTML = `
-
-        <div class="juego-panel">
-
-            <h3>🔤 Palabra correcta</h3>
-
-            <div class="juego-puntuacion">
-
-                <span>
-                    ⭐ Puntos:
-                    <b id="palabras-puntos">0</b>
-                </span>
-
-                <span>
-                    Pregunta:
-                    <b id="palabras-numero">1</b>/${palabras.length}
-                </span>
-
-            </div>
-
-            <div id="palabras-pregunta"></div>
-
-        </div>
-    `;
-
-    mostrarPalabra();
-
-}
-
-
-function mostrarPalabra() {
-
-    if (preguntaActual >= palabras.length) {
-
-        mostrarResultado(
-            "🎉 ¡Reto completado!",
-            `Terminaste con ${puntuacion} puntos.`
-        );
-
-        return;
-    }
-
-    const pregunta =
-        palabras[preguntaActual];
-
-    const contenedor =
-        document.getElementById(
-            "palabras-pregunta"
-        );
-
-    if (!contenedor) {
-        return;
-    }
-
-    const numero =
-        document.getElementById(
-            "palabras-numero"
-        );
-
-    if (numero) {
-        numero.textContent =
-            preguntaActual + 1;
-    }
-
-    contenedor.innerHTML = `
-
-        <div class="juego-palabra">
-            ${pregunta.palabra}
-        </div>
-
-        <p>
-            ¿Cuál es su significado?
-        </p>
-
-        <div class="juego-opciones">
-
-            ${pregunta.opciones
-                .map(
-                    (opcion) => `
-                        <button
-                            class="opcion-juego"
-                            type="button"
-                            onclick="responderPalabra('${escaparTexto(opcion)}')">
-                            ${opcion}
-                        </button>
-                    `
-                )
-                .join("")}
-
-        </div>
-    `;
-
-}
-
-
-function responderPalabra(respuesta) {
-
-    if (preguntaActual >= palabras.length) {
-        return;
-    }
-
-    const pregunta =
-        palabras[preguntaActual];
-
-    if (respuesta === pregunta.correcta) {
-
-        puntuacion += 10;
-
-    }
-
-    const puntos =
-        document.getElementById(
-            "palabras-puntos"
-        );
-
-    if (puntos) {
-        puntos.textContent = puntuacion;
-    }
-
-    preguntaActual++;
-
-    setTimeout(() => {
-        mostrarPalabra();
-    }, 250);
-
-}
-
-
-/* =====================================================
-   RESULTADO
-===================================================== */
-
-function mostrarResultado(titulo, texto) {
-
-    detenerTemporizador();
-
-    const tituloElemento =
-        document.getElementById(
-            "mensaje-titulo"
-        );
-
-    const contenido =
-        document.getElementById(
-            "juego-contenido"
-        );
-
-    if (!tituloElemento || !contenido) {
-        return;
-    }
-
-    tituloElemento.textContent =
-        titulo;
-
-    contenido.innerHTML = `
-
-        <div class="resultado-juego">
-
-            <div style="font-size:60px;">
-                🏆
-            </div>
-
-            <h3>
-                ${titulo}
-            </h3>
-
-            <p>
-                ${texto}
-            </p>
-
-            <button
-                class="btn pequeño"
-                type="button"
-                onclick="reiniciarJuego()">
-                🔄 Jugar otra vez
-            </button>
-
-            <button
-                class="btn pequeño"
-                type="button"
-                onclick="cerrarMensaje()">
-                ✓ Terminar
-            </button>
-
-        </div>
-    `;
-
-}
-
-
-function reiniciarJuego() {
-
-    const tipo =
-        juegoActual;
-
-    if (!tipo) {
-        cerrarMensaje();
-        return;
-    }
-
-    iniciarJuego(tipo);
 
 }
 
@@ -975,38 +339,25 @@ function solicitarClase() {
     const ventana =
         document.getElementById("mensaje");
 
+    const texto =
+        document.getElementById("mensaje-texto");
+
     const titulo =
         document.getElementById("mensaje-titulo");
 
-    const contenido =
-        document.getElementById("juego-contenido");
 
-    if (!ventana || !titulo || !contenido) {
-        return;
+    if (!ventana || !texto) return;
+
+
+    if (titulo) {
+        titulo.textContent =
+            "Clases virtuales 👨‍🏫";
     }
 
-    titulo.textContent =
-        "👨‍🏫 Clases virtuales";
 
-    contenido.innerHTML = `
+    texto.textContent =
+        "Muy pronto podrás solicitar una clase virtual de español o inglés en LinguaGo.";
 
-        <h3>
-            Aprende con LinguaGo
-        </h3>
-
-        <p>
-            Próximamente podrás solicitar
-            información sobre clases virtuales
-            de español e inglés.
-        </p>
-
-        <button
-            class="btn pequeño"
-            type="button"
-            onclick="cerrarMensaje()">
-            Entendido
-        </button>
-    `;
 
     ventana.classList.add("activo");
 
@@ -1014,7 +365,7 @@ function solicitarClase() {
 
 
 /* =====================================================
-   PREMIUM — RESERVADO PARA FUTURA FASE
+   PREMIUM
 ===================================================== */
 
 function mostrarPremium() {
@@ -1022,37 +373,25 @@ function mostrarPremium() {
     const ventana =
         document.getElementById("mensaje");
 
+    const texto =
+        document.getElementById("mensaje-texto");
+
     const titulo =
         document.getElementById("mensaje-titulo");
 
-    const contenido =
-        document.getElementById("juego-contenido");
 
-    if (!ventana || !titulo || !contenido) {
-        return;
+    if (!ventana || !texto) return;
+
+
+    if (titulo) {
+        titulo.textContent =
+            "LinguaGo Premium ⭐";
     }
 
-    titulo.textContent =
-        "⭐ LinguaGo Premium";
 
-    contenido.innerHTML = `
+    texto.textContent =
+        "LinguaGo Premium permitirá acceder a cursos, materiales, retos y funciones exclusivas.";
 
-        <h3>
-            Próximamente
-        </h3>
-
-        <p>
-            Aquí podremos incorporar cursos,
-            materiales y funciones especiales.
-        </p>
-
-        <button
-            class="btn pequeño"
-            type="button"
-            onclick="cerrarMensaje()">
-            Entendido
-        </button>
-    `;
 
     ventana.classList.add("activo");
 
@@ -1060,106 +399,742 @@ function mostrarPremium() {
 
 
 /* =====================================================
-   CERRAR MODAL
+   BANCO DE PREGUNTAS
 ===================================================== */
 
-function configurarCierreModal() {
+const preguntasPalabras = [
 
-    const ventana =
-        document.getElementById("mensaje");
+    {
+        pregunta: "¿Cómo se dice 'casa' en inglés?",
+        opciones: [
+            "House",
+            "School",
+            "Table",
+            "Window"
+        ],
+        correcta: "House"
+    },
 
-    if (!ventana) {
-        return;
+    {
+        pregunta: "¿Cómo se dice 'perro' en inglés?",
+        opciones: [
+            "Cat",
+            "Dog",
+            "Bird",
+            "Fish"
+        ],
+        correcta: "Dog"
+    },
+
+    {
+        pregunta: "¿Cómo se dice 'agua' en inglés?",
+        opciones: [
+            "Fire",
+            "Food",
+            "Water",
+            "Milk"
+        ],
+        correcta: "Water"
+    },
+
+    {
+        pregunta: "¿Cómo se dice 'libro' en inglés?",
+        opciones: [
+            "Book",
+            "Pen",
+            "Door",
+            "Chair"
+        ],
+        correcta: "Book"
+    },
+
+    {
+        pregunta: "¿Cómo se dice 'sol' en inglés?",
+        opciones: [
+            "Moon",
+            "Star",
+            "Sun",
+            "Cloud"
+        ],
+        correcta: "Sun"
     }
 
-    ventana.addEventListener(
-        "click",
-        (evento) => {
+];
+
+
+/* =====================================================
+   JUEGO DE PALABRAS
+===================================================== */
+
+function iniciarJuego(tipo) {
+
+    const modal =
+        document.getElementById("juegoModal");
+
+    const contenido =
+        document.getElementById("juegoContenido");
+
+
+    if (!modal || !contenido) return;
+
+
+    juegoActual = tipo;
+
+    puntuacion = 0;
+
+    preguntaActual = 0;
+
+    tiempo = 10;
+
+
+    modal.classList.add("activo");
+
+
+    if (tipo === "palabras") {
+
+        iniciarJuegoPalabras();
+
+    }
+
+    else if (tipo === "rapido") {
+
+        iniciarJuegoRapido();
+
+    }
+
+    else if (tipo === "memoria") {
+
+        iniciarJuegoMemoria();
+
+    }
+
+}
+
+
+/* =====================================================
+   JUEGO PALABRA CORRECTA
+===================================================== */
+
+function iniciarJuegoPalabras() {
+
+    mostrarPregunta();
+
+}
+
+
+function mostrarPregunta() {
+
+    const contenido =
+        document.getElementById("juegoContenido");
+
+    if (!contenido) return;
+
+
+    if (
+        preguntaActual >=
+        preguntasPalabras.length
+    ) {
+
+        mostrarResultado();
+
+        return;
+
+    }
+
+
+    const pregunta =
+        preguntasPalabras[preguntaActual];
+
+
+    contenido.innerHTML = `
+
+        <h2 class="juego-titulo">
+            🔤 Palabra correcta
+        </h2>
+
+        <div class="juego-puntos">
+            ⭐ Puntos: ${puntuacion}
+        </div>
+
+        <div class="pregunta">
+            ${pregunta.pregunta}
+        </div>
+
+        <div class="opciones">
+
+            ${pregunta.opciones.map(
+                (opcion) => `
+                    <button
+                        class="opcion"
+                        onclick="responder('${opcion.replace(/'/g, "\\'")}')">
+                        ${opcion}
+                    </button>
+                `
+            ).join("")}
+
+        </div>
+
+    `;
+
+}
+
+
+function responder(opcion) {
+
+    const pregunta =
+        preguntasPalabras[preguntaActual];
+
+
+    const botones =
+        document.querySelectorAll(".opcion");
+
+
+    botones.forEach((boton) => {
+
+        boton.disabled = true;
+
+
+        if (
+            boton.textContent.trim() ===
+            pregunta.correcta
+        ) {
+
+            boton.classList.add("correcta");
+
+        }
+
+    });
+
+
+    if (opcion === pregunta.correcta) {
+
+        puntuacion += 10;
+
+    } else {
+
+        botones.forEach((boton) => {
 
             if (
-                evento.target === ventana &&
-                !juegoActual
+                boton.textContent.trim() ===
+                opcion
             ) {
 
-                cerrarMensaje();
+                boton.classList.add(
+                    "incorrecta"
+                );
 
             }
 
-        }
-    );
+        });
 
-}
+    }
 
 
-function configurarTeclaEscape() {
+    setTimeout(() => {
 
-    document.addEventListener(
-        "keydown",
-        (evento) => {
+        preguntaActual++;
 
-            if (evento.key === "Escape") {
+        mostrarPregunta();
 
-                cerrarMensaje();
-
-            }
-
-        }
-    );
+    }, 700);
 
 }
 
 
 /* =====================================================
-   TEMPORIZADOR
+   RESULTADO
 ===================================================== */
 
-function detenerTemporizador() {
+function mostrarResultado() {
 
-    if (temporizador) {
+    const contenido =
+        document.getElementById("juegoContenido");
 
-        clearInterval(
-            temporizador
+    if (!contenido) return;
+
+
+    contenido.innerHTML = `
+
+        <div class="resultado">
+
+            🏆 ¡Juego terminado!
+
+        </div>
+
+        <p>
+            Conseguíste
+            <strong>${puntuacion}</strong>
+            puntos.
+        </p>
+
+        <br>
+
+        <button
+            class="btn principal"
+            onclick="iniciarJuego('palabras')">
+            🔄 Jugar otra vez
+        </button>
+
+    `;
+
+}
+
+
+/* =====================================================
+   RETO RÁPIDO
+===================================================== */
+
+function iniciarJuegoRapido() {
+
+    preguntaActual = 0;
+
+    puntuacion = 0;
+
+    tiempo = 10;
+
+    mostrarPreguntaRapida();
+
+}
+
+
+function mostrarPreguntaRapida() {
+
+    const contenido =
+        document.getElementById("juegoContenido");
+
+    if (!contenido) return;
+
+
+    if (
+        preguntaActual >=
+        preguntasPalabras.length
+    ) {
+
+        mostrarResultado();
+
+        return;
+
+    }
+
+
+    const pregunta =
+        preguntasPalabras[preguntaActual];
+
+
+    tiempo = 10;
+
+
+    contenido.innerHTML = `
+
+        <h2 class="juego-titulo">
+            ⚡ Reto rápido
+        </h2>
+
+        <div class="juego-puntos">
+            ⭐ ${puntuacion} puntos |
+            ⏱️ <span id="tiempo">${tiempo}</span>s
+        </div>
+
+        <div class="pregunta">
+            ${pregunta.pregunta}
+        </div>
+
+        <div class="opciones">
+
+            ${pregunta.opciones.map(
+                (opcion) => `
+                    <button
+                        class="opcion"
+                        onclick="responderRapido('${opcion.replace(/'/g, "\\'")}')">
+                        ${opcion}
+                    </button>
+                `
+            ).join("")}
+
+        </div>
+
+    `;
+
+
+    clearInterval(temporizador);
+
+
+    temporizador = setInterval(() => {
+
+        tiempo--;
+
+
+        const contador =
+            document.getElementById("tiempo");
+
+
+        if (contador) {
+            contador.textContent = tiempo;
+        }
+
+
+        if (tiempo <= 0) {
+
+            clearInterval(temporizador);
+
+            preguntaActual++;
+
+            mostrarPreguntaRapida();
+
+        }
+
+    }, 1000);
+
+}
+
+
+function responderRapido(opcion) {
+
+    clearInterval(temporizador);
+
+
+    const pregunta =
+        preguntasPalabras[preguntaActual];
+
+
+    if (opcion === pregunta.correcta) {
+
+        puntuacion += 10;
+
+    }
+
+
+    preguntaActual++;
+
+
+    setTimeout(() => {
+
+        mostrarPreguntaRapida();
+
+    }, 300);
+
+}
+
+
+/* =====================================================
+   JUEGO DE MEMORIA
+===================================================== */
+
+function iniciarJuegoMemoria() {
+
+    const contenido =
+        document.getElementById("juegoContenido");
+
+    if (!contenido) return;
+
+
+    const parejas = [
+
+        ["🐶","Dog"],
+        ["🐱","Cat"],
+        ["☀️","Sun"],
+        ["📚","Book"],
+        ["🍎","Apple"],
+        ["🏠","House"]
+
+    ];
+
+
+    let cartas = [];
+
+
+    parejas.forEach((pareja, indice) => {
+
+        cartas.push({
+            id: indice,
+            valor: pareja[0],
+            palabra: pareja[1]
+        });
+
+        cartas.push({
+            id: indice,
+            valor: pareja[1],
+            palabra: pareja[1]
+        });
+
+    });
+
+
+    cartas.sort(() =>
+        Math.random() - .5
+    );
+
+
+    contenido.innerHTML = `
+
+        <h2 class="juego-titulo">
+            🧠 Memoria de palabras
+        </h2>
+
+        <p>
+            Encuentra las parejas.
+        </p>
+
+        <div
+            id="memoriaTablero"
+            class="memoria-tablero">
+        </div>
+
+        <p id="memoriaMensaje"></p>
+
+    `;
+
+
+    const tablero =
+        document.getElementById(
+            "memoriaTablero"
         );
 
-        temporizador = null;
 
-    }
+    let seleccionadas = [];
+
+    let bloqueado = false;
+
+    let parejasEncontradas = 0;
+
+
+    cartas.forEach((carta, indice) => {
+
+        const boton =
+            document.createElement("button");
+
+
+        boton.className =
+            "carta-memoria";
+
+
+        boton.textContent = "❓";
+
+
+        boton.dataset.indice = indice;
+
+
+        boton.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    bloqueado ||
+                    seleccionadas.includes(indice) ||
+                    boton.classList.contains("encontrada")
+                ) {
+
+                    return;
+
+                }
+
+
+                boton.textContent =
+                    carta.valor;
+
+                boton.classList.add(
+                    "seleccionada"
+                );
+
+
+                seleccionadas.push(indice);
+
+
+                if (
+                    seleccionadas.length === 2
+                ) {
+
+                    bloqueado = true;
+
+
+                    const [primera, segunda] =
+                        seleccionadas;
+
+
+                    const carta1 =
+                        cartas[primera];
+
+                    const carta2 =
+                        cartas[segunda];
+
+
+                    if (
+                        carta1.id ===
+                        carta2.id
+                    ) {
+
+                        tablero
+                            .children[primera]
+                            .classList.add(
+                                "encontrada"
+                            );
+
+                        tablero
+                            .children[segunda]
+                            .classList.add(
+                                "encontrada"
+                            );
+
+
+                        parejasEncontradas++;
+
+
+                        seleccionadas = [];
+
+                        bloqueado = false;
+
+
+                        if (
+                            parejasEncontradas ===
+                            parejas.length
+                        ) {
+
+                            document
+                                .getElementById(
+                                    "memoriaMensaje"
+                                )
+                                .textContent =
+                                "🏆 ¡Excelente! Encontraste todas las parejas.";
+
+                        }
+
+                    } else {
+
+                        setTimeout(() => {
+
+                            tablero
+                                .children[primera]
+                                .textContent =
+                                "❓";
+
+                            tablero
+                                .children[segunda]
+                                .textContent =
+                                "❓";
+
+
+                            tablero
+                                .children[primera]
+                                .classList.remove(
+                                    "seleccionada"
+                                );
+
+                            tablero
+                                .children[segunda]
+                                .classList.remove(
+                                    "seleccionada"
+                                );
+
+
+                            seleccionadas = [];
+
+                            bloqueado = false;
+
+                        }, 700);
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        tablero.appendChild(boton);
+
+    });
 
 }
 
 
 /* =====================================================
-   SEGURIDAD PARA TEXTO DE BOTONES
+   CERRAR JUEGO
 ===================================================== */
 
-function escaparTexto(texto) {
+function cerrarJuego() {
 
-    return texto
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'")
-        .replace(/"/g, '\\"');
+    clearInterval(temporizador);
+
+    const modal =
+        document.getElementById("juegoModal");
+
+    if (!modal) return;
+
+    modal.classList.remove("activo");
 
 }
 
 
 /* =====================================================
-   ANIMACIÓN DE ELEMENTOS VISIBLES
+   TECLA ESC
 ===================================================== */
 
-const estiloAnimacion =
-    document.createElement("style");
+document.addEventListener(
+    "keydown",
+    (evento) => {
 
-estiloAnimacion.textContent = `
+        if (evento.key === "Escape") {
 
-    .tarjeta.visible,
-    .curso.visible,
-    .juego.visible {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
+            cerrarMensaje();
+
+            cerrarJuego();
+
+            cerrarMenu();
+
+        }
+
     }
+);
 
-`;
 
-document.head.appendChild(
-    estiloAnimacion
+/* =====================================================
+   AJUSTAR MENÚ AL CAMBIAR TAMAÑO
+===================================================== */
 
+window.addEventListener(
+    "resize",
+    () => {
+
+        const nav =
+            document.getElementById(
+                "menuPrincipal"
+            );
+
+
+        if (!nav) return;
+
+
+        if (window.innerWidth > 1000) {
+
+            nav.style.display = "flex";
+
+            nav.style.position = "";
+
+            nav.style.top = "";
+
+            nav.style.right = "";
+
+            nav.style.padding = "";
+
+            nav.style.gap = "";
+
+            nav.style.background = "";
+
+            nav.style.borderRadius = "";
+
+            nav.style.boxShadow = "";
+
+            nav.style.flexDirection = "";
+
+        } else if (
+            !nav.classList.contains(
+                "menu-abierto"
+            )
+        ) {
+
+            nav.style.display = "none";
+
+        }
+
+    }
+);
