@@ -2195,3 +2195,66 @@ input:focus-visible {
         font-size: 0.8rem;
     }
 }
+/* =====================================================
+   AJUSTE FINAL — LECCIONES ESPAÑOL E INGLÉS
+   Fuerza el contenedor y las lecciones a ocupar
+   correctamente su espacio.
+===================================================== */
+
+.course-card .lesson-item,
+.course-card .lessons,
+.course-card .lesson-list {
+    width: 100%;
+    max-width: 100%;
+}
+
+.course-card .lesson-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    margin: 12px 0;
+    padding: 15px 16px;
+
+    overflow: hidden;
+}
+
+.course-card {
+    overflow: hidden;
+}
+
+.lesson-item > div {
+    min-width: 0;
+}
+
+.lesson-item strong,
+.lesson-item small {
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+@media (max-width: 800px) {
+
+    .course-card {
+        width: 100%;
+    }
+
+    .course-card .lesson-item {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .course-card {
+        width: 100%;
+    }
+
+    .course-card .lesson-item {
+        width: 100%;
+        margin: 10px 0;
+        padding: 13px;
+    }
+}
