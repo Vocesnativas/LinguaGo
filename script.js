@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("LinguaGo iniciado correctamente 🚀");
 
+
     /* =================================================
        MENÚ
     ================================================= */
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 menu.classList.contains("active")
                     ? "✕"
                     : "☰";
+
         });
 
         menu.querySelectorAll("a").forEach((enlace) => {
@@ -81,6 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function mostrarMensaje(titulo, texto, icono = "🦊") {
 
+        if (!messageBox) return;
+
         messageTitle.textContent = titulo;
         messageText.textContent = texto;
         messageIcon.textContent = icono;
@@ -91,6 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     function cerrarMensaje() {
+
+        if (!messageBox) return;
 
         messageBox.classList.remove("active");
 
@@ -173,6 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 iniciarMemoria();
 
                 return;
+
             }
 
             if (boton.dataset.game === "Palabra correcta") {
@@ -180,6 +187,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 iniciarPalabraCorrecta();
 
                 return;
+
+            }
+
+            if (boton.dataset.game === "Reto LinguaGo") {
+
+                iniciarRetoLinguaGo();
+
+                return;
+
             }
 
             mostrarMensaje(
@@ -277,6 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const cartas = [];
 
+
         words.forEach((word) => {
 
             cartas.push({
@@ -292,6 +309,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
         });
+
 
         cartas.sort(() => Math.random() - 0.5);
 
@@ -323,10 +341,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             `;
 
+
             elemento.addEventListener(
                 "click",
                 () => voltearCarta(elemento)
             );
+
 
             memoryBoard.appendChild(elemento);
 
@@ -342,6 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (carta === firstCard) return;
 
         if (carta.classList.contains("matched")) return;
+
 
         carta.classList.add("flipped");
 
@@ -359,9 +380,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         attempts++;
 
+
         if (attemptsElement) {
             attemptsElement.textContent = attempts;
         }
+
 
         comprobarPareja();
 
@@ -401,14 +424,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         score += 100;
 
+
         if (scoreElement) {
             scoreElement.textContent = score;
         }
 
+
         if (pairsElement) {
+
             pairsElement.textContent =
                 `${pairs}/${words.length}`;
+
         }
+
 
         resetTurn();
 
@@ -435,6 +463,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lockBoard = true;
 
         score = Math.max(0, score - 10);
+
 
         if (scoreElement) {
             scoreElement.textContent = score;
@@ -473,6 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
         score = 0;
         pairs = 0;
 
+
         if (scoreElement) {
             scoreElement.textContent = "0";
         }
@@ -485,6 +515,7 @@ document.addEventListener("DOMContentLoaded", () => {
             pairsElement.textContent =
                 `0/${words.length}`;
         }
+
 
         crearCartas();
 
@@ -500,6 +531,7 @@ document.addEventListener("DOMContentLoaded", () => {
         memorySection.classList.add("active");
 
         reiniciarMemoria();
+
 
         setTimeout(() => {
 
@@ -609,6 +641,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let juego =
             document.getElementById("correctWordGame");
 
+
         if (!juego) {
 
             juego = document.createElement("section");
@@ -623,6 +656,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+
         juego.innerHTML = `
 
             <div class="correct-word-box">
@@ -631,7 +665,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     🔤 PALABRA CORRECTA
                 </span>
 
-                <h2>¡Elige la respuesta correcta!</h2>
+                <h2>
+                    ¡Elige la respuesta correcta!
+                </h2>
 
                 <div class="correct-progress">
                     Pregunta
@@ -652,13 +688,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
 
             </div>
+
         `;
 
 
         const opcionesBox =
             juego.querySelector(".correct-options");
 
-        preguntas[preguntaActual].opciones
+
+        const opciones =
+            [...preguntas[preguntaActual].opciones];
+
+
+        opciones
             .sort(() => Math.random() - 0.5)
             .forEach((opcion) => {
 
@@ -667,12 +709,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 boton.textContent = opcion;
 
-                boton.className = "correct-option";
+                boton.className =
+                    "correct-option";
+
 
                 boton.addEventListener(
                     "click",
                     () => responderPalabra(opcion)
                 );
+
 
                 opcionesBox.appendChild(boton);
 
@@ -692,14 +737,23 @@ document.addEventListener("DOMContentLoaded", () => {
         const correcta =
             preguntas[preguntaActual].correcta;
 
+
         const botones =
-            document.querySelectorAll(".correct-option");
+            document.querySelectorAll(
+                ".correct-option"
+            );
+
 
         botones.forEach((boton) => {
+
             boton.disabled = true;
 
             if (boton.textContent === correcta) {
-                boton.classList.add("correct-answer");
+
+                boton.classList.add(
+                    "correct-answer"
+                );
+
             }
 
         });
@@ -712,28 +766,40 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
 
             puntosPalabra =
-                Math.max(0, puntosPalabra - 25);
+                Math.max(
+                    0,
+                    puntosPalabra - 25
+                );
 
         }
 
 
         const juego =
-            document.getElementById("correctWordGame");
+            document.getElementById(
+                "correctWordGame"
+            );
+
 
         if (juego) {
 
             const resultado =
                 document.createElement("p");
 
-            resultado.className = "correct-feedback";
+
+            resultado.className =
+                "correct-feedback";
+
 
             resultado.textContent =
                 respuesta === correcta
                     ? "🎉 ¡Correcto! +100 puntos"
                     : `❌ Era "${correcta}"`;
 
+
             juego
-                .querySelector(".correct-word-box")
+                .querySelector(
+                    ".correct-word-box"
+                )
                 .appendChild(resultado);
 
         }
@@ -743,7 +809,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             preguntaActual++;
 
-            if (preguntaActual >= preguntas.length) {
+
+            if (
+                preguntaActual >=
+                preguntas.length
+            ) {
 
                 terminarPalabraCorrecta();
 
@@ -761,9 +831,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function terminarPalabraCorrecta() {
 
         const juego =
-            document.getElementById("correctWordGame");
+            document.getElementById(
+                "correctWordGame"
+            );
+
 
         if (!juego) return;
+
 
         juego.innerHTML = `
 
@@ -773,7 +847,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     🏆
                 </div>
 
-                <h2>¡Reto terminado!</h2>
+                <h2>
+                    ¡Reto terminado!
+                </h2>
 
                 <p>
                     Terminaste todas las preguntas.
@@ -787,21 +863,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button
                     class="correct-restart"
                     id="restartCorrectWord">
+
                     🔄 Jugar otra vez
+
                 </button>
 
                 <button
                     class="correct-close"
                     id="closeCorrectWord">
+
                     ✕ Cerrar
+
                 </button>
 
             </div>
+
         `;
 
 
         document
-            .getElementById("restartCorrectWord")
+            .getElementById(
+                "restartCorrectWord"
+            )
             .addEventListener(
                 "click",
                 () => {
@@ -816,7 +899,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         document
-            .getElementById("closeCorrectWord")
+            .getElementById(
+                "closeCorrectWord"
+            )
             .addEventListener(
                 "click",
                 cerrarPalabraCorrecta
@@ -840,11 +925,512 @@ document.addEventListener("DOMContentLoaded", () => {
     function cerrarPalabraCorrecta() {
 
         const juego =
-            document.getElementById("correctWordGame");
+            document.getElementById(
+                "correctWordGame"
+            );
+
 
         if (juego) {
             juego.remove();
         }
+
+
+        document
+            .getElementById("juegos")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    /* =================================================
+       RETO LINGUAGO
+    ================================================= */
+
+    const retosLinguaGo = [
+
+        {
+            pregunta: "¿Cómo se dice GATO en inglés?",
+            opciones: ["Cat", "Car", "Hat"],
+            correcta: "Cat"
+        },
+
+        {
+            pregunta: "¿Cómo se dice ROJO en inglés?",
+            opciones: ["Blue", "Red", "Green"],
+            correcta: "Red"
+        },
+
+        {
+            pregunta: "¿Cómo se dice AGUA en inglés?",
+            opciones: ["Water", "Milk", "Juice"],
+            correcta: "Water"
+        },
+
+        {
+            pregunta: "¿Cómo se dice LIBRO en inglés?",
+            opciones: ["Book", "Pen", "Table"],
+            correcta: "Book"
+        },
+
+        {
+            pregunta: "¿Cómo se dice GRANDE en inglés?",
+            opciones: ["Small", "Big", "Short"],
+            correcta: "Big"
+        },
+
+        {
+            pregunta: "¿Cómo se dice AMIGO en inglés?",
+            opciones: ["Friend", "Brother", "Teacher"],
+            correcta: "Friend"
+        },
+
+        {
+            pregunta: "¿Cómo se dice ESCUELA en inglés?",
+            opciones: ["School", "House", "Park"],
+            correcta: "School"
+        },
+
+        {
+            pregunta: "¿Cómo se dice SOL en inglés?",
+            opciones: ["Moon", "Sun", "Star"],
+            correcta: "Sun"
+        }
+
+    ];
+
+
+    let retoActual = 0;
+    let puntosReto = 0;
+    let tiempoReto = 10;
+    let intervaloReto = null;
+    let retoBloqueado = false;
+
+
+    function iniciarRetoLinguaGo() {
+
+        cerrarMensaje();
+
+        retoActual = 0;
+        puntosReto = 0;
+
+        crearRetoLinguaGo();
+
+    }
+
+
+    function crearRetoLinguaGo() {
+
+        let juego =
+            document.getElementById(
+                "linguaGoChallenge"
+            );
+
+
+        if (!juego) {
+
+            juego =
+                document.createElement(
+                    "section"
+                );
+
+            juego.id =
+                "linguaGoChallenge";
+
+            juego.className =
+                "linguago-challenge";
+
+
+            document
+                .getElementById("juegos")
+                .after(juego);
+
+        }
+
+
+        retoBloqueado = false;
+
+        tiempoReto = 10;
+
+        clearInterval(intervaloReto);
+
+
+        const reto =
+            retosLinguaGo[retoActual];
+
+
+        juego.innerHTML = `
+
+            <div class="challenge-box">
+
+                <span class="challenge-label">
+                    ⚡ RETO LINGUAGO
+                </span>
+
+                <h2>
+                    ¡Responde rápido!
+                </h2>
+
+
+                <div class="challenge-top">
+
+                    <div>
+
+                        <strong>
+                            ${retoActual + 1}
+                        </strong>
+
+                        <small>
+                            / ${retosLinguaGo.length}
+                        </small>
+
+                    </div>
+
+
+                    <div class="challenge-time">
+
+                        ⏱️
+
+                        <strong id="challengeTimer">
+                            ${tiempoReto}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        ⭐
+
+                        <strong id="challengeScore">
+                            ${puntosReto}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="challenge-question">
+                    ${reto.pregunta}
+                </div>
+
+
+                <div class="challenge-options"></div>
+
+
+                <div
+                    class="challenge-feedback"
+                    id="challengeFeedback">
+                </div>
+
+            </div>
+
+        `;
+
+
+        const opciones =
+            juego.querySelector(
+                ".challenge-options"
+            );
+
+
+        const opcionesMezcladas =
+            [...reto.opciones]
+                .sort(
+                    () => Math.random() - 0.5
+                );
+
+
+        opcionesMezcladas.forEach(
+            (opcion) => {
+
+                const boton =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                boton.className =
+                    "challenge-option";
+
+
+                boton.textContent =
+                    opcion;
+
+
+                boton.addEventListener(
+                    "click",
+                    () => responderReto(opcion)
+                );
+
+
+                opciones.appendChild(boton);
+
+            }
+        );
+
+
+        juego.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+
+        intervaloReto =
+            setInterval(() => {
+
+                tiempoReto--;
+
+
+                const timer =
+                    document.getElementById(
+                        "challengeTimer"
+                    );
+
+
+                if (timer) {
+                    timer.textContent =
+                        tiempoReto;
+                }
+
+
+                if (tiempoReto <= 0) {
+
+                    clearInterval(
+                        intervaloReto
+                    );
+
+                    responderReto(null);
+
+                }
+
+            }, 1000);
+
+    }
+
+
+    function responderReto(respuesta) {
+
+        if (retoBloqueado) return;
+
+        retoBloqueado = true;
+
+        clearInterval(intervaloReto);
+
+
+        const reto =
+            retosLinguaGo[retoActual];
+
+
+        const botones =
+            document.querySelectorAll(
+                ".challenge-option"
+            );
+
+
+        botones.forEach((boton) => {
+
+            boton.disabled = true;
+
+
+            if (
+                boton.textContent ===
+                reto.correcta
+            ) {
+
+                boton.classList.add(
+                    "challenge-correct"
+                );
+
+            }
+
+        });
+
+
+        const feedback =
+            document.getElementById(
+                "challengeFeedback"
+            );
+
+
+        if (respuesta === reto.correcta) {
+
+            puntosReto += 100;
+
+
+            if (feedback) {
+
+                feedback.textContent =
+                    "🎉 ¡Correcto! +100 puntos";
+
+            }
+
+        } else {
+
+            puntosReto =
+                Math.max(
+                    0,
+                    puntosReto - 25
+                );
+
+
+            if (feedback) {
+
+                feedback.textContent =
+                    respuesta === null
+                        ? `⏰ ¡Se acabó el tiempo! Era "${reto.correcta}".`
+                        : `❌ Incorrecto. Era "${reto.correcta}".`;
+
+            }
+
+        }
+
+
+        const score =
+            document.getElementById(
+                "challengeScore"
+            );
+
+
+        if (score) {
+            score.textContent =
+                puntosReto;
+        }
+
+
+        setTimeout(() => {
+
+            retoActual++;
+
+
+            if (
+                retoActual >=
+                retosLinguaGo.length
+            ) {
+
+                terminarRetoLinguaGo();
+
+            } else {
+
+                crearRetoLinguaGo();
+
+            }
+
+        }, 1000);
+
+    }
+
+
+    function terminarRetoLinguaGo() {
+
+        clearInterval(intervaloReto);
+
+
+        const juego =
+            document.getElementById(
+                "linguaGoChallenge"
+            );
+
+
+        if (!juego) return;
+
+
+        juego.innerHTML = `
+
+            <div
+                class="challenge-box challenge-final">
+
+                <div class="challenge-final-icon">
+                    🏆
+                </div>
+
+                <span class="challenge-label">
+                    ⚡ RETO LINGUAGO
+                </span>
+
+                <h2>
+                    ¡Reto completado!
+                </h2>
+
+                <p>
+                    Terminaste todas las preguntas.
+                </p>
+
+
+                <div class="challenge-final-score">
+
+                    <strong>
+                        ${puntosReto}
+                    </strong>
+
+                    <span>
+                        puntos
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="challenge-restart"
+                    id="restartChallenge">
+
+                    🔄 Jugar otra vez
+
+                </button>
+
+
+                <button
+                    class="challenge-close"
+                    id="closeChallenge">
+
+                    ✕ Cerrar
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        document
+            .getElementById(
+                "restartChallenge"
+            )
+            .addEventListener(
+                "click",
+                iniciarRetoLinguaGo
+            );
+
+
+        document
+            .getElementById(
+                "closeChallenge"
+            )
+            .addEventListener(
+                "click",
+                cerrarRetoLinguaGo
+            );
+
+    }
+
+
+    function cerrarRetoLinguaGo() {
+
+        clearInterval(intervaloReto);
+
+
+        const juego =
+            document.getElementById(
+                "linguaGoChallenge"
+            );
+
+
+        if (juego) {
+            juego.remove();
+        }
+
 
         document
             .getElementById("juegos")
@@ -862,20 +1448,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const lingo =
         document.getElementById("lingo");
 
-    document.addEventListener("mousemove", (evento) => {
 
-        if (!lingo) return;
+    document.addEventListener(
+        "mousemove",
+        (evento) => {
 
-        const x =
-            (evento.clientX / window.innerWidth - 0.5) * 5;
+            if (!lingo) return;
 
-        const y =
-            (evento.clientY / window.innerHeight - 0.5) * 3;
 
-        lingo.style.transform =
-            `translate(${x}px, ${y}px)`;
+            const x =
+                (
+                    evento.clientX /
+                    window.innerWidth -
+                    0.5
+                ) * 5;
 
-    });
+
+            const y =
+                (
+                    evento.clientY /
+                    window.innerHeight -
+                    0.5
+                ) * 3;
+
+
+            lingo.style.transform =
+                `translate(${x}px, ${y}px)`;
+
+        }
+    );
 
 
     /* =================================================
@@ -890,6 +1491,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "👋"
         );
 
-    }, 1200);
+   }, 1200);
 
 });
+
