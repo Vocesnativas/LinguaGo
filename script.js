@@ -1,6 +1,6 @@
 /* =====================================================
    LINGUAGO
-   JAVASCRIPT + JUEGOS
+   JAVASCRIPT + 3 JUEGOS
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,19 +22,15 @@ document.addEventListener("DOMContentLoaded", () => {
             menu.classList.toggle("active");
 
             menuBtn.textContent =
-                menu.classList.contains("active")
-                    ? "✕"
-                    : "☰";
+                menu.classList.contains("active") ? "✕" : "☰";
 
         });
-
 
         menu.querySelectorAll("a").forEach((enlace) => {
 
             enlace.addEventListener("click", () => {
 
                 menu.classList.remove("active");
-
                 menuBtn.textContent = "☰";
 
             });
@@ -45,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =================================================
-       NAVEGACIÓN SUAVE
+       NAVEGACIÓN
     ================================================= */
 
     document.querySelectorAll('a[href^="#"]').forEach((enlace) => {
@@ -63,8 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
             evento.preventDefault();
 
             elemento.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
+                behavior: "smooth"
             });
 
         });
@@ -76,41 +71,21 @@ document.addEventListener("DOMContentLoaded", () => {
        MENSAJES
     ================================================= */
 
-    const messageBox =
-        document.getElementById("messageBox");
-
-    const messageTitle =
-        document.getElementById("messageTitle");
-
-    const messageText =
-        document.getElementById("messageText");
-
-    const messageIcon =
-        document.getElementById("messageIcon");
-
-    const messageAction =
-        document.getElementById("messageAction");
-
-    const closeMessage =
-        document.getElementById("closeMessage");
+    const messageBox = document.getElementById("messageBox");
+    const messageTitle = document.getElementById("messageTitle");
+    const messageText = document.getElementById("messageText");
+    const messageIcon = document.getElementById("messageIcon");
+    const messageAction = document.getElementById("messageAction");
+    const closeMessage = document.getElementById("closeMessage");
 
 
-    function mostrarMensaje(
-        titulo,
-        texto,
-        icono = "🦊"
-    ) {
+    function mostrarMensaje(titulo, texto, icono = "🦊") {
 
         if (!messageBox) return;
 
-        if (messageTitle)
-            messageTitle.textContent = titulo;
-
-        if (messageText)
-            messageText.textContent = texto;
-
-        if (messageIcon)
-            messageIcon.textContent = icono;
+        messageTitle.textContent = titulo;
+        messageText.textContent = texto;
+        messageIcon.textContent = icono;
 
         messageBox.classList.add("active");
 
@@ -127,137 +102,101 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     if (closeMessage) {
-
-        closeMessage.addEventListener(
-            "click",
-            cerrarMensaje
-        );
-
+        closeMessage.addEventListener("click", cerrarMensaje);
     }
-
 
     if (messageAction) {
-
-        messageAction.addEventListener(
-            "click",
-            cerrarMensaje
-        );
-
+        messageAction.addEventListener("click", cerrarMensaje);
     }
-
 
     if (messageBox) {
 
-        messageBox.addEventListener(
-            "click",
-            (evento) => {
+        messageBox.addEventListener("click", (evento) => {
 
-                if (evento.target === messageBox) {
-                    cerrarMensaje();
-                }
-
+            if (evento.target === messageBox) {
+                cerrarMensaje();
             }
-        );
+
+        });
 
     }
 
 
-    document.addEventListener(
-        "keydown",
-        (evento) => {
+    document.addEventListener("keydown", (evento) => {
 
-            if (evento.key === "Escape") {
-                cerrarMensaje();
-            }
-
+        if (evento.key === "Escape") {
+            cerrarMensaje();
         }
-    );
+
+    });
 
 
     /* =================================================
        CURSOS
     ================================================= */
 
-    document
-        .querySelectorAll(".card-btn")
-        .forEach((boton) => {
+    document.querySelectorAll(".card-btn").forEach((boton) => {
 
-            boton.addEventListener("click", () => {
+        boton.addEventListener("click", () => {
 
-                const curso =
-                    boton.dataset.course;
+            const curso = boton.dataset.course;
 
+            if (curso === "Español") {
 
-                if (curso === "Español") {
+                mostrarMensaje(
+                    "¡Vamos con Español! 🇪🇸",
+                    "Lingo está listo para acompañarte.",
+                    "📚"
+                );
 
-                    mostrarMensaje(
-                        "¡Vamos con Español! 🇪🇸",
-                        "Lingo está listo para acompañarte.",
-                        "📚"
-                    );
+            } else {
 
-                } else {
+                mostrarMensaje(
+                    "Let's learn English! 🇬🇧",
+                    "Lingo está listo para comenzar.",
+                    "🦊"
+                );
 
-                    mostrarMensaje(
-                        "Let's learn English! 🇬🇧",
-                        "Lingo está listo para comenzar.",
-                        "🦊"
-                    );
-
-                }
-
-            });
+            }
 
         });
 
+    });
+
 
     /* =================================================
-       BOTONES DE JUEGOS
+       BOTONES DE LOS JUEGOS
     ================================================= */
 
-    document
-        .querySelectorAll(".game-btn")
-        .forEach((boton) => {
+    document.querySelectorAll(".game-btn").forEach((boton) => {
 
-            boton.addEventListener("click", () => {
+        boton.addEventListener("click", () => {
 
-                const juego =
-                    boton.dataset.game;
+            const juego = boton.dataset.game;
 
+            if (juego === "Memoria") {
+                iniciarMemoria();
+                return;
+            }
 
-                if (juego === "Memoria") {
+            if (juego === "Palabra correcta") {
+                iniciarPalabraCorrecta();
+                return;
+            }
 
-                    iniciarMemoria();
-
-                    return;
-
-                }
-
-
-                if (juego === "Palabra correcta") {
-
-                    iniciarPalabraCorrecta();
-
-                    return;
-
-                }
-
-
-                if (juego === "Reto LinguaGo") {
-
-                    iniciarRetoLinguaGo();
-
-                    return;
-
-                }
-
-            });
+            if (juego === "Reto LinguaGo") {
+                iniciarRetoLinguaGo();
+                return;
+            }
 
         });
 
+    });
+
 
     /* =================================================
-       JUEGO DE MEMORIA
+       JUEGO 1
+       MEMORIA
     ================================================= */
 
     const memorySection =
@@ -266,121 +205,111 @@ document.addEventListener("DOMContentLoaded", () => {
     const memoryBoard =
         document.getElementById("memoryBoard");
 
-    const scoreElement =
+    const memoryScore =
         document.getElementById("memoryScore");
 
-    const attemptsElement =
+    const memoryAttempts =
         document.getElementById("memoryAttempts");
 
-    const pairsElement =
+    const memoryPairs =
         document.getElementById("memoryPairs");
 
-    const restartButton =
+    const restartMemory =
         document.getElementById("restartMemory");
 
-    const closeButton =
+    const closeMemory =
         document.getElementById("closeMemory");
 
 
-    const words = [
+    const palabras = [
 
         {
             id: 1,
-            spanish: "Casa",
-            english: "House"
+            es: "Casa",
+            en: "House"
         },
 
         {
             id: 2,
-            spanish: "Perro",
-            english: "Dog"
+            es: "Perro",
+            en: "Dog"
         },
 
         {
             id: 3,
-            spanish: "Libro",
-            english: "Book"
+            es: "Libro",
+            en: "Book"
         },
 
         {
             id: 4,
-            spanish: "Agua",
-            english: "Water"
+            es: "Agua",
+            en: "Water"
         },
 
         {
             id: 5,
-            spanish: "Sol",
-            english: "Sun"
+            es: "Sol",
+            en: "Sun"
         },
 
         {
             id: 6,
-            spanish: "Amigo",
-            english: "Friend"
+            es: "Amigo",
+            en: "Friend"
         }
 
     ];
 
 
-    let firstCard = null;
-    let secondCard = null;
-    let lockBoard = false;
+    let primeraCarta = null;
+    let segundaCarta = null;
+    let bloqueo = false;
 
-    let attempts = 0;
-    let score = 0;
-    let pairs = 0;
+    let intentos = 0;
+    let puntosMemoria = 0;
+    let parejas = 0;
 
 
-    function crearCartas() {
+    function crearMemoria() {
 
         if (!memoryBoard) return;
 
         memoryBoard.innerHTML = "";
 
-        const cartas = [];
+        let cartas = [];
 
-
-        words.forEach((word) => {
+        palabras.forEach((palabra) => {
 
             cartas.push({
-                id: word.id,
-                language: "es",
-                text: word.spanish
+                id: palabra.id,
+                idioma: "es",
+                texto: palabra.es
             });
 
-
             cartas.push({
-                id: word.id,
-                language: "en",
-                text: word.english
+                id: palabra.id,
+                idioma: "en",
+                texto: palabra.en
             });
 
         });
 
 
-        cartas.sort(
-            () => Math.random() - 0.5
-        );
+        cartas.sort(() => Math.random() - 0.5);
 
 
         cartas.forEach((carta) => {
 
-            const elemento =
+            const boton =
                 document.createElement("button");
 
-            elemento.className =
-                "memory-card";
+            boton.className = "memory-card";
 
+            boton.dataset.id = carta.id;
+            boton.dataset.language = carta.idioma;
 
-            elemento.dataset.id =
-                carta.id;
-
-            elemento.dataset.language =
-                carta.language;
-
-
-            elemento.innerHTML = `
+            boton.innerHTML = `
 
                 <div class="memory-card-inner">
 
@@ -389,14 +318,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
 
                     <div class="memory-back">
-                        ${
-                            carta.language === "es"
-                                ? "🇪🇸 "
-                                : "🇬🇧 "
-                        }
-
-                        ${carta.text}
-
+                        ${carta.idioma === "es" ? "🇪🇸" : "🇬🇧"}
+                        ${carta.texto}
                     </div>
 
                 </div>
@@ -404,130 +327,102 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
 
 
-            elemento.addEventListener(
-                "click",
-                () => voltearCarta(elemento)
-            );
+            boton.addEventListener("click", () => {
+
+                voltearMemoria(boton);
+
+            });
 
 
-            memoryBoard.appendChild(
-                elemento
-            );
+            memoryBoard.appendChild(boton);
 
         });
 
     }
 
 
-    function voltearCarta(carta) {
+    function voltearMemoria(carta) {
 
-        if (lockBoard) return;
+        if (bloqueo) return;
 
-        if (carta === firstCard) return;
+        if (carta === primeraCarta) return;
 
-        if (
-            carta.classList.contains("matched")
-        ) {
-            return;
-        }
+        if (carta.classList.contains("matched")) return;
 
 
         carta.classList.add("flipped");
 
 
-        if (!firstCard) {
+        if (!primeraCarta) {
 
-            firstCard = carta;
+            primeraCarta = carta;
 
             return;
 
         }
 
 
-        secondCard = carta;
+        segundaCarta = carta;
 
-        attempts++;
+        intentos++;
 
+        memoryAttempts.textContent = intentos;
 
-        if (attemptsElement) {
-
-            attemptsElement.textContent =
-                attempts;
-
-        }
-
-
-        comprobarPareja();
+        comprobarMemoria();
 
     }
 
 
-    function comprobarPareja() {
+    function comprobarMemoria() {
 
         const mismaPalabra =
-            firstCard.dataset.id ===
-            secondCard.dataset.id;
+            primeraCarta.dataset.id ===
+            segundaCarta.dataset.id;
+
+        const idiomasDistintos =
+            primeraCarta.dataset.language !==
+            segundaCarta.dataset.language;
 
 
-        const idiomasDiferentes =
-            firstCard.dataset.language !==
-            secondCard.dataset.language;
+        if (mismaPalabra && idiomasDistintos) {
 
-
-        if (
-            mismaPalabra &&
-            idiomasDiferentes
-        ) {
-
-            parejaCorrecta();
+            parejaMemoriaCorrecta();
 
         } else {
 
-            parejaIncorrecta();
+            parejaMemoriaIncorrecta();
 
         }
 
     }
 
 
-    function parejaCorrecta() {
+    function parejaMemoriaCorrecta() {
 
-        firstCard.classList.add("matched");
+        primeraCarta.classList.add("matched");
+        segundaCarta.classList.add("matched");
 
-        secondCard.classList.add("matched");
+        parejas++;
 
+        puntosMemoria += 100;
 
-        pairs++;
+        memoryScore.textContent = puntosMemoria;
 
-        score += 100;
-
-
-        if (scoreElement) {
-
-            scoreElement.textContent =
-                score;
-
-        }
+        memoryPairs.textContent =
+            `${parejas}/${palabras.length}`;
 
 
-        if (pairsElement) {
-
-            pairsElement.textContent =
-                `${pairs}/${words.length}`;
-
-        }
+        primeraCarta = null;
+        segundaCarta = null;
 
 
-        resetTurn();
-
-
-        if (pairs === words.length) {
+        if (parejas === palabras.length) {
 
             setTimeout(() => {
 
                 mostrarMensaje(
                     "¡Ganaste! 🏆",
-                    `Excelente trabajo. Conseguí ${score} puntos en ${attempts} intentos.`,
+                    `Conseguiste ${puntosMemoria} puntos en ${intentos} intentos.`,
                     "🦊"
                 );
 
@@ -538,81 +433,48 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function parejaIncorrecta() {
+    function parejaMemoriaIncorrecta() {
 
-        lockBoard = true;
+        bloqueo = true;
 
-        score =
-            Math.max(0, score - 10);
+        puntosMemoria =
+            Math.max(0, puntosMemoria - 10);
 
-
-        if (scoreElement) {
-
-            scoreElement.textContent =
-                score;
-
-        }
+        memoryScore.textContent = puntosMemoria;
 
 
         setTimeout(() => {
 
-            if (firstCard)
-                firstCard.classList.remove("flipped");
+            primeraCarta.classList.remove("flipped");
+            segundaCarta.classList.remove("flipped");
 
-            if (secondCard)
-                secondCard.classList.remove("flipped");
+            primeraCarta = null;
+            segundaCarta = null;
 
-
-            resetTurn();
+            bloqueo = false;
 
         }, 800);
 
     }
 
 
-    function resetTurn() {
-
-        firstCard = null;
-
-        secondCard = null;
-
-        lockBoard = false;
-
-    }
-
-
     function reiniciarMemoria() {
 
-        firstCard = null;
+        primeraCarta = null;
+        segundaCarta = null;
 
-        secondCard = null;
+        bloqueo = false;
 
-        lockBoard = false;
+        intentos = 0;
+        puntosMemoria = 0;
+        parejas = 0;
 
-        attempts = 0;
+        memoryScore.textContent = "0";
+        memoryAttempts.textContent = "0";
+        memoryPairs.textContent =
+            `0/${palabras.length}`;
 
-        score = 0;
-
-        pairs = 0;
-
-
-        if (scoreElement)
-            scoreElement.textContent = "0";
-
-
-        if (attemptsElement)
-            attemptsElement.textContent = "0";
-
-
-        if (pairsElement) {
-
-            pairsElement.textContent =
-                `0/${words.length}`;
-
-        }
-
-
-        crearCartas();
+        crearMemoria();
 
     }
 
@@ -621,33 +483,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
         cerrarMensaje();
 
-
         if (!memorySection) return;
 
+        cerrarTodosLosJuegos();
 
-        memorySection.classList.add(
-            "active"
-        );
-
+        memorySection.classList.add("active");
 
         reiniciarMemoria();
 
-
-        setTimeout(() => {
-
-            memorySection.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        }, 100);
+        memorySection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
 
     }
 
 
-    if (restartButton) {
+    if (restartMemory) {
 
-        restartButton.addEventListener(
+        restartMemory.addEventListener(
             "click",
             reiniciarMemoria
         );
@@ -655,34 +509,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    if (closeButton) {
+    if (closeMemory) {
 
-        closeButton.addEventListener(
+        closeMemory.addEventListener(
             "click",
             () => {
 
-                if (memorySection) {
+                memorySection.classList.remove("active");
 
-                    memorySection.classList.remove(
-                        "active"
-                    );
-
-                }
-
-
-                const juegos =
-                    document.getElementById(
-                        "juegos"
-                    );
-
-
-                if (juegos) {
-
-                    juegos.scrollIntoView({
+                document
+                    .getElementById("juegos")
+                    .scrollIntoView({
                         behavior: "smooth"
                     });
-
-                }
 
             }
         );
@@ -691,6 +530,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =================================================
+       JUEGO 2
        PALABRA CORRECTA
     ================================================= */
 
@@ -698,81 +538,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
         {
             pregunta: "¿Cómo se dice CASA en inglés?",
-            opciones: [
-                "House",
-                "Horse",
-                "Mouse"
-            ],
+            opciones: ["House", "Horse", "Mouse"],
             correcta: "House"
         },
 
         {
             pregunta: "¿Cómo se dice PERRO en inglés?",
-            opciones: [
-                "Bird",
-                "Dog",
-                "Fish"
-            ],
+            opciones: ["Bird", "Dog", "Fish"],
             correcta: "Dog"
         },
 
         {
             pregunta: "¿Cómo se dice LIBRO en inglés?",
-            opciones: [
-                "Book",
-                "Look",
-                "Cook"
-            ],
+            opciones: ["Book", "Look", "Cook"],
             correcta: "Book"
         },
 
         {
             pregunta: "¿Cómo se dice AGUA en inglés?",
-            opciones: [
-                "Fire",
-                "Food",
-                "Water"
-            ],
+            opciones: ["Fire", "Food", "Water"],
             correcta: "Water"
         },
 
         {
             pregunta: "¿Cómo se dice SOL en inglés?",
-            opciones: [
-                "Moon",
-                "Sun",
-                "Star"
-            ],
+            opciones: ["Moon", "Sun", "Star"],
             correcta: "Sun"
         },
 
         {
             pregunta: "¿Cómo se dice AMIGO en inglés?",
-            opciones: [
-                "Family",
-                "Friend",
-                "Father"
-            ],
+            opciones: ["Family", "Friend", "Father"],
             correcta: "Friend"
         },
 
         {
             pregunta: "¿Cómo se dice ESCUELA en inglés?",
-            opciones: [
-                "School",
-                "Street",
-                "Store"
-            ],
+            opciones: ["School", "Street", "Store"],
             correcta: "School"
         },
 
         {
             pregunta: "¿Cómo se dice LIBRE en inglés?",
-            opciones: [
-                "Free",
-                "Three",
-                "Tree"
-            ],
+            opciones: ["Free", "Three", "Tree"],
             correcta: "Free"
         }
 
@@ -780,7 +588,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     let preguntaActual = 0;
-
     let puntosPalabra = 0;
 
 
@@ -788,54 +595,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
         cerrarMensaje();
 
-        preguntaActual = 0;
+        cerrarTodosLosJuegos();
 
+        preguntaActual = 0;
         puntosPalabra = 0;
 
-        crearJuegoPalabraCorrecta();
+        const juego =
+            document.getElementById("correctWordGame");
+
+        if (!juego) return;
+
+        juego.classList.add("active");
+
+        mostrarPregunta();
+
+        juego.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
 
     }
 
 
-    function crearJuegoPalabraCorrecta() {
+    function mostrarPregunta() {
 
-        let juego =
-            document.getElementById(
-                "correctWordGame"
-            );
+        const juego =
+            document.getElementById("correctWordGame");
 
-
-        if (!juego) {
-
-            juego =
-                document.createElement(
-                    "section"
-                );
-
-            juego.id =
-                "correctWordGame";
-
-            juego.className =
-                "correct-word-game";
-
-
-            const juegos =
-                document.getElementById(
-                    "juegos"
-                );
-
-
-            if (juegos) {
-
-                juegos.after(juego);
-
-            }
-
-        }
-
-
-        const pregunta =
-            preguntas[preguntaActual];
+        if (!juego) return;
 
 
         juego.innerHTML = `
@@ -851,197 +638,123 @@ document.addEventListener("DOMContentLoaded", () => {
                 </h2>
 
                 <div class="correct-progress">
+
                     Pregunta
-                    <strong>
-                        ${preguntaActual + 1}
-                    </strong>
+                    <strong>${preguntaActual + 1}</strong>
                     de
-                    <strong>
-                        ${preguntas.length}
-                    </strong>
+                    <strong>${preguntas.length}</strong>
+
                 </div>
 
                 <div class="correct-question">
-                    ${pregunta.pregunta}
+                    ${preguntas[preguntaActual].pregunta}
                 </div>
 
-                <div class="correct-options">
-                </div>
+                <div class="correct-options"></div>
 
                 <div class="correct-score">
+
                     ⭐ Puntos:
-                    <strong>
-                        ${puntosPalabra}
-                    </strong>
+                    <strong>${puntosPalabra}</strong>
+
                 </div>
-
-                <button
-                    class="correct-close"
-                    id="closeCorrectWord">
-
-                    ✕ Cerrar
-
-                </button>
 
             </div>
 
         `;
 
 
-        const opcionesBox =
-            juego.querySelector(
-                ".correct-options"
-            );
-
-
         const opciones =
-            [...pregunta.opciones];
+            juego.querySelector(".correct-options");
 
 
-        opciones.sort(
-            () => Math.random() - 0.5
-        );
+        const lista =
+            [...preguntas[preguntaActual].opciones];
+
+        lista.sort(() => Math.random() - 0.5);
 
 
-        opciones.forEach((opcion) => {
+        lista.forEach((opcion) => {
 
             const boton =
-                document.createElement(
-                    "button"
-                );
+                document.createElement("button");
+
+            boton.className = "correct-option";
+
+            boton.textContent = opcion;
 
 
-            boton.textContent =
-                opcion;
+            boton.addEventListener("click", () => {
+
+                responderPalabra(opcion, boton);
+
+            });
 
 
-            boton.className =
-                "correct-option";
+            opciones.appendChild(boton);
 
-
-            boton.addEventListener(
-                "click",
-                () => responderPalabra(opcion)
-            );
-
-
-            opcionesBox.appendChild(
-                boton
-            );
-
-        });
-
-
-        const cerrar =
-            document.getElementById(
-                "closeCorrectWord"
-            );
-
-
-        if (cerrar) {
-
-            cerrar.addEventListener(
-                "click",
-                cerrarPalabraCorrecta
-            );
-
-        }
-
-
-        juego.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
         });
 
     }
 
 
-    function responderPalabra(
-        respuesta
-    ) {
+    function responderPalabra(respuesta, botonSeleccionado) {
 
         const correcta =
-            preguntas[preguntaActual]
-                .correcta;
+            preguntas[preguntaActual].correcta;
+
+
+        const juego =
+            document.getElementById("correctWordGame");
 
 
         const botones =
-            document.querySelectorAll(
-                ".correct-option"
-            );
+            juego.querySelectorAll(".correct-option");
 
 
         botones.forEach((boton) => {
 
             boton.disabled = true;
 
+            if (boton.textContent === correcta) {
 
-            if (
-                boton.textContent ===
-                correcta
-            ) {
-
-                boton.classList.add(
-                    "correct-answer"
-                );
+                boton.classList.add("correct-answer");
 
             }
 
         });
 
 
+        let resultado;
+
+
         if (respuesta === correcta) {
 
             puntosPalabra += 100;
 
+            resultado = "🎉 ¡Correcto! +100 puntos";
+
         } else {
 
             puntosPalabra =
-                Math.max(
-                    0,
-                    puntosPalabra - 25
-                );
+                Math.max(0, puntosPalabra - 25);
+
+            resultado =
+                `❌ La respuesta era "${correcta}"`;
 
         }
 
 
-        const juego =
-            document.getElementById(
-                "correctWordGame"
-            );
+        const mensaje =
+            document.createElement("p");
 
+        mensaje.className = "correct-feedback";
 
-        if (juego) {
+        mensaje.textContent = resultado;
 
-            const resultado =
-                document.createElement("p");
-
-
-            resultado.className =
-                "correct-feedback";
-
-
-            resultado.textContent =
-                respuesta === correcta
-                    ? "🎉 ¡Correcto! +100 puntos"
-                    : `❌ La respuesta era "${correcta}"`;
-
-
-            const caja =
-                juego.querySelector(
-                    ".correct-word-box"
-                );
-
-
-            if (caja) {
-
-                caja.appendChild(
-                    resultado
-                );
-
-            }
-
-        }
+        juego
+            .querySelector(".correct-word-box")
+            .appendChild(mensaje);
 
 
         setTimeout(() => {
@@ -1049,20 +762,17 @@ document.addEventListener("DOMContentLoaded", () => {
             preguntaActual++;
 
 
-            if (
-                preguntaActual >=
-                preguntas.length
-            ) {
+            if (preguntaActual >= preguntas.length) {
 
                 terminarPalabraCorrecta();
 
             } else {
 
-                crearJuegoPalabraCorrecta();
+                mostrarPregunta();
 
             }
 
-        }, 1100);
+        }, 1000);
 
     }
 
@@ -1070,10 +780,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function terminarPalabraCorrecta() {
 
         const juego =
-            document.getElementById(
-                "correctWordGame"
-            );
-
+            document.getElementById("correctWordGame");
 
         if (!juego) return;
 
@@ -1082,7 +789,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div class="correct-word-box final">
 
-                <div class="correct-final-icon">
+                <div style="font-size:4rem;">
                     🏆
                 </div>
 
@@ -1091,33 +798,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 </h2>
 
                 <p>
-                    Terminaste todas las preguntas.
+                    Terminaste las ${preguntas.length}
+                    preguntas.
                 </p>
 
-                <div class="final-score">
-
+                <div class="final-score"
+                     style="font-size:3rem;font-weight:900;color:#ff7043;margin:20px;">
                     ${puntosPalabra}
-
-                    <small>
+                    <small style="font-size:1rem;">
                         puntos
                     </small>
-
                 </div>
 
                 <button
                     class="correct-restart"
-                    id="restartCorrectWord">
-
+                    id="restartCorrectWord"
+                    style="padding:12px 20px;border:0;border-radius:10px;background:#2878e3;color:white;font-weight:800;">
                     🔄 Jugar otra vez
-
                 </button>
 
                 <button
                     class="correct-close"
-                    id="closeCorrectWord">
-
+                    id="closeCorrectWord"
+                    style="padding:12px 20px;border:1px solid #ddd;border-radius:10px;background:white;font-weight:800;">
                     ✕ Cerrar
-
                 </button>
 
             </div>
@@ -1126,27 +830,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         document
-            .getElementById(
-                "restartCorrectWord"
-            )
-            .addEventListener(
-                "click",
-                () => {
+            .getElementById("restartCorrectWord")
+            .addEventListener("click", () => {
 
-                    preguntaActual = 0;
+                preguntaActual = 0;
+                puntosPalabra = 0;
 
-                    puntosPalabra = 0;
+                mostrarPregunta();
 
-                    crearJuegoPalabraCorrecta();
-
-                }
-            );
+            });
 
 
         document
-            .getElementById(
-                "closeCorrectWord"
-            )
+            .getElementById("closeCorrectWord")
             .addEventListener(
                 "click",
                 cerrarPalabraCorrecta
@@ -1158,304 +854,110 @@ document.addEventListener("DOMContentLoaded", () => {
     function cerrarPalabraCorrecta() {
 
         const juego =
-            document.getElementById(
-                "correctWordGame"
-            );
-
+            document.getElementById("correctWordGame");
 
         if (juego) {
 
-            juego.remove();
+            juego.classList.remove("active");
 
         }
 
 
-        const juegos =
-            document.getElementById(
-                "juegos"
-            );
-
-
-        if (juegos) {
-
-            juegos.scrollIntoView({
+        document
+            .getElementById("juegos")
+            .scrollIntoView({
                 behavior: "smooth"
             });
-
-        }
 
     }
 
 
     /* =================================================
+       JUEGO 3
        RETO LINGUAGO
        CRUCIGRAMA
     ================================================= */
 
-    const crucigrama = [
+    const challengeSection =
+        document.getElementById("challengeGame");
+
+    const crossword =
+        document.getElementById("crossword");
+
+    const clues =
+        document.getElementById("clues");
+
+    const challengeScore =
+        document.getElementById("challengeScore");
+
+    const challengeCompleted =
+        document.getElementById("challengeCompleted");
+
+    const restartChallenge =
+        document.getElementById("restartChallenge");
+
+    const closeChallenge =
+        document.getElementById("closeChallenge");
+
+
+    const retos = [
 
         {
-            palabra: "CASA",
-            pista: "🏠 Lugar donde vivimos.",
-            respuesta: "HOUSE"
+            numero: 1,
+            palabra: "CAT",
+            pista: "🐱 Animal que dice miau."
         },
 
         {
-            palabra: "PERRO",
-            pista: "🐶 Animal que dice guau.",
-            respuesta: "DOG"
+            numero: 2,
+            palabra: "DOG",
+            pista: "🐶 Animal que dice guau."
         },
 
         {
-            palabra: "SOL",
-            pista: "☀️ Brilla durante el día.",
-            respuesta: "SUN"
+            numero: 3,
+            palabra: "SUN",
+            pista: "☀️ Brilla durante el día."
         },
 
         {
-            palabra: "AGUA",
-            pista: "💧 La bebemos para vivir.",
-            respuesta: "WATER"
+            numero: 4,
+            palabra: "BOOK",
+            pista: "📚 Lo usamos para leer."
         },
 
         {
-            palabra: "LIBRO",
-            pista: "📖 Lo usamos para leer.",
-            respuesta: "BOOK"
+            numero: 5,
+            palabra: "WATER",
+            pista: "💧 Bebida necesaria para vivir."
         },
 
         {
-            palabra: "AMIGO",
-            pista: "🤝 Persona que nos acompaña.",
-            respuesta: "FRIEND"
+            numero: 6,
+            palabra: "SCHOOL",
+            pista: "🏫 Lugar donde aprendemos."
         }
 
     ];
 
 
-    let retoActual = 0;
-
     let puntosReto = 0;
+    let retosCompletados = 0;
 
 
     function iniciarRetoLinguaGo() {
 
         cerrarMensaje();
 
-        retoActual = 0;
+        cerrarTodosLosJuegos();
 
-        puntosReto = 0;
+        if (!challengeSection) return;
 
-        crearRetoLinguaGo();
+        challengeSection.classList.add("active");
 
-    }
+        reiniciarReto();
 
-
-    function crearRetoLinguaGo() {
-
-        let juego =
-            document.getElementById(
-                "linguaGoChallenge"
-            );
-
-
-        if (!juego) {
-
-            juego =
-                document.createElement(
-                    "section"
-                );
-
-            juego.id =
-                "linguaGoChallenge";
-
-            juego.className =
-                "linguago-challenge";
-
-
-            const juegos =
-                document.getElementById(
-                    "juegos"
-                );
-
-
-            if (juegos) {
-
-                juegos.after(juego);
-
-            }
-
-        }
-
-
-        if (
-            retoActual >=
-            crucigrama.length
-        ) {
-
-            terminarRetoLinguaGo();
-
-            return;
-
-        }
-
-
-        const reto =
-            crucigrama[retoActual];
-
-
-        juego.innerHTML = `
-
-            <div class="linguago-challenge-box">
-
-                <span class="challenge-label">
-                    🧩 RETO LINGUAGO
-                </span>
-
-                <h2>
-                    ¡Completa el reto!
-                </h2>
-
-                <p class="challenge-intro">
-                    Lee la pista y escribe la palabra
-                    en inglés.
-                </p>
-
-                <div class="challenge-progress">
-                    Reto
-                    <strong>
-                        ${retoActual + 1}
-                    </strong>
-                    de
-                    <strong>
-                        ${crucigrama.length}
-                    </strong>
-                </div>
-
-                <div class="challenge-puzzle">
-
-                    <div class="puzzle-icon">
-                        🧩
-                    </div>
-
-                    <div class="puzzle-word">
-                        ${reto.palabra}
-                    </div>
-
-                    <p>
-                        ${reto.pista}
-                    </p>
-
-                </div>
-
-                <input
-                    type="text"
-                    id="challengeAnswer"
-                    class="challenge-input"
-                    placeholder="Escribe en inglés..."
-                    autocomplete="off"
-                >
-
-                <button
-                    id="challengeCheck"
-                    class="challenge-check">
-
-                    Comprobar
-
-                </button>
-
-                <div
-                    id="challengeFeedback"
-                    class="challenge-feedback">
-                </div>
-
-                <div class="challenge-score">
-
-                    ⭐ Puntos:
-                    <strong>
-                        ${puntosReto}
-                    </strong>
-
-                </div>
-
-                <button
-                    id="closeChallenge"
-                    class="correct-close">
-
-                    ✕ Cerrar
-
-                </button>
-
-            </div>
-
-        `;
-
-
-        const input =
-            document.getElementById(
-                "challengeAnswer"
-            );
-
-
-        const check =
-            document.getElementById(
-                "challengeCheck"
-            );
-
-
-        const close =
-            document.getElementById(
-                "closeChallenge"
-            );
-
-
-        if (check) {
-
-            check.addEventListener(
-                "click",
-                comprobarReto
-            );
-
-        }
-
-
-        if (input) {
-
-            input.addEventListener(
-                "keydown",
-                (evento) => {
-
-                    if (
-                        evento.key ===
-                        "Enter"
-                    ) {
-
-                        comprobarReto();
-
-                    }
-
-                }
-            );
-
-
-            setTimeout(() => {
-                input.focus();
-            }, 200);
-
-        }
-
-
-        if (close) {
-
-            close.addEventListener(
-                "click",
-                cerrarRetoLinguaGo
-            );
-
-        }
-
-
-        juego.scrollIntoView({
+        challengeSection.scrollIntoView({
             behavior: "smooth",
             block: "start"
         });
@@ -1463,218 +965,273 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function comprobarReto() {
+    function reiniciarReto() {
 
-        const input =
-            document.getElementById(
-                "challengeAnswer"
-            );
+        puntosReto = 0;
+        retosCompletados = 0;
 
+        challengeScore.textContent = "0";
+        challengeCompleted.textContent = "0";
 
-        const feedback =
-            document.getElementById(
-                "challengeFeedback"
-            );
+        crearCrucigrama();
 
-
-        const check =
-            document.getElementById(
-                "challengeCheck"
-            );
+    }
 
 
-        if (!input || !feedback) return;
+    function crearCrucigrama() {
+
+        crossword.innerHTML = "";
+        clues.innerHTML = "";
 
 
-        const respuesta =
-            input.value
-                .trim()
-                .toUpperCase();
+        /*
+           Cada palabra se presenta como una
+           pequeña fila dentro del crucigrama.
+           Así funciona correctamente en móvil
+           y escritorio sin depender de una
+           cuadrícula imposible de editar.
+        */
 
 
-        if (!respuesta) {
+        retos.forEach((reto, indice) => {
 
-            feedback.textContent =
-                "✏️ Escribe una respuesta.";
+            const fila =
+                document.createElement("div");
 
+            fila.style.display = "flex";
+            fila.style.justifyContent = "center";
+            fila.style.gap = "3px";
+            fila.style.marginBottom = "6px";
+
+
+            [...reto.palabra].forEach((letra, posicion) => {
+
+                const input =
+                    document.createElement("input");
+
+                input.className = "cross-cell";
+
+                input.maxLength = 1;
+
+                input.dataset.respuesta = letra;
+
+                input.dataset.reto = indice;
+
+                input.setAttribute(
+                    "aria-label",
+                    `Letra ${posicion + 1} de la palabra ${reto.numero}`
+                );
+
+
+                input.addEventListener(
+                    "input",
+                    () => {
+
+                        input.value =
+                            input.value
+                                .toUpperCase()
+                                .replace(/[^A-Z]/g, "")
+                                .slice(0, 1);
+
+
+                        if (input.value) {
+
+                            const siguiente =
+                                fila.children[posicion + 1];
+
+                            if (siguiente) {
+                                siguiente.focus();
+                            }
+
+                        }
+
+
+                        comprobarFila(
+                            indice,
+                            fila
+                        );
+
+                    }
+                );
+
+
+                input.addEventListener(
+                    "keydown",
+                    (evento) => {
+
+                        if (
+                            evento.key === "Backspace" &&
+                            !input.value &&
+                            posicion > 0
+                        ) {
+
+                            fila.children[
+                                posicion - 1
+                            ].focus();
+
+                        }
+
+                    }
+                );
+
+
+                fila.appendChild(input);
+
+            });
+
+
+            crossword.appendChild(fila);
+
+
+            const pista =
+                document.createElement("div");
+
+            pista.className = "clue";
+
+            pista.innerHTML =
+                `<strong>${reto.numero}.</strong>
+                 ${reto.pista}
+                 <small style="opacity:.6;">
+                    (${reto.palabra.length} letras)
+                 </small>`;
+
+
+            clues.appendChild(pista);
+
+        });
+
+    }
+
+
+    const palabrasResueltas =
+        new Set();
+
+
+    function comprobarFila(indice, fila) {
+
+        if (palabrasResueltas.has(indice)) return;
+
+
+        const reto = retos[indice];
+
+        const valores =
+            [...fila.querySelectorAll("input")]
+                .map((input) => input.value)
+                .join("");
+
+
+        if (valores.length !== reto.palabra.length) {
             return;
-
         }
 
 
-        const correcta =
-            crucigrama[retoActual]
-                .respuesta;
+        if (valores === reto.palabra) {
 
+            palabrasResueltas.add(indice);
 
-        if (respuesta === correcta) {
+            retosCompletados++;
 
             puntosReto += 100;
 
+            challengeScore.textContent =
+                puntosReto;
 
-            feedback.textContent =
-                "🎉 ¡Correcto! +100 puntos";
-
-
-            feedback.className =
-                "challenge-feedback correct";
+            challengeCompleted.textContent =
+                retosCompletados;
 
 
-            input.disabled = true;
+            fila.querySelectorAll("input")
+                .forEach((input) => {
 
-            if (check)
-                check.disabled = true;
+                    input.style.background = "#dff8e8";
+                    input.style.borderColor = "#3bb273";
+                    input.disabled = true;
+
+                });
 
 
-            setTimeout(() => {
+            if (retosCompletados === retos.length) {
 
-                retoActual++;
+                setTimeout(() => {
 
-                crearRetoLinguaGo();
+                    mostrarMensaje(
+                        "¡Reto LinguaGo completado! 🏆",
+                        `Terminaste el crucigrama con ${puntosReto} puntos.`,
+                        "🧩"
+                    );
 
-            }, 1000);
+                }, 400);
 
+            }
 
         } else {
 
             puntosReto =
-                Math.max(
-                    0,
-                    puntosReto - 25
-                );
+                Math.max(0, puntosReto - 10);
 
-
-            feedback.textContent =
-                "❌ No es correcto. Inténtalo otra vez.";
-
-
-            feedback.className =
-                "challenge-feedback wrong";
-
-
-            input.select();
+            challengeScore.textContent =
+                puntosReto;
 
         }
 
     }
 
 
-    function terminarRetoLinguaGo() {
+    if (restartChallenge) {
 
-        const juego =
-            document.getElementById(
-                "linguaGoChallenge"
-            );
+        restartChallenge.addEventListener(
+            "click",
+            () => {
 
+                palabrasResueltas.clear();
 
-        if (!juego) return;
+                reiniciarReto();
 
-
-        juego.innerHTML = `
-
-            <div class="linguago-challenge-box final">
-
-                <div class="challenge-final-icon">
-                    🏆
-                </div>
-
-                <h2>
-                    ¡Crucigrama completado!
-                </h2>
-
-                <p>
-                    Has superado todos los retos
-                    de LinguaGo.
-                </p>
-
-                <div class="final-score">
-
-                    ${puntosReto}
-
-                    <small>
-                        puntos
-                    </small>
-
-                </div>
-
-                <button
-                    id="restartChallenge"
-                    class="correct-restart">
-
-                    🔄 Jugar otra vez
-
-                </button>
-
-                <button
-                    id="closeChallengeFinal"
-                    class="correct-close">
-
-                    ✕ Cerrar
-
-                </button>
-
-            </div>
-
-        `;
-
-
-        document
-            .getElementById(
-                "restartChallenge"
-            )
-            .addEventListener(
-                "click",
-                () => {
-
-                    retoActual = 0;
-
-                    puntosReto = 0;
-
-                    crearRetoLinguaGo();
-
-                }
-            );
-
-
-        document
-            .getElementById(
-                "closeChallengeFinal"
-            )
-            .addEventListener(
-                "click",
-                cerrarRetoLinguaGo
-            );
+            }
+        );
 
     }
 
 
-    function cerrarRetoLinguaGo() {
+    if (closeChallenge) {
 
-        const juego =
-            document.getElementById(
-                "linguaGoChallenge"
-            );
+        closeChallenge.addEventListener(
+            "click",
+            () => {
+
+                challengeSection.classList.remove("active");
+
+                document
+                    .getElementById("juegos")
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+            }
+        );
+
+    }
 
 
-        if (juego) {
+    /* =================================================
+       CERRAR TODOS LOS JUEGOS
+    ================================================= */
 
-            juego.remove();
+    function cerrarTodosLosJuegos() {
 
+        if (memorySection) {
+            memorySection.classList.remove("active");
         }
 
+        const palabra =
+            document.getElementById("correctWordGame");
 
-        const juegos =
-            document.getElementById(
-                "juegos"
-            );
+        if (palabra) {
+            palabra.classList.remove("active");
+        }
 
-
-        if (juegos) {
-
-            juegos.scrollIntoView({
-                behavior: "smooth"
-            });
-
+        if (challengeSection) {
+            challengeSection.classList.remove("active");
         }
 
     }
@@ -1685,43 +1242,29 @@ document.addEventListener("DOMContentLoaded", () => {
     ================================================= */
 
     const lingo =
-        document.getElementById(
-            "lingo"
-        );
+        document.getElementById("lingo");
 
 
-    document.addEventListener(
-        "mousemove",
-        (evento) => {
+    document.addEventListener("mousemove", (evento) => {
 
-            if (!lingo) return;
+        if (!lingo) return;
 
 
-            const x =
-                (
-                    evento.clientX /
-                    window.innerWidth -
-                    0.5
-                ) * 5;
+        const x =
+            (evento.clientX / window.innerWidth - 0.5) * 5;
+
+        const y =
+            (evento.clientY / window.innerHeight - 0.5) * 3;
 
 
-            const y =
-                (
-                    evento.clientY /
-                    window.innerHeight -
-                    0.5
-                ) * 3;
+        lingo.style.transform =
+            `translate(${x}px, ${y}px)`;
 
-
-            lingo.style.transform =
-                `translate(${x}px, ${y}px)`;
-
-        }
-    );
+    });
 
 
     /* =================================================
-       SALUDO INICIAL
+       SALUDO
     ================================================= */
 
     setTimeout(() => {
