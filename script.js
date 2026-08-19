@@ -873,347 +873,636 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =================================================
-       JUEGO 3
-       RETO LINGUAGO
-       CRUCIGRAMA
-    ================================================= */
+   JUEGO 3
+   RETO LINGUAGO - CRUCIGRAMA
+================================================= */
 
-    const challengeSection =
-        document.getElementById("challengeGame");
+const challengeSection =
+    document.getElementById("challengeGame");
 
-    const crossword =
-        document.getElementById("crossword");
+const crossword =
+    document.getElementById("crossword");
 
-    const clues =
-        document.getElementById("clues");
+const clues =
+    document.getElementById("clues");
 
-    const challengeScore =
-        document.getElementById("challengeScore");
+const challengeScore =
+    document.getElementById("challengeScore");
 
-    const challengeCompleted =
-        document.getElementById("challengeCompleted");
+const challengeCompleted =
+    document.getElementById("challengeCompleted");
 
-    const restartChallenge =
-        document.getElementById("restartChallenge");
+const restartChallenge =
+    document.getElementById("restartChallenge");
 
-    const closeChallenge =
-        document.getElementById("closeChallenge");
+const closeChallenge =
+    document.getElementById("closeChallenge");
 
 
-    const retos = [
+/* =================================================
+   DATOS DEL CRUCIGRAMA
+================================================= */
+
+const crucigrama = {
+
+    filas: 9,
+    columnas: 9,
+
+    palabras: [
 
         {
             numero: 1,
-            palabra: "CAT",
-            pista: "🐱 Animal que dice miau."
+            palabra: "HOUSE",
+            fila: 0,
+            columna: 2,
+            direccion: "horizontal",
+            pista: "🏠 Casa"
         },
 
         {
             numero: 2,
-            palabra: "DOG",
-            pista: "🐶 Animal que dice guau."
+            palabra: "SUN",
+            fila: 0,
+            columna: 2,
+            direccion: "vertical",
+            pista: "☀️ Sol"
         },
 
         {
             numero: 3,
-            palabra: "SUN",
-            pista: "☀️ Brilla durante el día."
+            palabra: "SCHOOL",
+            fila: 2,
+            columna: 0,
+            direccion: "horizontal",
+            pista: "🏫 Escuela"
         },
 
         {
             numero: 4,
-            palabra: "BOOK",
-            pista: "📚 Lo usamos para leer."
+            palabra: "DOG",
+            fila: 2,
+            columna: 3,
+            direccion: "vertical",
+            pista: "🐶 Perro"
         },
 
         {
             numero: 5,
             palabra: "WATER",
-            pista: "💧 Bebida necesaria para vivir."
+            fila: 5,
+            columna: 0,
+            direccion: "horizontal",
+            pista: "💧 Agua"
         },
 
         {
             numero: 6,
-            palabra: "SCHOOL",
-            pista: "🏫 Lugar donde aprendemos."
+            palabra: "BOOK",
+            fila: 4,
+            columna: 3,
+            direccion: "vertical",
+            pista: "📚 Libro"
+        },
+
+        {
+            numero: 7,
+            palabra: "FRIEND",
+            fila: 7,
+            columna: 1,
+            direccion: "horizontal",
+            pista: "🤝 Amigo"
         }
 
-    ];
+    ]
+
+};
 
 
-    let puntosReto = 0;
-    let retosCompletados = 0;
+let puntosReto = 0;
+let palabrasCompletadas = 0;
+let palabrasCorrectas = new Set();
 
 
-    function iniciarRetoLinguaGo() {
+/* =================================================
+   INICIAR RETO
+================================================= */
 
-        cerrarMensaje();
+function iniciarRetoLinguaGo() {
 
-        cerrarTodosLosJuegos();
+    cerrarMensaje();
 
-        if (!challengeSection) return;
+    cerrarTodosLosJuegos();
 
-        challengeSection.classList.add("active");
+    if (!challengeSection) return;
 
-        reiniciarReto();
+    challengeSection.classList.add("active");
 
-        challengeSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+    reiniciarCrucigrama();
 
-    }
+    challengeSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}
 
 
-    function reiniciarReto() {
+/* =================================================
+   REINICIAR
+================================================= */
 
-        puntosReto = 0;
-        retosCompletados = 0;
+function reiniciarCrucigrama() {
 
+    puntosReto = 0;
+    palabrasCompletadas = 0;
+
+    palabrasCorrectas.clear();
+
+    if (challengeScore) {
         challengeScore.textContent = "0";
-        challengeCompleted.textContent = "0";
-
-        crearCrucigrama();
-
     }
 
+    if (challengeCompleted) {
+        challengeCompleted.textContent = "0";
+    }
 
-    function crearCrucigrama() {
+    crearCrucigrama();
 
-        crossword.innerHTML = "";
-        clues.innerHTML = "";
-
-
-        /*
-           Cada palabra se presenta como una
-           pequeña fila dentro del crucigrama.
-           Así funciona correctamente en móvil
-           y escritorio sin depender de una
-           cuadrícula imposible de editar.
-        */
+}
 
 
-        retos.forEach((reto, indice) => {
+/* =================================================
+   CREAR CUADRÍCULA
+================================================= */
 
-            const fila =
-                document.createElement("div");
+function crearCrucigrama() {
 
-            fila.style.display = "flex";
-            fila.style.justifyContent = "center";
-            fila.style.gap = "3px";
-            fila.style.marginBottom = "6px";
+    if (!crossword) return;
 
+    crossword.innerHTML = "";
 
-            [...reto.palabra].forEach((letra, posicion) => {
-
-                const input =
-                    document.createElement("input");
-
-                input.className = "cross-cell";
-
-                input.maxLength = 1;
-
-                input.dataset.respuesta = letra;
-
-                input.dataset.reto = indice;
-
-                input.setAttribute(
-                    "aria-label",
-                    `Letra ${posicion + 1} de la palabra ${reto.numero}`
-                );
+    const celdas = {};
 
 
-                input.addEventListener(
-                    "input",
-                    () => {
+    /* Crear estructura */
 
-                        input.value =
-                            input.value
-                                .toUpperCase()
-                                .replace(/[^A-Z]/g, "")
-                                .slice(0, 1);
+    crucigrama.palabras.forEach((palabra) => {
 
+        for (
+            let i = 0;
+            i < palabra.palabra.length;
+            i++
+        ) {
 
-                        if (input.value) {
-
-                            const siguiente =
-                                fila.children[posicion + 1];
-
-                            if (siguiente) {
-                                siguiente.focus();
-                            }
-
-                        }
+            let fila = palabra.fila;
+            let columna = palabra.columna;
 
 
-                        comprobarFila(
-                            indice,
-                            fila
+            if (palabra.direccion === "horizontal") {
+                columna += i;
+            } else {
+                fila += i;
+            }
+
+
+            const clave =
+                `${fila}-${columna}`;
+
+
+            if (!celdas[clave]) {
+
+                celdas[clave] = {
+
+                    fila,
+                    columna,
+                    letra: palabra.palabra[i],
+                    palabras: []
+
+                };
+
+            }
+
+
+            celdas[clave].palabras.push(
+                palabra.numero
+            );
+
+        }
+
+    });
+
+
+    /* Crear las 81 posiciones */
+
+    for (let fila = 0; fila < crucigrama.filas; fila++) {
+
+        for (
+            let columna = 0;
+            columna < crucigrama.columnas;
+            columna++
+        ) {
+
+            const clave =
+                `${fila}-${columna}`;
+
+            const celda =
+                celdas[clave];
+
+
+            if (!celda) {
+
+                const bloque =
+                    document.createElement("div");
+
+                bloque.className = "cross-cell block";
+
+                crossword.appendChild(bloque);
+
+                continue;
+
+            }
+
+
+            const input =
+                document.createElement("input");
+
+            input.className = "cross-cell";
+
+            input.maxLength = 1;
+
+            input.dataset.fila = fila;
+            input.dataset.columna = columna;
+
+            input.dataset.respuesta =
+                celda.letra;
+
+            input.dataset.palabras =
+                celda.palabras.join(",");
+
+
+            input.setAttribute(
+                "aria-label",
+                "Letra del crucigrama"
+            );
+
+
+            input.addEventListener(
+                "input",
+                () => {
+
+                    input.value =
+                        input.value
+                            .toUpperCase()
+                            .replace(/[^A-Z]/g, "")
+                            .slice(0, 1);
+
+                    if (input.value) {
+
+                        moverSiguiente(
+                            fila,
+                            columna
                         );
 
                     }
-                );
+
+                    comprobarCrucigrama();
+
+                }
+            );
 
 
-                input.addEventListener(
-                    "keydown",
-                    (evento) => {
+            input.addEventListener(
+                "keydown",
+                (evento) => {
 
-                        if (
-                            evento.key === "Backspace" &&
-                            !input.value &&
-                            posicion > 0
-                        ) {
+                    if (
+                        evento.key === "Backspace" &&
+                        input.value === ""
+                    ) {
 
-                            fila.children[
-                                posicion - 1
-                            ].focus();
-
-                        }
+                        moverAnterior(
+                            fila,
+                            columna
+                        );
 
                     }
-                );
+
+                }
+            );
 
 
-                fila.appendChild(input);
+            crossword.appendChild(input);
 
-            });
-
-
-            crossword.appendChild(fila);
-
-
-            const pista =
-                document.createElement("div");
-
-            pista.className = "clue";
-
-            pista.innerHTML =
-                `<strong>${reto.numero}.</strong>
-                 ${reto.pista}
-                 <small style="opacity:.6;">
-                    (${reto.palabra.length} letras)
-                 </small>`;
-
-
-            clues.appendChild(pista);
-
-        });
+        }
 
     }
 
 
-    const palabrasResueltas =
-        new Set();
+    crearPistas();
+
+}
 
 
-    function comprobarFila(indice, fila) {
+/* =================================================
+   MOVER A LA SIGUIENTE CELDA
+================================================= */
 
-        if (palabrasResueltas.has(indice)) return;
+function moverSiguiente(fila, columna) {
+
+    const inputs =
+        crossword.querySelectorAll(
+            ".cross-cell:not(.block)"
+        );
 
 
-        const reto = retos[indice];
-
-        const valores =
-            [...fila.querySelectorAll("input")]
-                .map((input) => input.value)
-                .join("");
+    const actual =
+        crossword.querySelector(
+            `[data-fila="${fila}"][data-columna="${columna}"]`
+        );
 
 
-        if (valores.length !== reto.palabra.length) {
+    const index =
+        Array.from(inputs).indexOf(actual);
+
+
+    if (
+        index >= 0 &&
+        index < inputs.length - 1
+    ) {
+
+        inputs[index + 1].focus();
+
+    }
+
+}
+
+
+/* =================================================
+   MOVER A LA ANTERIOR
+================================================= */
+
+function moverAnterior(fila, columna) {
+
+    const inputs =
+        crossword.querySelectorAll(
+            ".cross-cell:not(.block)"
+        );
+
+
+    const actual =
+        crossword.querySelector(
+            `[data-fila="${fila}"][data-columna="${columna}"]`
+        );
+
+
+    const index =
+        Array.from(inputs).indexOf(actual);
+
+
+    if (index > 0) {
+
+        inputs[index - 1].focus();
+
+    }
+
+}
+
+
+/* =================================================
+   CREAR PISTAS
+================================================= */
+
+function crearPistas() {
+
+    if (!clues) return;
+
+    clues.innerHTML = "";
+
+    crucigrama.palabras.forEach((palabra) => {
+
+        const pista =
+            document.createElement("div");
+
+        pista.className = "clue";
+
+        pista.innerHTML = `
+
+            <strong>
+                ${palabra.numero}.
+            </strong>
+
+            ${palabra.pista}
+
+            <small>
+                (${palabra.palabra.length} letras)
+            </small>
+
+        `;
+
+        clues.appendChild(pista);
+
+    });
+
+}
+
+
+/* =================================================
+   COMPROBAR CRUCIGRAMA
+================================================= */
+
+function comprobarCrucigrama() {
+
+    crucigrama.palabras.forEach((palabra) => {
+
+        if (palabrasCorrectas.has(palabra.numero)) {
             return;
         }
 
 
-        if (valores === reto.palabra) {
-
-            palabrasResueltas.add(indice);
-
-            retosCompletados++;
-
-            puntosReto += 100;
-
-            challengeScore.textContent =
-                puntosReto;
-
-            challengeCompleted.textContent =
-                retosCompletados;
+        let respuesta = "";
 
 
-            fila.querySelectorAll("input")
-                .forEach((input) => {
+        for (
+            let i = 0;
+            i < palabra.palabra.length;
+            i++
+        ) {
 
-                    input.style.background = "#dff8e8";
-                    input.style.borderColor = "#3bb273";
-                    input.disabled = true;
-
-                });
+            let fila = palabra.fila;
+            let columna = palabra.columna;
 
 
-            if (retosCompletados === retos.length) {
-
-                setTimeout(() => {
-
-                    mostrarMensaje(
-                        "¡Reto LinguaGo completado! 🏆",
-                        `Terminaste el crucigrama con ${puntosReto} puntos.`,
-                        "🧩"
-                    );
-
-                }, 400);
-
+            if (palabra.direccion === "horizontal") {
+                columna += i;
+            } else {
+                fila += i;
             }
 
-        } else {
 
-            puntosReto =
-                Math.max(0, puntosReto - 10);
+            const input =
+                crossword.querySelector(
+                    `[data-fila="${fila}"][data-columna="${columna}"]`
+                );
 
-            challengeScore.textContent =
-                puntosReto;
+
+            if (!input) return;
+
+
+            respuesta += input.value;
 
         }
 
-    }
+
+        if (respuesta.length !== palabra.palabra.length) {
+            return;
+        }
 
 
-    if (restartChallenge) {
+        if (respuesta === palabra.palabra) {
 
-        restartChallenge.addEventListener(
-            "click",
-            () => {
+            palabrasCorrectas.add(
+                palabra.numero
+            );
 
-                palabrasResueltas.clear();
+            palabrasCompletadas++;
 
-                reiniciarReto();
+            puntosReto += 100;
+
+
+            if (challengeScore) {
+                challengeScore.textContent =
+                    puntosReto;
+            }
+
+
+            if (challengeCompleted) {
+                challengeCompleted.textContent =
+                    palabrasCompletadas;
+            }
+
+
+            /* Marcar palabra correcta */
+
+            for (
+                let i = 0;
+                i < palabra.palabra.length;
+                i++
+            ) {
+
+                let fila = palabra.fila;
+                let columna = palabra.columna;
+
+
+                if (
+                    palabra.direccion ===
+                    "horizontal"
+                ) {
+
+                    columna += i;
+
+                } else {
+
+                    fila += i;
+
+                }
+
+
+                const input =
+                    crossword.querySelector(
+                        `[data-fila="${fila}"][data-columna="${columna}"]`
+                    );
+
+
+                if (input) {
+
+                    input.classList.add(
+                        "correct-cell"
+                    );
+
+                    input.disabled = true;
+
+                }
 
             }
-        );
 
-    }
+        }
 
-
-    if (closeChallenge) {
-
-        closeChallenge.addEventListener(
-            "click",
-            () => {
-
-                challengeSection.classList.remove("active");
-
-                document
-                    .getElementById("juegos")
-                    .scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-            }
-        );
-
-    }
+    });
 
 
     /* =================================================
+       VICTORIA
+    ================================================= */
+
+    if (
+        palabrasCompletadas ===
+        crucigrama.palabras.length
+    ) {
+
+        setTimeout(() => {
+
+            mostrarMensaje(
+                "¡Crucigrama completado! 🏆",
+                `Excelente. Lograste ${puntosReto} puntos.`,
+                "🧩"
+            );
+
+        }, 400);
+
+    }
+
+}
+
+
+/* =================================================
+   BOTÓN REINICIAR
+================================================= */
+
+if (restartChallenge) {
+
+    restartChallenge.addEventListener(
+        "click",
+        reiniciarCrucigrama
+    );
+
+}
+
+
+/* =================================================
+   BOTÓN CERRAR
+================================================= */
+
+if (closeChallenge) {
+
+    closeChallenge.addEventListener(
+        "click",
+        () => {
+
+            if (challengeSection) {
+
+                challengeSection.classList.remove(
+                    "active"
+                );
+
+            }
+
+
+            const juegos =
+                document.getElementById("juegos");
+
+
+            if (juegos) {
+
+                juegos.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+            }
+
+        }
+    );
+
+}    /* =================================================
        CERRAR TODOS LOS JUEGOS
     ================================================= */
 
