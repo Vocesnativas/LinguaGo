@@ -1,6 +1,6 @@
 /* =====================================================
    LINGUAGO
-   ESTILOS COMPLETOS
+   ESTILOS GENERALES
 ===================================================== */
 
 * {
@@ -17,7 +17,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background: #f5f8fc;
     color: #172033;
-    line-height: 1.6;
 }
 
 button,
@@ -27,6 +26,10 @@ a {
 
 button {
     cursor: pointer;
+}
+
+a {
+    text-decoration: none;
 }
 
 
@@ -39,19 +42,17 @@ button {
     top: 0;
     z-index: 1000;
 
-    width: 100%;
+    height: 72px;
+    padding: 0 7%;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 15px 7%;
-
     background: rgba(255,255,255,0.96);
+    border-bottom: 1px solid #e8edf4;
 
-    border-bottom: 1px solid #e7edf5;
-
-    box-shadow: 0 5px 20px rgba(23,32,51,0.06);
+    backdrop-filter: blur(12px);
 }
 
 .logo {
@@ -59,14 +60,12 @@ button {
     align-items: center;
     gap: 8px;
 
-    font-size: 1.45rem;
+    font-size: 1.35rem;
     font-weight: 900;
-
-    color: #172033;
 }
 
 .logo-icon {
-    font-size: 1.65rem;
+    font-size: 1.6rem;
 }
 
 .logo span span {
@@ -76,17 +75,14 @@ button {
 .navbar nav {
     display: flex;
     align-items: center;
-    gap: 27px;
+    gap: 28px;
 }
 
 .navbar nav a {
-    color: #172033;
-    text-decoration: none;
-
+    color: #4b5565;
     font-size: 0.9rem;
     font-weight: 700;
-
-    transition: 0.25s;
+    transition: 0.2s;
 }
 
 .navbar nav a:hover {
@@ -108,20 +104,17 @@ button {
 ===================================================== */
 
 .hero {
-    min-height: 650px;
-
-    padding: 80px 7%;
+    min-height: 610px;
+    padding: 80px 8%;
 
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     align-items: center;
-    gap: 30px;
-
-    overflow: hidden;
+    gap: 40px;
 
     background:
-        radial-gradient(circle at 80% 30%, rgba(40,120,227,0.15), transparent 30%),
-        linear-gradient(135deg, #eef6ff, #ffffff);
+        radial-gradient(circle at 80% 20%, #dcecff, transparent 35%),
+        linear-gradient(135deg, #ffffff, #eef6ff);
 }
 
 .hero-content {
@@ -132,25 +125,22 @@ button {
     display: inline-block;
 
     margin-bottom: 15px;
-
-    padding: 7px 13px;
+    padding: 8px 14px;
 
     border-radius: 30px;
 
-    background: #e3f0ff;
+    background: #e7f1ff;
     color: #2878e3;
 
     font-size: 0.78rem;
-    font-weight: 900;
-    letter-spacing: 0.7px;
+    font-weight: 800;
 }
 
 .hero h1 {
     margin-bottom: 20px;
 
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    line-height: 1.05;
-    letter-spacing: -2px;
+    font-size: clamp(2.5rem, 6vw, 4.8rem);
+    line-height: 1.02;
 }
 
 .hero h1 span {
@@ -164,17 +154,18 @@ button {
 .hero p {
     max-width: 570px;
 
-    margin-bottom: 28px;
+    margin-bottom: 30px;
 
-    color: #637087;
+    color: #657084;
 
-    font-size: 1.05rem;
+    font-size: 1.08rem;
+    line-height: 1.7;
 }
 
 .hero-buttons {
     display: flex;
-    flex-wrap: wrap;
     gap: 12px;
+    flex-wrap: wrap;
 }
 
 .btn {
@@ -183,17 +174,13 @@ button {
     justify-content: center;
 
     min-height: 48px;
-
     padding: 0 22px;
 
     border-radius: 12px;
 
-    text-decoration: none;
-
-    font-size: 0.9rem;
     font-weight: 800;
 
-    transition: 0.25s;
+    transition: 0.2s;
 }
 
 .btn:hover {
@@ -203,15 +190,13 @@ button {
 .btn-primary {
     background: #2878e3;
     color: white;
-
     box-shadow: 0 10px 25px rgba(40,120,227,0.25);
 }
 
 .btn-secondary {
     background: white;
     color: #172033;
-
-    border: 1px solid #dce4ef;
+    border: 1px solid #dce3ed;
 }
 
 
@@ -222,7 +207,7 @@ button {
 .lingo-area {
     position: relative;
 
-    min-height: 430px;
+    min-height: 390px;
 
     display: flex;
     align-items: center;
@@ -231,96 +216,93 @@ button {
 
 .lingo-bubble {
     position: absolute;
-    top: 20px;
-    right: 12%;
+    top: 15px;
+    right: 10%;
 
-    z-index: 5;
-
-    padding: 15px 20px;
-
-    display: flex;
-    flex-direction: column;
-
-    border-radius: 18px;
+    padding: 13px 18px;
 
     background: white;
+    border-radius: 18px;
 
     box-shadow: 0 15px 40px rgba(23,32,51,0.12);
 
-    animation: floating 3s ease-in-out infinite;
+    z-index: 3;
+}
+
+.lingo-bubble span,
+.lingo-bubble small {
+    display: block;
 }
 
 .lingo-bubble span {
     font-weight: 900;
+    color: #2878e3;
 }
 
 .lingo-bubble small {
-    color: #637087;
-}
-
-@keyframes floating {
-    50% {
-        transform: translateY(-8px);
-    }
+    margin-top: 3px;
+    color: #657084;
 }
 
 .lingo {
     position: relative;
 
-    width: 260px;
-    height: 350px;
+    width: 210px;
+    height: 290px;
 
     transition: transform 0.2s ease;
 }
 
-.ear {
-    position: absolute;
-
-    width: 75px;
-    height: 95px;
-
-    top: 18px;
-
-    background: #ff8b61;
-
-    border-radius: 70% 70% 20% 20%;
-}
-
-.ear-left {
-    left: 15px;
-    transform: rotate(-25deg);
-}
-
-.ear-right {
-    right: 15px;
-    transform: rotate(25deg);
-}
-
 .head {
     position: absolute;
+    z-index: 4;
 
-    left: 35px;
-    top: 35px;
+    top: 25px;
+    left: 25px;
 
-    width: 190px;
-    height: 175px;
-
-    z-index: 2;
+    width: 160px;
+    height: 150px;
 
     border-radius: 48% 48% 45% 45%;
 
     background: #ff9a75;
+    border: 6px solid #f07b52;
 
-    border: 5px solid #ff7043;
+    box-shadow: inset -12px -10px 0 rgba(0,0,0,0.06);
+}
+
+.ear {
+    position: absolute;
+    z-index: 1;
+
+    top: 15px;
+
+    width: 65px;
+    height: 75px;
+
+    background: #ff9a75;
+    border: 6px solid #f07b52;
+
+    border-radius: 70% 30% 60% 40%;
+}
+
+.ear-left {
+    left: 5px;
+    transform: rotate(-30deg);
+}
+
+.ear-right {
+    right: 5px;
+    transform: scaleX(-1) rotate(-30deg);
 }
 
 .eye {
     position: absolute;
 
-    top: 58px;
+    top: 57px;
 
-    width: 38px;
-    height: 45px;
+    width: 24px;
+    height: 30px;
 
     border-radius: 50%;
 
@@ -338,25 +320,24 @@ button {
 .eye span {
     position: absolute;
 
-    top: 7px;
-    left: 9px;
+    top: 5px;
+    left: 6px;
 
-    width: 10px;
-    height: 10px;
+    width: 7px;
+    height: 8px;
 
     border-radius: 50%;
-
     background: white;
 }
 
 .nose {
     position: absolute;
 
-    left: 80px;
-    top: 105px;
+    left: 67px;
+    top: 88px;
 
-    width: 30px;
-    height: 25px;
+    width: 27px;
+    height: 21px;
 
     border-radius: 50%;
 
@@ -366,27 +347,26 @@ button {
 .mouth {
     position: absolute;
 
-    left: 70px;
-    top: 132px;
+    left: 66px;
+    top: 112px;
 
-    width: 50px;
-    height: 20px;
+    width: 30px;
+    height: 15px;
 
-    border-bottom: 5px solid #172033;
-
+    border-bottom: 4px solid #172033;
     border-radius: 50%;
 }
 
 .body {
     position: absolute;
 
-    left: 48px;
-    top: 190px;
+    top: 150px;
+    left: 38px;
 
-    width: 165px;
-    height: 125px;
+    width: 135px;
+    height: 115px;
 
-    border-radius: 45px 45px 25px 25px;
+    border-radius: 40px 40px 20px 20px;
 
     background: #2878e3;
 }
@@ -394,23 +374,12 @@ button {
 .shirt {
     position: absolute;
 
-    left: 50%;
-    top: 35px;
+    left: 48px;
+    top: 30px;
 
-    transform: translateX(-50%);
+    color: white;
 
-    width: 55px;
-    height: 55px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: white;
-    color: #2878e3;
-
+    font-size: 1.5rem;
     font-weight: 900;
 }
 
@@ -419,58 +388,56 @@ button {
 
     top: 20px;
 
-    width: 45px;
+    width: 28px;
     height: 85px;
 
-    border-radius: 40px;
+    border-radius: 20px;
 
     background: #ff9a75;
 }
 
 .arm-left {
-    left: -28px;
-    transform: rotate(25deg);
+    left: -22px;
+    transform: rotate(18deg);
 }
 
 .arm-right {
-    right: -28px;
-    transform: rotate(-25deg);
+    right: -22px;
+    transform: rotate(-18deg);
 }
 
 .foot {
     position: absolute;
 
-    bottom: 0;
+    top: 255px;
 
-    width: 75px;
-    height: 35px;
+    width: 65px;
+    height: 30px;
 
     border-radius: 50%;
 
-    background: #ff7043;
+    background: #172033;
 }
 
 .foot-left {
-    left: 40px;
+    left: 35px;
 }
 
 .foot-right {
-    right: 40px;
+    right: 25px;
 }
 
 .lingo-shadow {
     position: absolute;
 
-    bottom: 0;
+    bottom: 15px;
 
     width: 220px;
-    height: 30px;
+    height: 25px;
 
     border-radius: 50%;
 
     background: rgba(23,32,51,0.12);
-
-    filter: blur(4px);
 }
 
 
@@ -483,7 +450,7 @@ button {
 }
 
 .section-title {
-    max-width: 680px;
+    max-width: 650px;
 
     margin: 0 auto 45px;
 
@@ -499,13 +466,14 @@ button {
 }
 
 .section-title h2 {
-    margin: 8px 0;
+    margin: 10px 0;
 
     font-size: clamp(2rem, 4vw, 3rem);
 }
 
 .section-title p {
-    color: #637087;
+    color: #697487;
+    line-height: 1.6;
 }
 
 
@@ -528,13 +496,12 @@ button {
 
     background: white;
 
-    border: 1px solid #e3e9f2;
-
+    border: 1px solid #e4eaf2;
     border-radius: 22px;
 
-    box-shadow: 0 12px 35px rgba(23,32,51,0.07);
+    box-shadow: 0 15px 45px rgba(23,32,51,0.06);
 
-    transition: 0.3s;
+    transition: 0.25s;
 }
 
 .course-card:hover {
@@ -542,36 +509,37 @@ button {
 }
 
 .course-icon {
-    font-size: 3rem;
+    font-size: 2.7rem;
+    margin-bottom: 15px;
 }
 
 .course-card h3 {
-    margin: 12px 0 8px;
+    margin-bottom: 10px;
 
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 .course-card p {
     min-height: 55px;
 
-    color: #637087;
+    color: #687386;
+    line-height: 1.5;
 }
 
 .progress {
-    height: 8px;
+    height: 7px;
 
-    margin: 18px 0 8px;
+    margin: 20px 0 8px;
 
     overflow: hidden;
 
-    border-radius: 20px;
+    border-radius: 10px;
 
-    background: #e9eef5;
+    background: #e8edf4;
 }
 
 .progress span {
     display: block;
-
     height: 100%;
 
     border-radius: inherit;
@@ -580,7 +548,7 @@ button {
 }
 
 .course-card small {
-    color: #7b8798;
+    color: #7a8495;
 }
 
 .card-btn {
@@ -590,23 +558,15 @@ button {
 
     margin-top: 18px;
 
-    min-height: 45px;
+    min-height: 43px;
 
     border: none;
-
     border-radius: 10px;
 
     background: #2878e3;
     color: white;
 
     font-weight: 800;
-
-    transition: 0.25s;
-}
-
-.card-btn:hover {
-    background: #1765cb;
-    transform: translateY(-2px);
 }
 
 
@@ -631,69 +591,58 @@ button {
 .game-card {
     padding: 28px;
 
-    text-align: center;
-
     background: white;
 
-    border: 1px solid #dfe8f4;
-
+    border: 1px solid #e1e9f4;
     border-radius: 20px;
 
-    box-shadow: 0 12px 30px rgba(23,32,51,0.06);
+    text-align: center;
 
-    transition: 0.3s;
+    box-shadow: 0 12px 35px rgba(23,32,51,0.06);
+
+    transition: 0.25s;
 }
 
 .game-card:hover {
-    transform: translateY(-7px);
+    transform: translateY(-6px);
 }
 
 .game-icon {
     font-size: 3rem;
+    margin-bottom: 12px;
 }
 
 .game-card h3 {
-    margin: 12px 0 8px;
-
-    font-size: 1.25rem;
+    margin-bottom: 10px;
 }
 
 .game-card p {
-    min-height: 55px;
+    min-height: 45px;
 
-    color: #637087;
+    color: #697487;
 
-    font-size: 0.92rem;
+    line-height: 1.5;
 }
 
 .game-btn {
     width: 100%;
 
+    margin-top: 20px;
+
     min-height: 44px;
 
-    margin-top: 18px;
-
     border: none;
-
     border-radius: 10px;
 
-    background: #2878e3;
+    background: #ff7043;
     color: white;
 
-    font-weight: 800;
-
-    transition: 0.25s;
-}
-
-.game-btn:hover {
-    background: #1765cb;
-
-    transform: translateY(-2px);
+    font-weight: 900;
 }
 
 
 /* =====================================================
-   JUEGO DE MEMORIA
+   MEMORIA
 ===================================================== */
 
 .memory-game-section {
@@ -724,6 +673,7 @@ button {
         opacity: 1;
         transform: translateY(0);
     }
+
 }
 
 .memory-header {
@@ -791,7 +741,6 @@ button {
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-
     gap: 12px;
 }
 
@@ -799,8 +748,6 @@ button {
     position: relative;
 
     height: 115px;
-
-    padding: 0;
 
     border: none;
 
@@ -866,13 +813,13 @@ button {
 
 .memory-card.matched .memory-back {
     background: #dff8e8;
-
     border-color: #3bb273;
 }
 
 .memory-controls {
     display: flex;
     justify-content: center;
+
     gap: 10px;
     flex-wrap: wrap;
 }
@@ -885,7 +832,6 @@ button {
 
     border-radius: 9px;
 
-    font-size: 0.85rem;
     font-weight: 700;
 }
 
@@ -903,11 +849,6 @@ button {
     color: white;
 }
 
-.memory-restart:hover,
-.memory-close:hover {
-    transform: translateY(-2px);
-}
-
 
 /* =====================================================
    PALABRA CORRECTA
@@ -918,9 +859,7 @@ button {
 
     padding: 65px 7%;
 
-    background: linear-gradient(135deg, #fff5ef, #fff);
-
-    text-align: center;
+    background: #f7faff;
 }
 
 .correct-word-game.active {
@@ -928,23 +867,22 @@ button {
 }
 
 .correct-word-box {
-    width: min(700px, 100%);
+    max-width: 720px;
 
     margin: auto;
-
     padding: 35px;
 
     background: white;
 
-    border: 1px solid #f0ddd5;
+    border-radius: 22px;
 
-    border-radius: 24px;
+    box-shadow: 0 15px 50px rgba(23,32,51,0.09);
 
-    box-shadow: 0 15px 40px rgba(23,32,51,0.08);
+    text-align: center;
 }
 
 .correct-label {
-    color: #ff7043;
+    color: #2878e3;
 
     font-size: 0.78rem;
     font-weight: 900;
@@ -953,22 +891,20 @@ button {
 
 .correct-word-box h2 {
     margin: 10px 0 20px;
-
-    font-size: 2rem;
 }
 
 .correct-progress {
     margin-bottom: 20px;
 
-    color: #637087;
+    color: #7a8495;
 }
 
 .correct-question {
-    padding: 22px;
+    padding: 25px;
 
     border-radius: 15px;
 
-    background: #f3f7fc;
+    background: #eef5ff;
 
     font-size: 1.2rem;
     font-weight: 800;
@@ -976,23 +912,22 @@ button {
 
 .correct-options {
     display: grid;
-
     gap: 12px;
 
-    margin-top: 22px;
+    margin-top: 20px;
 }
 
 .correct-option {
     min-height: 52px;
 
-    border: 2px solid #dce5f0;
-
+    border: 2px solid #dfe7f1;
     border-radius: 12px;
 
     background: white;
 
     color: #172033;
 
+    font-size: 1rem;
     font-weight: 800;
 
     transition: 0.2s;
@@ -1000,20 +935,16 @@ button {
 
 .correct-option:hover:not(:disabled) {
     border-color: #2878e3;
-
-    background: #eef6ff;
-
-    transform: translateY(-2px);
+    background: #eef5ff;
 }
 
 .correct-option:disabled {
     cursor: default;
 }
 
-.correct-answer {
-    border-color: #3bb273 !important;
-
-    background: #dff8e8 !important;
+.correct-option.correct-answer {
+    border-color: #3bb273;
+    background: #dff8e8;
 }
 
 .correct-feedback {
@@ -1023,64 +954,13 @@ button {
 }
 
 .correct-score {
-    margin-top: 20px;
+    margin-top: 25px;
 
-    color: #637087;
+    color: #657084;
 }
 
 .correct-score strong {
-    color: #2878e3;
-}
-
-.correct-word-box.final {
-    text-align: center;
-}
-
-.correct-final-icon {
-    font-size: 4rem;
-}
-
-.final-score {
-    margin: 20px;
-
-    color: #2878e3;
-
-    font-size: 3rem;
-    font-weight: 900;
-}
-
-.final-score small {
-    display: block;
-
-    color: #637087;
-
-    font-size: 0.9rem;
-}
-
-.correct-restart,
-.correct-close {
-    min-height: 45px;
-
-    margin: 5px;
-
-    padding: 0 20px;
-
-    border-radius: 10px;
-
-    font-weight: 800;
-}
-
-.correct-restart {
-    border: none;
-
-    background: #2878e3;
-    color: white;
-}
-
-.correct-close {
-    border: 1px solid #dce5f0;
-
-    background: white;
+    color: #ff7043;
 }
 
 
@@ -1088,124 +968,86 @@ button {
    RETO LINGUAGO
 ===================================================== */
 
-.linguago-challenge {
+.challenge-section {
     display: none;
 
-    padding: 70px 7%;
+    padding: 65px 7%;
 
     background: #172033;
-
     color: white;
-
-    text-align: center;
 }
 
-.linguago-challenge.active {
+.challenge-section.active {
     display: block;
 
     animation: memoryAppear 0.4s ease;
 }
 
-.challenge-header {
-    max-width: 700px;
+.challenge-box {
+    max-width: 850px;
 
     margin: auto;
+
+    text-align: center;
 }
 
-.challenge-header > span {
+.challenge-box > span {
     color: #ff9a75;
 
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     font-weight: 900;
     letter-spacing: 1px;
 }
 
-.challenge-header h2 {
+.challenge-box h2 {
     margin: 8px 0;
 
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: 2.4rem;
 }
 
-.challenge-header p {
+.challenge-box > p {
     color: #bdc5d3;
 }
 
 .challenge-info {
-    width: min(500px, 100%);
+    max-width: 400px;
 
-    margin: 28px auto;
+    margin: 25px auto;
 
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 
 .challenge-info div {
-    padding: 14px;
+    padding: 12px 20px;
 
     background: rgba(255,255,255,0.07);
 
-    border: 1px solid rgba(255,255,255,0.1);
-
-    border-radius: 13px;
+    border-radius: 12px;
 }
 
 .challenge-info strong {
-    display: block;
-
     color: #ff9a75;
-
-    font-size: 1.5rem;
 }
 
-.challenge-info span {
-    color: #bdc5d3;
-
-    font-size: 0.75rem;
-}
-
-.crossword-box {
-    width: min(950px, 100%);
-
-    margin: auto;
-
-    padding: 30px;
-
-    background: #202b40;
-
-    border: 1px solid rgba(255,255,255,0.1);
-
-    border-radius: 22px;
-}
-
-.crossword-board {
-    min-height: 250px;
-
+.crossword {
     display: grid;
 
-    place-items: center;
+    grid-template-columns: repeat(8, 45px);
 
-    margin-bottom: 30px;
-}
+    justify-content: center;
 
-.crossword-grid {
-    display: grid;
-
-    grid-template-columns: repeat(9, 42px);
-
-    grid-template-rows: repeat(9, 42px);
+    margin: 25px auto;
 
     gap: 3px;
 }
 
-.crossword-cell {
-    width: 42px;
-    height: 42px;
+.cross-cell {
+    width: 45px;
+    height: 45px;
 
-    border: 1px solid #52617a;
-
-    border-radius: 5px;
+    border: 1px solid #506078;
 
     background: white;
 
@@ -1218,95 +1060,60 @@ button {
     text-transform: uppercase;
 }
 
-.crossword-cell.blocked {
-    background: #101827;
-
-    border-color: #101827;
-
-    pointer-events: none;
+.cross-cell.block {
+    background: transparent;
+    border: none;
 }
 
-.crossword-cell:focus {
-    outline: 3px solid #ff9a75;
+.cross-cell:focus {
+    outline: 3px solid #ff7043;
 }
 
-.crossword-clues {
-    display: grid;
+.challenge-clues {
+    max-width: 650px;
 
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 25px;
+    margin: 30px auto;
 
     text-align: left;
 }
 
-.clue-column {
-    padding: 20px;
-
-    border-radius: 15px;
-
-    background: rgba(255,255,255,0.05);
+.challenge-clues h3 {
+    margin-bottom: 15px;
 }
 
-.clue-column h3 {
-    margin-bottom: 12px;
+.clue {
+    margin-bottom: 10px;
+    padding: 12px 15px;
 
-    color: #ff9a75;
+    background: rgba(255,255,255,0.07);
 
-    font-size: 1rem;
-}
-
-.clue-column li {
-    margin: 8px 0;
-
-    color: #d5dbe5;
-
-    font-size: 0.9rem;
+    border-radius: 10px;
 }
 
 .challenge-controls {
     display: flex;
-
     justify-content: center;
-
-    flex-wrap: wrap;
-
     gap: 10px;
-
-    margin-top: 25px;
 }
 
 .challenge-controls button {
-    min-height: 45px;
+    min-height: 42px;
 
-    padding: 0 20px;
+    padding: 0 18px;
 
-    border-radius: 10px;
+    border-radius: 9px;
 
     font-weight: 800;
-
-    transition: 0.2s;
 }
 
-.challenge-controls button:hover {
-    transform: translateY(-2px);
-}
-
-.challenge-check {
-    border: none;
-
-    background: #3bb273;
-    color: white;
-}
-
-.challenge-restart {
+#restartChallenge {
     border: none;
 
     background: #ff7043;
     color: white;
 }
 
-.challenge-close {
+#closeChallenge {
     border: 1px solid rgba(255,255,255,0.2);
 
     background: transparent;
@@ -1324,44 +1131,33 @@ button {
     margin: auto;
 
     display: grid;
-
     grid-template-columns: repeat(4, 1fr);
-
     gap: 18px;
 }
 
 .activity {
     padding: 25px;
 
-    text-align: center;
-
     background: white;
-
-    border: 1px solid #e3e9f2;
 
     border-radius: 18px;
 
-    box-shadow: 0 10px 25px rgba(23,32,51,0.05);
+    text-align: center;
 
-    transition: 0.3s;
+    border: 1px solid #e3e9f1;
 }
 
-.activity:hover {
-    transform: translateY(-5px);
-}
-
-.activity > span {
+.activity span {
     font-size: 2.2rem;
 }
 
 .activity h3 {
-    margin: 10px 0 5px;
+    margin: 10px 0;
 }
 
 .activity p {
-    color: #637087;
-
-    font-size: 0.88rem;
+    color: #697487;
+    line-height: 1.5;
 }
 
 
@@ -1370,68 +1166,67 @@ button {
 ===================================================== */
 
 .about {
-    padding: 100px 7%;
+    padding: 85px 7%;
 
-    background:
-        linear-gradient(135deg, #2878e3, #174c99);
-
+    background: #2878e3;
     color: white;
-
-    text-align: center;
 }
 
 .about-content {
-    max-width: 800px;
+    max-width: 850px;
 
     margin: auto;
+
+    text-align: center;
 }
 
 .about-content > span {
     font-size: 0.8rem;
     font-weight: 900;
-    letter-spacing: 1px;
 }
 
-.about h2 {
+.about-content h2 {
     margin: 12px 0;
 
     font-size: clamp(2rem, 4vw, 3rem);
 }
 
-.about p {
-    color: #dbeaff;
+.about-content p {
+    max-width: 650px;
+
+    margin: auto;
+
+    color: #e4efff;
+
+    line-height: 1.7;
 }
 
 .stats {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 15px;
-
     margin-top: 35px;
+
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
 }
 
 .stats div {
+    min-width: 130px;
+
     padding: 18px;
 
-    background: rgba(255,255,255,0.1);
-
-    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.12);
 
     border-radius: 15px;
 }
 
-.stats strong {
+.stats strong,
+.stats span {
     display: block;
-
-    font-size: 2rem;
 }
 
-.stats span {
-    color: #dbeaff;
-
-    font-size: 0.8rem;
+.stats strong {
+    font-size: 1.8rem;
 }
 
 
@@ -1443,17 +1238,15 @@ button {
     position: fixed;
 
     inset: 0;
-
-    z-index: 2000;
+    z-index: 5000;
 
     display: none;
-
     align-items: center;
     justify-content: center;
 
     padding: 20px;
 
-    background: rgba(10,17,30,0.65);
+    background: rgba(23,32,51,0.55);
 
     backdrop-filter: blur(5px);
 }
@@ -1469,28 +1262,44 @@ button {
 
     padding: 35px;
 
-    border-radius: 24px;
-
     background: white;
+
+    border-radius: 24px;
 
     text-align: center;
 
-    box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.2);
 
-    animation: popup 0.3s ease;
+    animation: popMessage 0.25s ease;
 }
 
-@keyframes popup {
+@keyframes popMessage {
 
     from {
-        opacity: 0;
         transform: scale(0.9);
+        opacity: 0;
     }
 
     to {
-        opacity: 1;
         transform: scale(1);
+        opacity: 1;
     }
+
+}
+
+#messageIcon {
+    margin-bottom: 12px;
+
+    font-size: 3.5rem;
+}
+
+#messageTitle {
+    margin-bottom: 8px;
+}
+
+#messageText {
+    color: #687386;
+    line-height: 1.5;
 }
 
 .close-message {
@@ -1500,37 +1309,21 @@ button {
     right: 15px;
 
     border: none;
-
     background: transparent;
 
-    color: #637087;
+    font-size: 1.7rem;
 
-    font-size: 1.6rem;
-}
-
-#messageIcon {
-    margin-bottom: 8px;
-
-    font-size: 3.5rem;
-}
-
-.message-content h3 {
-    font-size: 1.5rem;
-}
-
-.message-content p {
-    margin: 10px 0 20px;
-
-    color: #637087;
+    color: #7b8493;
 }
 
 .message-btn {
+    margin-top: 22px;
+
     min-height: 43px;
 
     padding: 0 25px;
 
     border: none;
-
     border-radius: 10px;
 
     background: #2878e3;
@@ -1545,9 +1338,9 @@ button {
 ===================================================== */
 
 footer {
-    padding: 40px 7%;
+    padding: 35px 7%;
 
-    background: #101827;
+    background: #111827;
 
     color: white;
 
@@ -1555,20 +1348,20 @@ footer {
 }
 
 .footer-logo {
-    margin-bottom: 7px;
+    margin-bottom: 8px;
 
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 900;
 }
 
 footer p {
-    color: #aeb8c8;
+    margin-bottom: 12px;
 
-    margin-bottom: 10px;
+    color: #aeb7c5;
 }
 
 footer small {
-    color: #778397;
+    color: #697487;
 }
 
 
@@ -1576,23 +1369,48 @@ footer small {
    RESPONSIVE
 ===================================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
+
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .navbar nav {
+        position: absolute;
+
+        top: 72px;
+        left: 0;
+        right: 0;
+
+        display: none;
+
+        padding: 20px;
+
+        background: white;
+
+        border-bottom: 1px solid #e5eaf1;
+
+        flex-direction: column;
+    }
+
+    .navbar nav.active {
+        display: flex;
+    }
 
     .hero {
         grid-template-columns: 1fr;
 
         text-align: center;
 
-        padding-top: 60px;
+        padding: 60px 5%;
     }
 
     .hero-content {
         margin: auto;
-    }
-
-    .hero p {
-        margin-left: auto;
-        margin-right: auto;
     }
 
     .hero-buttons {
@@ -1600,117 +1418,43 @@ footer small {
     }
 
     .lingo-area {
-        min-height: 380px;
+        min-height: 340px;
     }
 
+    .course-grid,
     .game-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
     }
 
     .activity-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .crossword {
+        grid-template-columns: repeat(8, 35px);
+    }
+
+    .cross-cell {
+        width: 35px;
+        height: 35px;
     }
 
 }
-
-
-@media (max-width: 700px) {
-
-    .navbar {
-        padding: 13px 5%;
-    }
-
-    .navbar nav {
-        position: absolute;
-
-        top: 100%;
-
-        left: 0;
-
-        width: 100%;
-
-        padding: 15px;
-
-        display: none;
-
-        flex-direction: column;
-
-        background: white;
-
-        border-bottom: 1px solid #e3e9f2;
-
-        box-shadow: 0 10px 20px rgba(23,32,51,0.08);
-    }
-
-    .navbar nav.active {
-        display: flex;
-    }
-
-    .menu-btn {
-        display: block;
-    }
-
-    .hero,
-    .section,
-    .about,
-    .memory-game-section,
-    .correct-word-game,
-    .linguago-challenge {
-        padding-left: 5%;
-        padding-right: 5%;
-    }
-
-    .course-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .game-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .crossword-grid {
-        grid-template-columns: repeat(9, 31px);
-
-        grid-template-rows: repeat(9, 31px);
-    }
-
-    .crossword-cell {
-        width: 31px;
-        height: 31px;
-
-        font-size: 0.75rem;
-    }
-
-    .crossword-box {
-        padding: 15px;
-
-        overflow-x: auto;
-    }
-
-    .crossword-clues {
-        grid-template-columns: 1fr;
-    }
-
-}
-
 
 @media (max-width: 600px) {
 
-    .hero h1 {
-        font-size: 2.5rem;
+    .section {
+        padding: 60px 5%;
     }
 
-    .lingo {
-        transform: scale(0.82);
-    }
-
-    .lingo-bubble {
-        right: 0;
+    .memory-game-section,
+    .correct-word-game,
+    .challenge-section {
+        padding: 50px 5%;
     }
 
     .memory-board {
         grid-template-columns: repeat(3, 1fr);
-
         gap: 9px;
     }
 
@@ -1738,16 +1482,20 @@ footer small {
         grid-template-columns: 1fr;
     }
 
-    .stats {
-        grid-template-columns: 1fr;
+    .challenge-box h2 {
+        font-size: 1.9rem;
     }
 
-    .correct-word-box {
-        padding: 25px 18px;
+    .crossword {
+        grid-template-columns: repeat(8, 32px);
+        gap: 2px;
     }
 
-    .correct-word-box h2 {
-        font-size: 1.5rem;
+    .cross-cell {
+        width: 32px;
+        height: 32px;
+
+        font-size: 0.8rem;
     }
 
 }
