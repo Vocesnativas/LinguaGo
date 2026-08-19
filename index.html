@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,37 +8,29 @@
     <title>LinguaGo | Aprende Español e Inglés</title>
 
     <meta name="description"
-          content="LinguaGo: aprende español e inglés mediante cursos, juegos, retos y actividades interactivas.">
+        content="LinguaGo: aprende español e inglés mediante cursos, juegos, retos y actividades interactivas.">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- =====================================================
-     NAVBAR
-===================================================== -->
-
 <header class="navbar">
 
-    <a href="#inicio" class="logo">
+    <div class="logo">
         <span class="logo-icon">🌎</span>
         <span>Lingua<span>Go</span></span>
-    </a>
+    </div>
 
     <nav id="menu">
-
         <a href="#inicio">Inicio</a>
         <a href="#cursos">Cursos</a>
         <a href="#juegos">Juegos</a>
         <a href="#actividades">Actividades</a>
         <a href="#nosotros">Nosotros</a>
-
     </nav>
 
-    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
-        ☰
-    </button>
+    <button class="menu-btn" id="menuBtn">☰</button>
 
 </header>
 
@@ -45,31 +38,30 @@
 <main>
 
 <!-- =====================================================
-     HERO
+     INICIO
 ===================================================== -->
 
 <section class="hero" id="inicio">
 
     <div class="hero-content">
 
-        <span class="etiqueta">
-            🌎 APRENDE • JUEGA • AVANZA
-        </span>
+        <span class="etiqueta">🌎 APRENDE SIN LÍMITES</span>
 
         <h1>
-            El idioma se aprende
-            <span>jugando.</span>
+            Aprende <span>Español</span> e
+            <strong>Inglés</strong>
+            de forma divertida
         </h1>
 
         <p>
-            Descubre Español e Inglés con cursos,
-            juegos, retos y actividades interactivas.
+            Aprende idiomas jugando, superando retos
+            y realizando actividades interactivas.
         </p>
 
         <div class="hero-buttons">
 
             <a href="#cursos" class="btn btn-primary">
-                📚 Explorar cursos
+                📚 Ver cursos
             </a>
 
             <a href="#juegos" class="btn btn-secondary">
@@ -78,40 +70,14 @@
 
         </div>
 
-        <div class="hero-mini">
-
-            <div>
-                <strong>2</strong>
-                <span>Idiomas</span>
-            </div>
-
-            <div>
-                <strong>3</strong>
-                <span>Juegos</span>
-            </div>
-
-            <div>
-                <strong>∞</strong>
-                <span>Retos</span>
-            </div>
-
-        </div>
-
     </div>
 
-
-    <!-- LINGO -->
 
     <div class="lingo-area">
 
         <div class="lingo-bubble">
-
             <span>¡Hola!</span>
-
-            <small>
-                Soy Lingo 👋
-            </small>
-
+            <small>Soy Lingo 👋</small>
         </div>
 
 
@@ -140,12 +106,11 @@
             <div class="body">
 
                 <div class="arm arm-left"></div>
+                <div class="arm arm-right"></div>
 
                 <div class="shirt">
                     LG
                 </div>
-
-                <div class="arm arm-right"></div>
 
             </div>
 
@@ -163,6 +128,7 @@
 </section>
 
 
+
 <!-- =====================================================
      CURSOS
 ===================================================== -->
@@ -173,9 +139,7 @@
 
         <span>📚 APRENDE</span>
 
-        <h2>
-            Elige tu camino
-        </h2>
+        <h2>Nuestros cursos</h2>
 
         <p>
             Aprende paso a paso y avanza a tu propio ritmo.
@@ -186,25 +150,13 @@
 
     <div class="course-grid">
 
-        <!-- ESPAÑOL -->
+        <article class="course-card">
 
-        <article class="course-card spanish-card">
-
-            <div class="course-top">
-
-                <div class="course-icon">
-                    🇪🇸
-                </div>
-
-                <span class="course-level">
-                    NIVEL INICIAL
-                </span>
-
+            <div class="course-icon">
+                🇪🇸
             </div>
 
-            <h3>
-                Español
-            </h3>
+            <h3>Español</h3>
 
             <p>
                 Lectura, escritura, vocabulario,
@@ -212,9 +164,7 @@
             </p>
 
             <div class="progress">
-
                 <span style="width:70%"></span>
-
             </div>
 
             <small>
@@ -225,32 +175,20 @@
                 class="card-btn"
                 data-course="Español">
 
-                Comenzar 🇪🇸
+                Comenzar
 
             </button>
 
         </article>
 
 
-        <!-- INGLÉS -->
+        <article class="course-card">
 
-        <article class="course-card english-card">
-
-            <div class="course-top">
-
-                <div class="course-icon">
-                    🇬🇧
-                </div>
-
-                <span class="course-level">
-                    BEGINNER
-                </span>
-
+            <div class="course-icon">
+                🇬🇧
             </div>
 
-            <h3>
-                English
-            </h3>
+            <h3>English</h3>
 
             <p>
                 Vocabulary, pronunciation,
@@ -258,20 +196,18 @@
             </p>
 
             <div class="progress">
-
                 <span style="width:55%"></span>
-
             </div>
 
             <small>
-                Complete course
+                Curso completo
             </small>
 
             <button
                 class="card-btn"
                 data-course="Inglés">
 
-                Start 🇬🇧
+                Start
 
             </button>
 
@@ -280,6 +216,7 @@
     </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -292,9 +229,7 @@
 
         <span>🎮 DIVIÉRTETE</span>
 
-        <h2>
-            Juegos educativos
-        </h2>
+        <h2>Juegos educativos</h2>
 
         <p>
             Aprende mientras juegas y supera nuevos retos.
@@ -308,11 +243,7 @@
 
         <!-- MEMORIA -->
 
-        <article class="game-card game-memory">
-
-            <div class="game-number">
-                01
-            </div>
+        <article class="game-card">
 
             <div class="game-icon">
                 🧠
@@ -323,12 +254,9 @@
             </h3>
 
             <p>
-                Encuentra las parejas Español ↔ Inglés.
+                Encuentra las parejas
+                Español ↔ Inglés.
             </p>
-
-            <div class="game-tag">
-                🟢 LISTO PARA JUGAR
-            </div>
 
             <button
                 class="game-btn"
@@ -342,13 +270,10 @@
         </article>
 
 
+
         <!-- PALABRA CORRECTA -->
 
-        <article class="game-card game-word">
-
-            <div class="game-number">
-                02
-            </div>
+        <article class="game-card">
 
             <div class="game-icon">
                 🔤
@@ -359,12 +284,9 @@
             </h3>
 
             <p>
-                Escoge la palabra que completa cada reto.
+                Escoge la palabra que
+                completa cada reto.
             </p>
-
-            <div class="game-tag">
-                🟢 LISTO PARA JUGAR
-            </div>
 
             <button
                 class="game-btn"
@@ -377,13 +299,10 @@
         </article>
 
 
+
         <!-- RETO LINGUAGO -->
 
-        <article class="game-card game-crossword">
-
-            <div class="game-number">
-                03
-            </div>
+        <article class="game-card">
 
             <div class="game-icon">
                 🧩
@@ -394,16 +313,12 @@
             </h3>
 
             <p>
-                Resuelve el crucigrama y demuestra cuánto sabes.
+                Resuelve el crucigrama
+                y demuestra cuánto sabes.
             </p>
-
-            <div class="game-tag">
-                🟢 NUEVO RETO
-            </div>
 
             <button
                 class="game-btn"
-                id="crosswordGameBtn"
                 data-game="Reto LinguaGo">
 
                 🧩 Jugar
@@ -415,6 +330,7 @@
     </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -436,7 +352,8 @@
         </h2>
 
         <p>
-            Une cada palabra en español con su equivalente en inglés.
+            Une cada palabra en español
+            con su equivalente en inglés.
         </p>
 
     </div>
@@ -445,7 +362,6 @@
     <div class="memory-info">
 
         <div>
-
             <strong id="memoryScore">
                 0
             </strong>
@@ -453,12 +369,10 @@
             <span>
                 Puntos
             </span>
-
         </div>
 
 
         <div>
-
             <strong id="memoryAttempts">
                 0
             </strong>
@@ -466,12 +380,10 @@
             <span>
                 Intentos
             </span>
-
         </div>
 
 
         <div>
-
             <strong id="memoryPairs">
                 0/6
             </strong>
@@ -479,7 +391,6 @@
             <span>
                 Parejas
             </span>
-
         </div>
 
     </div>
@@ -515,6 +426,7 @@
 </section>
 
 
+
 <!-- =====================================================
      PALABRA CORRECTA
 ===================================================== -->
@@ -526,32 +438,34 @@
 </section>
 
 
+
 <!-- =====================================================
      RETO LINGUAGO - CRUCIGRAMA
 ===================================================== -->
 
 <section
-    class="crossword-section"
-    id="crosswordGame">
+    class="linguago-challenge"
+    id="linguaGoChallenge">
 
-    <div class="crossword-header">
+    <div class="challenge-header">
 
         <span>
             🧩 RETO LINGUAGO
         </span>
 
         <h2>
-            El crucigrama de los idiomas
+            El gran crucigrama
         </h2>
 
         <p>
-            Completa las palabras y demuestra cuánto sabes.
+            Completa las palabras y demuestra
+            cuánto sabes de Español e Inglés.
         </p>
 
     </div>
 
 
-    <div class="crossword-info">
+    <div class="challenge-info">
 
         <div>
             <strong id="crosswordScore">
@@ -566,7 +480,7 @@
 
         <div>
             <strong id="crosswordProgress">
-                0/6
+                0/8
             </strong>
 
             <span>
@@ -577,184 +491,76 @@
     </div>
 
 
-    <div class="crossword-layout">
+    <div class="crossword-box">
 
 
-        <div class="crossword-board">
+        <div class="crossword-board"
+             id="crosswordBoard">
 
-            <div class="cross-cell black"></div>
-            <div class="cross-cell black"></div>
-            <div class="cross-cell" data-word="1"></div>
-            <div class="cross-cell" data-word="1"></div>
-            <div class="cross-cell" data-word="1"></div>
-            <div class="cross-cell black"></div>
-
-
-            <div class="cross-cell" data-word="2"></div>
-            <div class="cross-cell" data-word="2"></div>
-            <div class="cross-cell" data-word="2"></div>
-            <div class="cross-cell black"></div>
-            <div class="cross-cell black"></div>
-            <div class="cross-cell black"></div>
-
-
-            <div class="cross-cell black"></div>
-            <div class="cross-cell" data-word="3"></div>
-            <div class="cross-cell" data-word="3"></div>
-            <div class="cross-cell" data-word="3"></div>
-            <div class="cross-cell" data-word="3"></div>
-            <div class="cross-cell black"></div>
-
-
-            <div class="cross-cell" data-word="4"></div>
-            <div class="cross-cell" data-word="4"></div>
-            <div class="cross-cell" data-word="4"></div>
-            <div class="cross-cell black"></div>
-            <div class="cross-cell black"></div>
-            <div class="cross-cell black"></div>
-
-
-            <div class="cross-cell black"></div>
-            <div class="cross-cell" data-word="5"></div>
-            <div class="cross-cell" data-word="5"></div>
-            <div class="cross-cell" data-word="5"></div>
-            <div class="cross-cell" data-word="5"></div>
-            <div class="cross-cell" data-word="5"></div>
-
-
-            <div class="cross-cell black"></div>
-            <div class="cross-cell black"></div>
-            <div class="cross-cell" data-word="6"></div>
-            <div class="cross-cell" data-word="6"></div>
-            <div class="cross-cell" data-word="6"></div>
-            <div class="cross-cell" data-word="6"></div>
+            <!--
+                El tablero será construido
+                automáticamente por JavaScript.
+            -->
 
         </div>
 
 
         <div class="crossword-clues">
 
-            <h3>
-                💡 Pistas
-            </h3>
+            <div class="clue-column">
 
+                <h3>
+                    🇪🇸 Español → Inglés
+                </h3>
 
-            <div class="clue">
+                <ol>
 
-                <span>
-                    1 →
-                </span>
+                    <li>
+                        Casa
+                    </li>
 
-                <p>
-                    🏠 Lugar donde vivimos.
-                </p>
+                    <li>
+                        Perro
+                    </li>
 
-                <input
-                    type="text"
-                    maxlength="5"
-                    data-answer="casa"
-                    data-word-id="1"
-                    placeholder="____">
+                    <li>
+                        Libro
+                    </li>
 
-            </div>
+                    <li>
+                        Agua
+                    </li>
 
-
-            <div class="clue">
-
-                <span>
-                    2 →
-                </span>
-
-                <p>
-                    🐶 Animal que dice "guau".
-                </p>
-
-                <input
-                    type="text"
-                    maxlength="4"
-                    data-answer="dog"
-                    data-word-id="2"
-                    placeholder="___">
+                </ol>
 
             </div>
 
 
-            <div class="clue">
+            <div class="clue-column">
 
-                <span>
-                    3 →
-                </span>
+                <h3>
+                    🇬🇧 Inglés → Español
+                </h3>
 
-                <p>
-                    📚 Objeto que usamos para leer.
-                </p>
+                <ol>
 
-                <input
-                    type="text"
-                    maxlength="5"
-                    data-answer="libro"
-                    data-word-id="3"
-                    placeholder="_____">
+                    <li>
+                        Sun
+                    </li>
 
-            </div>
+                    <li>
+                        Friend
+                    </li>
 
+                    <li>
+                        School
+                    </li>
 
-            <div class="clue">
+                    <li>
+                        Tree
+                    </li>
 
-                <span>
-                    4 →
-                </span>
-
-                <p>
-                    💧 La bebemos todos los días.
-                </p>
-
-                <input
-                    type="text"
-                    maxlength="4"
-                    data-answer="agua"
-                    data-word-id="4"
-                    placeholder="____">
-
-            </div>
-
-
-            <div class="clue">
-
-                <span>
-                    5 →
-                </span>
-
-                <p>
-                    ☀️ Nos da luz durante el día.
-                </p>
-
-                <input
-                    type="text"
-                    maxlength="3"
-                    data-answer="sol"
-                    data-word-id="5"
-                    placeholder="___">
-
-            </div>
-
-
-            <div class="clue">
-
-                <span>
-                    6 →
-                </span>
-
-                <p>
-                    🧑 Persona que queremos y nos acompaña.
-                </p>
-
-                <input
-                    type="text"
-                    maxlength="5"
-                    data-answer="amigo"
-                    data-word-id="6"
-                    placeholder="_____">
+                </ol>
 
             </div>
 
@@ -763,11 +569,11 @@
     </div>
 
 
-    <div class="crossword-controls">
+    <div class="challenge-controls">
 
         <button
             id="checkCrossword"
-            class="crossword-check">
+            class="challenge-check">
 
             ✅ Comprobar
 
@@ -776,7 +582,7 @@
 
         <button
             id="restartCrossword"
-            class="crossword-restart">
+            class="challenge-restart">
 
             🔄 Nuevo reto
 
@@ -785,7 +591,7 @@
 
         <button
             id="closeCrossword"
-            class="crossword-close">
+            class="challenge-close">
 
             ✕ Cerrar
 
@@ -794,6 +600,7 @@
     </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -815,7 +622,8 @@
         </h2>
 
         <p>
-            Fortalece tus conocimientos con ejercicios entretenidos.
+            Fortalece tus conocimientos con
+            ejercicios entretenidos.
         </p>
 
     </div>
@@ -835,7 +643,8 @@
             </h3>
 
             <p>
-                Comprende textos y descubre nuevas palabras.
+                Comprende textos y descubre
+                nuevas palabras.
             </p>
 
         </div>
@@ -852,7 +661,8 @@
             </h3>
 
             <p>
-                Practica frases y construye tus propios textos.
+                Practica frases y construye
+                tus propios textos.
             </p>
 
         </div>
@@ -886,7 +696,8 @@
             </h3>
 
             <p>
-                Aprende expresiones para comunicarte.
+                Aprende expresiones para
+                comunicarte.
             </p>
 
         </div>
@@ -894,6 +705,7 @@
     </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -911,17 +723,19 @@
         </span>
 
         <h2>
-            Aprender un idioma puede ser una aventura
+            Aprender un idioma
+            puede ser una aventura
         </h2>
 
         <p>
-            LinguaGo combina educación, tecnología y diversión
-            para crear una experiencia sencilla, dinámica y motivadora.
+            LinguaGo combina educación,
+            tecnología y diversión para
+            crear una experiencia sencilla,
+            dinámica y motivadora.
         </p>
 
 
         <div class="stats">
-
 
             <div>
 
@@ -970,6 +784,7 @@
 </main>
 
 
+
 <!-- =====================================================
      MENSAJE
 ===================================================== -->
@@ -979,6 +794,7 @@
     id="messageBox">
 
     <div class="message-content">
+
 
         <button
             class="close-message"
@@ -1017,6 +833,7 @@
 </div>
 
 
+
 <!-- =====================================================
      FOOTER
 ===================================================== -->
@@ -1028,17 +845,21 @@
     </div>
 
     <p>
-        Aprende Español e Inglés de una manera diferente.
+        Aprende Español e Inglés
+        de una manera diferente.
     </p>
 
     <small>
-        © 2026 LinguaGo. Proyecto educativo.
+        © 2026 LinguaGo.
+        Proyecto educativo.
     </small>
 
 </footer>
 
 
+
 <script src="script.js"></script>
 
 </body>
+
 </html>
