@@ -7,7 +7,7 @@
     <title>LinguaGo | Aprende Español e Inglés</title>
 
     <meta name="description"
-          content="LinguaGo: aprende español e inglés mediante cursos, juegos y actividades interactivas.">
+          content="LinguaGo: aprende español e inglés mediante cursos, juegos, retos y actividades interactivas.">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,7 +15,7 @@
 <body>
 
 <!-- =====================================================
-     NAVEGACIÓN
+     NAVBAR
 ===================================================== -->
 
 <header class="navbar">
@@ -38,10 +38,14 @@
 </header>
 
 
+<!-- =====================================================
+     CONTENIDO PRINCIPAL
+===================================================== -->
+
 <main>
 
 <!-- =====================================================
-     PORTADA
+     HERO
 ===================================================== -->
 
 <section class="hero" id="inicio">
@@ -49,20 +53,18 @@
     <div class="hero-content">
 
         <span class="etiqueta">
-            🌎 APRENDE SIN LÍMITES
+            🌎 Aprende sin límites
         </span>
 
         <h1>
-            Aprende
-            <span>Español</span>
-            e
+            Aprende <span>Español</span> e
             <strong>Inglés</strong>
             de forma divertida
         </h1>
 
         <p>
-            Aprende idiomas mediante cursos,
-            juegos, retos y actividades interactivas.
+            Aprende idiomas mediante cursos, juegos,
+            retos y actividades interactivas.
         </p>
 
         <div class="hero-buttons">
@@ -85,8 +87,13 @@
     <div class="lingo-area">
 
         <div class="lingo-bubble">
+
             <span>¡Hola!</span>
-            <small>Soy Lingo 👋</small>
+
+            <small>
+                Soy Lingo 👋
+            </small>
+
         </div>
 
 
@@ -106,6 +113,7 @@
                 </div>
 
                 <div class="nose"></div>
+
                 <div class="mouth"></div>
 
             </div>
@@ -127,7 +135,6 @@
             <div class="foot foot-right"></div>
 
         </div>
-
 
         <div class="lingo-shadow"></div>
 
@@ -157,6 +164,7 @@
 
     <div class="course-grid">
 
+        <!-- ESPAÑOL -->
 
         <article class="course-card">
 
@@ -191,6 +199,8 @@
 
         </article>
 
+
+        <!-- INGLÉS -->
 
         <article class="course-card">
 
@@ -253,7 +263,6 @@
 
     <div class="game-grid">
 
-
         <!-- MEMORIA -->
 
         <article class="game-card">
@@ -267,8 +276,7 @@
             </h3>
 
             <p>
-                Encuentra las parejas
-                Español ↔ Inglés.
+                Encuentra las parejas Español ↔ Inglés.
             </p>
 
             <button
@@ -296,8 +304,7 @@
             </h3>
 
             <p>
-                Escoge la palabra que
-                completa cada reto.
+                Escoge la palabra que completa cada reto.
             </p>
 
             <button
@@ -312,7 +319,7 @@
         </article>
 
 
-        <!-- CRUCIGRAMA -->
+        <!-- RETO LINGUAGO -->
 
         <article class="game-card">
 
@@ -325,13 +332,12 @@
             </h3>
 
             <p>
-                Completa el crucigrama
-                bilingüe y consigue puntos.
+                Resuelve un divertido crucigrama bilingüe.
             </p>
 
             <button
                 class="game-btn"
-                id="crosswordGameBtn"
+                id="linguaGoChallengeBtn"
                 data-game="Reto LinguaGo">
 
                 🧩 Jugar
@@ -364,8 +370,8 @@
         </h2>
 
         <p>
-            Une cada palabra en español
-            con su equivalente en inglés.
+            Une cada palabra en español con
+            su equivalente en inglés.
         </p>
 
     </div>
@@ -445,6 +451,167 @@
 
 
 <!-- =====================================================
+     PALABRA CORRECTA
+===================================================== -->
+
+<section
+    class="correct-word-game"
+    id="correctWordGame">
+
+    <div class="correct-word-box">
+
+        <span class="correct-label">
+            🔤 PALABRA CORRECTA
+        </span>
+
+        <h2>
+            ¡Elige la respuesta correcta!
+        </h2>
+
+        <p>
+            Pon a prueba tu vocabulario.
+        </p>
+
+        <div
+            class="correct-progress"
+            id="correctProgress">
+        </div>
+
+        <div
+            class="correct-question"
+            id="correctQuestion">
+        </div>
+
+        <div
+            class="correct-options"
+            id="correctOptions">
+        </div>
+
+        <div class="correct-score">
+
+            ⭐ Puntos:
+
+            <strong id="correctScore">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RETO LINGUAGO - CRUCIGRAMA
+===================================================== -->
+
+<section
+    class="linguago-challenge"
+    id="linguaGoChallenge">
+
+    <div class="challenge-header">
+
+        <span>
+            🧩 RETO LINGUAGO
+        </span>
+
+        <h2>
+            ¡Crucigrama bilingüe!
+        </h2>
+
+        <p>
+            Completa las palabras usando las pistas.
+        </p>
+
+    </div>
+
+
+    <div class="challenge-info">
+
+        <div>
+
+            <strong id="crosswordScore">
+                0
+            </strong>
+
+            <span>
+                Puntos
+            </span>
+
+        </div>
+
+        <div>
+
+            <strong id="crosswordProgress">
+                0/6
+            </strong>
+
+            <span>
+                Palabras
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="crossword-container">
+
+        <div
+            class="crossword-board"
+            id="crosswordBoard">
+        </div>
+
+
+        <div class="crossword-clues">
+
+            <h3>
+                💡 Pistas
+            </h3>
+
+            <div id="crosswordClues">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="challenge-controls">
+
+        <button
+            id="checkCrossword"
+            class="challenge-check">
+
+            ✅ Comprobar
+
+        </button>
+
+
+        <button
+            id="restartCrossword"
+            class="challenge-restart">
+
+            🔄 Nuevo reto
+
+        </button>
+
+
+        <button
+            id="closeCrossword"
+            class="challenge-close">
+
+            ✕ Cerrar
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
      ACTIVIDADES
 ===================================================== -->
 
@@ -463,8 +630,7 @@
         </h2>
 
         <p>
-            Fortalece tus conocimientos
-            con ejercicios entretenidos.
+            Fortalece tus conocimientos con ejercicios entretenidos.
         </p>
 
     </div>
@@ -472,20 +638,16 @@
 
     <div class="activity-grid">
 
-
         <div class="activity">
 
-            <span>
-                📖
-            </span>
+            <span>📖</span>
 
             <h3>
                 Lectura
             </h3>
 
             <p>
-                Comprende textos y descubre
-                nuevas palabras.
+                Comprende textos y descubre nuevas palabras.
             </p>
 
         </div>
@@ -493,17 +655,14 @@
 
         <div class="activity">
 
-            <span>
-                ✍️
-            </span>
+            <span>✍️</span>
 
             <h3>
                 Escritura
             </h3>
 
             <p>
-                Practica frases y construye
-                tus propios textos.
+                Practica frases y construye tus propios textos.
             </p>
 
         </div>
@@ -511,9 +670,7 @@
 
         <div class="activity">
 
-            <span>
-                🎧
-            </span>
+            <span>🎧</span>
 
             <h3>
                 Escucha
@@ -528,9 +685,7 @@
 
         <div class="activity">
 
-            <span>
-                🗣️
-            </span>
+            <span>🗣️</span>
 
             <h3>
                 Habla
@@ -562,19 +717,16 @@
         </span>
 
         <h2>
-            Aprender un idioma
-            puede ser una aventura
+            Aprender un idioma puede ser una aventura
         </h2>
 
         <p>
-            LinguaGo combina educación,
-            tecnología y diversión para crear
-            una experiencia sencilla y motivadora.
+            LinguaGo combina educación, tecnología y diversión
+            para crear una experiencia sencilla y motivadora.
         </p>
 
 
         <div class="stats">
-
 
             <div>
 
@@ -614,7 +766,6 @@
 
             </div>
 
-
         </div>
 
     </div>
@@ -625,7 +776,7 @@
 
 
 <!-- =====================================================
-     MENSAJE
+     MENSAJE MODAL
 ===================================================== -->
 
 <div
@@ -633,7 +784,6 @@
     id="messageBox">
 
     <div class="message-content">
-
 
         <button
             class="close-message"
@@ -673,7 +823,7 @@
 
 
 <!-- =====================================================
-     PIE DE PÁGINA
+     FOOTER
 ===================================================== -->
 
 <footer>
@@ -683,8 +833,7 @@
     </div>
 
     <p>
-        Aprende Español e Inglés
-        de una manera diferente.
+        Aprende Español e Inglés de una manera diferente.
     </p>
 
     <small>
