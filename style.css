@@ -2105,3 +2105,215 @@ footer small {
     }
 
 }
+/* =====================================================
+   LINGUAGO - PORTADA DINÁMICA
+===================================================== */
+
+/* 🌎 TIERRA / LOGO */
+
+.logo-tierra,
+.hero-logo,
+.earth-logo {
+    animation:
+        tierraFlotando 4s ease-in-out infinite,
+        tierraEntrada 1s ease-out;
+    transform-origin: center;
+}
+
+@keyframes tierraFlotando {
+
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(3deg);
+    }
+
+}
+
+@keyframes tierraEntrada {
+
+    from {
+        opacity: 0;
+        transform: scale(.75);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* =====================================================
+   TÍTULO PRINCIPAL
+===================================================== */
+
+.hero h1 {
+
+    animation:
+        tituloEntrada 1s ease-out,
+        tituloFlotando 4s ease-in-out 1s infinite;
+
+    text-shadow:
+        0 4px 18px rgba(40,120,227,.25);
+
+    letter-spacing: .5px;
+}
+
+
+/* ENTRADA DEL TÍTULO */
+
+@keyframes tituloEntrada {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* MOVIMIENTO SUAVE */
+
+@keyframes tituloFlotando {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+}
+
+
+/* =====================================================
+   TEXTO DE LA PORTADA
+===================================================== */
+
+.hero p {
+
+    animation:
+        textoEntrada 1s ease-out .25s both;
+
+}
+
+@keyframes textoEntrada {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =====================================================
+   BOTONES PRINCIPALES
+===================================================== */
+
+.hero .btn,
+.hero a {
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+.hero .btn:hover,
+.hero a:hover {
+
+    transform: translateY(-4px) scale(1.03);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.15);
+
+}
+
+
+/* =====================================================
+   EFECTO DE VIDA EN LA PORTADA
+===================================================== */
+
+.hero {
+
+    overflow: hidden;
+}
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.18),
+            transparent 70%
+        );
+
+    top: 10%;
+    right: -80px;
+
+    animation:
+        luzFlotante 7s ease-in-out infinite;
+
+    pointer-events: none;
+
+}
+
+@keyframes luzFlotante {
+
+    0%, 100% {
+        transform: translateY(0);
+        opacity: .4;
+    }
+
+    50% {
+        transform: translateY(35px);
+        opacity: .7;
+    }
+
+}
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .hero h1 {
+        animation:
+            tituloEntrada 1s ease-out;
+    }
+
+    .logo-tierra,
+    .hero-logo,
+    .earth-logo {
+        animation:
+            tierraFlotando 4s ease-in-out infinite;
+    }
+
+}
