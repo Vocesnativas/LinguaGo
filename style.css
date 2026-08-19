@@ -1947,3 +1947,161 @@ footer small {
     }
 
 }
+/* =====================================================
+   LINGUAGO - AJUSTE FINAL PARA CELULAR
+===================================================== */
+
+@media (max-width: 600px) {
+
+    /* CONTENIDO GENERAL */
+
+    body {
+        overflow-x: hidden;
+    }
+
+    section {
+        width: 100%;
+    }
+
+
+    /* TÍTULOS */
+
+    h1 {
+        font-size: 2rem;
+        line-height: 1.15;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    p {
+        font-size: .92rem;
+    }
+
+
+    /* TARJETAS DE JUEGOS */
+
+    .games-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .games-grid .game-card {
+        width: 100%;
+    }
+
+
+    /* BOTONES */
+
+    .game-btn,
+    .card-btn {
+        width: 100%;
+        min-height: 44px;
+    }
+
+
+    /* MEMORIA */
+
+    .memory-board {
+        width: 100%;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 7px;
+    }
+
+    .memory-card {
+        height: 90px;
+    }
+
+    .memory-front {
+        font-size: 1.3rem;
+    }
+
+    .memory-back {
+        font-size: .75rem;
+        padding: 4px;
+    }
+
+
+    /* PALABRA CORRECTA */
+
+    .correct-word-game {
+        padding: 35px 5%;
+    }
+
+    .correct-word-box {
+        width: 100%;
+        padding: 22px 15px;
+    }
+
+    .correct-options {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .correct-option {
+        min-height: 48px;
+    }
+
+
+    /* CRUCIGRAMA */
+
+    #challengeGame {
+        padding: 40px 4%;
+    }
+
+    .challenge-content {
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    #crossword {
+        width: 100%;
+        max-width: 390px;
+        margin: auto;
+
+        gap: 2px;
+        padding: 5px;
+    }
+
+    .cross-cell {
+        font-size: .85rem;
+        border-radius: 3px;
+    }
+
+    #clues {
+        width: 100%;
+        padding: 16px;
+    }
+
+
+    /* INFORMACIÓN DE JUEGOS */
+
+    .memory-info,
+    .challenge-info {
+        width: 100%;
+        gap: 8px;
+    }
+
+    .memory-info div,
+    .challenge-info div {
+        padding: 10px 5px;
+    }
+
+
+    /* CONTROLES */
+
+    .memory-controls,
+    .challenge-controls {
+        width: 100%;
+    }
+
+    .memory-restart,
+    .memory-close,
+    #restartChallenge,
+    #closeChallenge {
+        flex: 1;
+        min-width: 130px;
+    }
+
+}
