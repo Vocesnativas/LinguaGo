@@ -1,6 +1,7 @@
 /* =====================================================
    LINGUAGO
    ESTILOS GENERALES
+   Versión unificada y optimizada
 ===================================================== */
 
 * {
@@ -17,6 +18,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background: #f5f8fc;
     color: #172033;
+    overflow-x: hidden;
 }
 
 button,
@@ -42,14 +44,14 @@ a {
     top: 0;
     z-index: 1000;
 
-    height: 72px;
+    min-height: 72px;
     padding: 0 7%;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    background: rgba(255,255,255,0.96);
+    background: rgba(255, 255, 255, 0.96);
     border-bottom: 1px solid #e8edf4;
 
     backdrop-filter: blur(12px);
@@ -59,6 +61,8 @@ a {
     display: flex;
     align-items: center;
     gap: 8px;
+
+    color: #172033;
 
     font-size: 1.35rem;
     font-weight: 900;
@@ -80,9 +84,11 @@ a {
 
 .navbar nav a {
     color: #4b5565;
+
     font-size: 0.9rem;
     font-weight: 700;
-    transition: 0.2s;
+
+    transition: color 0.2s ease;
 }
 
 .navbar nav a:hover {
@@ -95,6 +101,8 @@ a {
     border: none;
     background: transparent;
 
+    color: #172033;
+
     font-size: 1.5rem;
 }
 
@@ -104,6 +112,9 @@ a {
 ===================================================== */
 
 .hero {
+    position: relative;
+    overflow: hidden;
+
     min-height: 610px;
     padding: 80px 8%;
 
@@ -118,6 +129,9 @@ a {
 }
 
 .hero-content {
+    position: relative;
+    z-index: 2;
+
     max-width: 650px;
 }
 
@@ -141,6 +155,13 @@ a {
 
     font-size: clamp(2.5rem, 6vw, 4.8rem);
     line-height: 1.02;
+    letter-spacing: 0.5px;
+
+    text-shadow: 0 4px 18px rgba(40, 120, 227, 0.25);
+
+    animation:
+        tituloEntrada 1s ease-out,
+        tituloFlotando 4s ease-in-out 1s infinite;
 }
 
 .hero h1 span {
@@ -160,6 +181,8 @@ a {
 
     font-size: 1.08rem;
     line-height: 1.7;
+
+    animation: textoEntrada 1s ease-out 0.25s both;
 }
 
 .hero-buttons {
@@ -180,7 +203,9 @@ a {
 
     font-weight: 800;
 
-    transition: 0.2s;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .btn:hover {
@@ -190,13 +215,93 @@ a {
 .btn-primary {
     background: #2878e3;
     color: white;
-    box-shadow: 0 10px 25px rgba(40,120,227,0.25);
+
+    box-shadow: 0 10px 25px rgba(40, 120, 227, 0.25);
 }
 
 .btn-secondary {
     background: white;
     color: #172033;
+
     border: 1px solid #dce3ed;
+}
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    top: 10%;
+    right: -80px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.18),
+            transparent 70%
+        );
+
+    animation: luzFlotante 7s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   ANIMACIONES PORTADA
+===================================================== */
+
+@keyframes tituloEntrada {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes tituloFlotando {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes textoEntrada {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes luzFlotante {
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translateY(35px);
+        opacity: 0.7;
+    }
 }
 
 
@@ -218,15 +323,14 @@ a {
     position: absolute;
     top: 15px;
     right: 10%;
+    z-index: 3;
 
     padding: 13px 18px;
 
     background: white;
     border-radius: 18px;
 
-    box-shadow: 0 15px 40px rgba(23,32,51,0.12);
-
-    z-index: 3;
+    box-shadow: 0 15px 40px rgba(23, 32, 51, 0.12);
 }
 
 .lingo-bubble span,
@@ -235,8 +339,8 @@ a {
 }
 
 .lingo-bubble span {
-    font-weight: 900;
     color: #2878e3;
+    font-weight: 900;
 }
 
 .lingo-bubble small {
@@ -255,35 +359,33 @@ a {
 
 .head {
     position: absolute;
-    z-index: 4;
-
     top: 25px;
     left: 25px;
+    z-index: 4;
 
     width: 160px;
     height: 150px;
 
+    border: 6px solid #f07b52;
     border-radius: 48% 48% 45% 45%;
 
     background: #ff9a75;
-    border: 6px solid #f07b52;
 
-    box-shadow: inset -12px -10px 0 rgba(0,0,0,0.06);
+    box-shadow: inset -12px -10px 0 rgba(0, 0, 0, 0.06);
 }
 
 .ear {
     position: absolute;
-    z-index: 1;
-
     top: 15px;
+    z-index: 1;
 
     width: 65px;
     height: 75px;
 
-    background: #ff9a75;
     border: 6px solid #f07b52;
-
     border-radius: 70% 30% 60% 40%;
+
+    background: #ff9a75;
 }
 
 .ear-left {
@@ -298,7 +400,6 @@ a {
 
 .eye {
     position: absolute;
-
     top: 57px;
 
     width: 24px;
@@ -319,7 +420,6 @@ a {
 
 .eye span {
     position: absolute;
-
     top: 5px;
     left: 6px;
 
@@ -327,14 +427,14 @@ a {
     height: 8px;
 
     border-radius: 50%;
+
     background: white;
 }
 
 .nose {
     position: absolute;
-
-    left: 67px;
     top: 88px;
+    left: 67px;
 
     width: 27px;
     height: 21px;
@@ -346,9 +446,8 @@ a {
 
 .mouth {
     position: absolute;
-
-    left: 66px;
     top: 112px;
+    left: 66px;
 
     width: 30px;
     height: 15px;
@@ -359,7 +458,6 @@ a {
 
 .body {
     position: absolute;
-
     top: 150px;
     left: 38px;
 
@@ -373,9 +471,8 @@ a {
 
 .shirt {
     position: absolute;
-
-    left: 48px;
     top: 30px;
+    left: 48px;
 
     color: white;
 
@@ -385,7 +482,6 @@ a {
 
 .arm {
     position: absolute;
-
     top: 20px;
 
     width: 28px;
@@ -408,7 +504,6 @@ a {
 
 .foot {
     position: absolute;
-
     top: 255px;
 
     width: 65px;
@@ -429,7 +524,6 @@ a {
 
 .lingo-shadow {
     position: absolute;
-
     bottom: 15px;
 
     width: 220px;
@@ -437,7 +531,44 @@ a {
 
     border-radius: 50%;
 
-    background: rgba(23,32,51,0.12);
+    background: rgba(23, 32, 51, 0.12);
+}
+
+
+/* =====================================================
+   ANIMACIÓN TIERRA / LOGO
+===================================================== */
+
+.logo-tierra,
+.hero-logo,
+.earth-logo {
+    animation:
+        tierraFlotando 4s ease-in-out infinite,
+        tierraEntrada 1s ease-out;
+    transform-origin: center;
+}
+
+@keyframes tierraFlotando {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(3deg);
+    }
+}
+
+@keyframes tierraEntrada {
+    from {
+        opacity: 0;
+        transform: scale(0.75);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 
@@ -473,6 +604,7 @@ a {
 
 .section-title p {
     color: #697487;
+
     line-height: 1.6;
 }
 
@@ -499,18 +631,23 @@ a {
     border: 1px solid #e4eaf2;
     border-radius: 22px;
 
-    box-shadow: 0 15px 45px rgba(23,32,51,0.06);
+    box-shadow: 0 15px 45px rgba(23, 32, 51, 0.06);
 
-    transition: 0.25s;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .course-card:hover {
     transform: translateY(-6px);
+
+    box-shadow: 0 20px 50px rgba(23, 32, 51, 0.1);
 }
 
 .course-icon {
-    font-size: 2.7rem;
     margin-bottom: 15px;
+
+    font-size: 2.7rem;
 }
 
 .course-card h3 {
@@ -523,6 +660,7 @@ a {
     min-height: 55px;
 
     color: #687386;
+
     line-height: 1.5;
 }
 
@@ -540,6 +678,7 @@ a {
 
 .progress span {
     display: block;
+
     height: 100%;
 
     border-radius: inherit;
@@ -555,10 +694,9 @@ a {
     display: block;
 
     width: 100%;
+    min-height: 43px;
 
     margin-top: 18px;
-
-    min-height: 43px;
 
     border: none;
     border-radius: 10px;
@@ -567,6 +705,16 @@ a {
     color: white;
 
     font-weight: 800;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.card-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(40, 120, 227, 0.2);
 }
 
 
@@ -578,7 +726,8 @@ a {
     background: #eef5ff;
 }
 
-.game-grid {
+.game-grid,
+.games-grid {
     max-width: 1050px;
 
     margin: auto;
@@ -589,6 +738,9 @@ a {
 }
 
 .game-card {
+    position: relative;
+    overflow: hidden;
+
     padding: 28px;
 
     background: white;
@@ -598,18 +750,56 @@ a {
 
     text-align: center;
 
-    box-shadow: 0 12px 35px rgba(23,32,51,0.06);
+    box-shadow: 0 12px 35px rgba(23, 32, 51, 0.06);
 
-    transition: 0.25s;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+    animation: juegoEntrada 0.5s ease both;
+}
+
+.game-card::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(
+        90deg,
+        #2878e3,
+        #ff7043
+    );
 }
 
 .game-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-7px);
+
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.14);
+}
+
+.game-card:nth-child(2) {
+    animation-delay: 0.08s;
+}
+
+.game-card:nth-child(3) {
+    animation-delay: 0.16s;
 }
 
 .game-icon {
-    font-size: 3rem;
     margin-bottom: 12px;
+
+    font-size: 3rem;
+
+    transition: transform 0.25s ease;
+}
+
+.game-card:hover .game-icon {
+    transform: scale(1.15) rotate(-4deg);
 }
 
 .game-card h3 {
@@ -626,10 +816,9 @@ a {
 
 .game-btn {
     width: 100%;
+    min-height: 44px;
 
     margin-top: 20px;
-
-    min-height: 44px;
 
     border: none;
     border-radius: 10px;
@@ -638,6 +827,28 @@ a {
     color: white;
 
     font-weight: 900;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.game-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes juegoEntrada {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
@@ -659,21 +870,7 @@ a {
 .memory-game-section.active {
     display: block;
 
-    animation: memoryAppear 0.4s ease;
-}
-
-@keyframes memoryAppear {
-
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
+    animation: gameAppear 0.4s ease;
 }
 
 .memory-header {
@@ -713,9 +910,9 @@ a {
 .memory-info div {
     padding: 12px;
 
-    background: rgba(255,255,255,0.07);
+    background: rgba(255, 255, 255, 0.07);
 
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 
     border-radius: 12px;
 }
@@ -803,7 +1000,6 @@ a {
     padding: 8px;
 
     background: white;
-
     color: #172033;
 
     border: 2px solid #ff7043;
@@ -813,6 +1009,7 @@ a {
 
 .memory-card.matched .memory-back {
     background: #dff8e8;
+
     border-color: #3bb273;
 }
 
@@ -843,7 +1040,7 @@ a {
 }
 
 .memory-close {
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 
     background: transparent;
     color: white;
@@ -864,6 +1061,8 @@ a {
 
 .correct-word-game.active {
     display: block;
+
+    animation: gameAppear 0.4s ease;
 }
 
 .correct-word-box {
@@ -876,7 +1075,7 @@ a {
 
     border-radius: 22px;
 
-    box-shadow: 0 15px 50px rgba(23,32,51,0.09);
+    box-shadow: 0 15px 50px rgba(23, 32, 51, 0.09);
 
     text-align: center;
 }
@@ -924,7 +1123,6 @@ a {
     border-radius: 12px;
 
     background: white;
-
     color: #172033;
 
     font-size: 1rem;
@@ -944,6 +1142,7 @@ a {
 
 .correct-option.correct-answer {
     border-color: #3bb273;
+
     background: #dff8e8;
 }
 
@@ -965,22 +1164,38 @@ a {
 
 
 /* =====================================================
-   RETO LINGUAGO
+   RETO LINGUAGO / CRUCIGRAMA
 ===================================================== */
 
-.challenge-section {
+.challenge-section,
+#challengeGame {
     display: none;
 
     padding: 65px 7%;
 
     background: #172033;
     color: white;
+
+    text-align: center;
 }
 
-.challenge-section.active {
+.challenge-section.active,
+#challengeGame.active {
     display: block;
 
-    animation: memoryAppear 0.4s ease;
+    animation: gameAppear 0.4s ease;
+}
+
+@keyframes gameAppear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .challenge-box {
@@ -991,7 +1206,8 @@ a {
     text-align: center;
 }
 
-.challenge-box > span {
+.challenge-box > span,
+#challengeGame .challenge-header span {
     color: #ff9a75;
 
     font-size: 0.8rem;
@@ -999,111 +1215,220 @@ a {
     letter-spacing: 1px;
 }
 
-.challenge-box h2 {
+.challenge-box h2,
+#challengeGame .challenge-header h2 {
     margin: 8px 0;
 
-    font-size: 2.4rem;
+    font-size: clamp(1.9rem, 4vw, 2.5rem);
 }
 
-.challenge-box > p {
+.challenge-box > p,
+#challengeGame .challenge-header p {
     color: #bdc5d3;
 }
 
+#challengeGame .challenge-header {
+    max-width: 700px;
+
+    margin: 0 auto 25px;
+}
+
 .challenge-info {
-    max-width: 400px;
+    width: min(520px, 100%);
 
-    margin: 25px auto;
+    margin: 0 auto 25px;
 
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
 }
 
 .challenge-info div {
-    padding: 12px 20px;
+    padding: 12px;
 
-    background: rgba(255,255,255,0.07);
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
 
     border-radius: 12px;
 }
 
 .challenge-info strong {
+    display: block;
+
     color: #ff9a75;
+
+    font-size: 1.3rem;
 }
 
-.crossword {
+.challenge-info span {
+    color: #b8c0cf;
+
+    font-size: 0.72rem;
+}
+
+.challenge-content {
+    width: min(850px, 100%);
+
+    margin: auto;
+
     display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 30px;
 
-    grid-template-columns: repeat(8, 45px);
+    align-items: start;
+}
 
-    justify-content: center;
+#crossword {
+    width: min(520px, 100%);
+    aspect-ratio: 1 / 1;
 
-    margin: 25px auto;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
 
     gap: 3px;
+
+    padding: 8px;
+
+    background: #0d1422;
+
+    border: 2px solid rgba(255, 255, 255, 0.15);
+
+    border-radius: 15px;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
 .cross-cell {
-    width: 45px;
-    height: 45px;
+    width: 100%;
+    height: 100%;
 
-    border: 1px solid #506078;
+    min-width: 0;
+
+    border: 1px solid #8d9aae;
+    border-radius: 4px;
 
     background: white;
-
     color: #172033;
 
     text-align: center;
 
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 3vw, 1.5rem);
     font-weight: 900;
+
+    outline: none;
+
     text-transform: uppercase;
+
+    cursor: text;
 }
 
 .cross-cell.block {
-    background: transparent;
+    background: #080d16;
+
     border: none;
+
+    cursor: default;
 }
 
 .cross-cell:focus {
-    outline: 3px solid #ff7043;
+    background: #fff3df;
+
+    border: 3px solid #ff7043;
+
+    transform: scale(0.95);
+
+    z-index: 2;
 }
 
-.challenge-clues {
-    max-width: 650px;
+.cross-cell.correct-cell {
+    background: #dff8e8;
 
-    margin: 30px auto;
+    border-color: #3bb273;
+
+    color: #176b43;
+}
+
+#clues {
+    padding: 20px;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 15px;
 
     text-align: left;
 }
 
-.challenge-clues h3 {
+#clues::before {
+    content: "💡 PISTAS";
+
+    display: block;
+
     margin-bottom: 15px;
+
+    color: #ff9a75;
+
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 1px;
 }
 
 .clue {
-    margin-bottom: 10px;
-    padding: 12px 15px;
+    padding: 10px 0;
 
-    background: rgba(255,255,255,0.07);
+    color: #d5dbe5;
 
-    border-radius: 10px;
+    font-size: 0.88rem;
+
+    line-height: 1.4;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.clue:last-child {
+    border-bottom: none;
+}
+
+.clue strong {
+    color: #ff9a75;
+}
+
+.clue small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #8994a7;
 }
 
 .challenge-controls {
+    margin-top: 25px;
+
     display: flex;
     justify-content: center;
+
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .challenge-controls button {
     min-height: 42px;
 
-    padding: 0 18px;
+    padding: 0 20px;
 
     border-radius: 9px;
 
+    font-size: 0.85rem;
     font-weight: 800;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 #restartChallenge {
@@ -1114,10 +1439,15 @@ a {
 }
 
 #closeChallenge {
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 
     background: transparent;
     color: white;
+}
+
+#restartChallenge:hover,
+#closeChallenge:hover {
+    transform: translateY(-2px);
 }
 
 
@@ -1140,11 +1470,20 @@ a {
 
     background: white;
 
+    border: 1px solid #e3e9f1;
     border-radius: 18px;
 
     text-align: center;
 
-    border: 1px solid #e3e9f1;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.activity:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 12px 30px rgba(23, 32, 51, 0.08);
 }
 
 .activity span {
@@ -1157,6 +1496,7 @@ a {
 
 .activity p {
     color: #697487;
+
     line-height: 1.5;
 }
 
@@ -1206,6 +1546,7 @@ a {
 
     display: flex;
     justify-content: center;
+
     gap: 18px;
     flex-wrap: wrap;
 }
@@ -1215,7 +1556,7 @@ a {
 
     padding: 18px;
 
-    background: rgba(255,255,255,0.12);
+    background: rgba(255, 255, 255, 0.12);
 
     border-radius: 15px;
 }
@@ -1231,12 +1572,11 @@ a {
 
 
 /* =====================================================
-   MENSAJE
+   MENSAJE MODAL
 ===================================================== */
 
 .message-box {
     position: fixed;
-
     inset: 0;
     z-index: 5000;
 
@@ -1246,7 +1586,7 @@ a {
 
     padding: 20px;
 
-    background: rgba(23,32,51,0.55);
+    background: rgba(23, 32, 51, 0.55);
 
     backdrop-filter: blur(5px);
 }
@@ -1268,13 +1608,12 @@ a {
 
     text-align: center;
 
-    box-shadow: 0 25px 70px rgba(0,0,0,0.2);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
 
     animation: popMessage 0.25s ease;
 }
 
 @keyframes popMessage {
-
     from {
         transform: scale(0.9);
         opacity: 0;
@@ -1284,7 +1623,6 @@ a {
         transform: scale(1);
         opacity: 1;
     }
-
 }
 
 #messageIcon {
@@ -1299,6 +1637,7 @@ a {
 
 #messageText {
     color: #687386;
+
     line-height: 1.5;
 }
 
@@ -1309,18 +1648,17 @@ a {
     right: 15px;
 
     border: none;
+
     background: transparent;
+    color: #7b8493;
 
     font-size: 1.7rem;
-
-    color: #7b8493;
 }
 
 .message-btn {
-    margin-top: 22px;
-
     min-height: 43px;
 
+    margin-top: 22px;
     padding: 0 25px;
 
     border: none;
@@ -1366,7 +1704,7 @@ footer small {
 
 
 /* =====================================================
-   RESPONSIVE
+   RESPONSIVE - TABLET
 ===================================================== */
 
 @media (max-width: 800px) {
@@ -1395,6 +1733,8 @@ footer small {
         border-bottom: 1px solid #e5eaf1;
 
         flex-direction: column;
+
+        box-shadow: 0 10px 25px rgba(23, 32, 51, 0.08);
     }
 
     .navbar nav.active {
@@ -1404,13 +1744,18 @@ footer small {
     .hero {
         grid-template-columns: 1fr;
 
-        text-align: center;
-
         padding: 60px 5%;
+
+        text-align: center;
     }
 
     .hero-content {
         margin: auto;
+    }
+
+    .hero p {
+        margin-right: auto;
+        margin-left: auto;
     }
 
     .hero-buttons {
@@ -1422,7 +1767,8 @@ footer small {
     }
 
     .course-grid,
-    .game-grid {
+    .game-grid,
+    .games-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1430,389 +1776,8 @@ footer small {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .crossword {
-        grid-template-columns: repeat(8, 35px);
-    }
-
-    .cross-cell {
-        width: 35px;
-        height: 35px;
-    }
-
-}
-
-@media (max-width: 600px) {
-
-    .section {
-        padding: 60px 5%;
-    }
-
-    .memory-game-section,
-    .correct-word-game,
-    .challenge-section {
-        padding: 50px 5%;
-    }
-
-    .memory-board {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 9px;
-    }
-
-    .memory-card {
-        height: 95px;
-    }
-
-    .memory-back {
-        font-size: 0.78rem;
-    }
-
-    .memory-front {
-        font-size: 1.4rem;
-    }
-
-    .memory-info {
-        gap: 7px;
-    }
-
-    .memory-info div {
-        padding: 9px 5px;
-    }
-
-    .activity-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .challenge-box h2 {
-        font-size: 1.9rem;
-    }
-
-    .crossword {
-        grid-template-columns: repeat(8, 32px);
-        gap: 2px;
-    }
-
-    .cross-cell {
-        width: 32px;
-        height: 32px;
-
-        font-size: 0.8rem;
-    }
-
-}
-/* =====================================================
-   CRUCIGRAMA RETO LINGUAGO
-===================================================== */
-
-#challengeGame {
-    display: none;
-    padding: 65px 7%;
-    background: #172033;
-    color: white;
-    text-align: center;
-}
-
-#challengeGame.active {
-    display: block;
-    animation: challengeAppear 0.4s ease;
-}
-
-@keyframes challengeAppear {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-/* ENCABEZADO */
-
-#challengeGame .challenge-header {
-    max-width: 700px;
-    margin: 0 auto 25px;
-}
-
-#challengeGame .challenge-header span {
-    color: #ff9a75;
-    font-size: .78rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-#challengeGame .challenge-header h2 {
-    margin: 8px 0;
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-}
-
-#challengeGame .challenge-header p {
-    color: #bdc5d3;
-}
-
-
-/* INFORMACIÓN */
-
-.challenge-info {
-    width: min(520px, 100%);
-    margin: 0 auto 25px;
-
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-}
-
-.challenge-info div {
-    padding: 12px;
-
-    background: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,255,255,.1);
-
-    border-radius: 12px;
-}
-
-.challenge-info strong {
-    display: block;
-
-    color: #ff9a75;
-    font-size: 1.3rem;
-}
-
-.challenge-info span {
-    color: #b8c0cf;
-    font-size: .72rem;
-}
-
-
-/* CONTENEDOR */
-
-.challenge-content {
-    width: min(850px, 100%);
-    margin: auto;
-
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 30px;
-
-    align-items: start;
-}
-
-
-/* TABLERO */
-
-#crossword {
-    width: min(520px, 100%);
-    aspect-ratio: 1 / 1;
-
-    margin: auto;
-
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: repeat(9, 1fr);
-
-    gap: 3px;
-
-    padding: 8px;
-
-    background: #0d1422;
-
-    border: 2px solid rgba(255,255,255,.15);
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.3);
-}
-
-
-/* CASILLAS */
-
-.cross-cell {
-    width: 100%;
-    height: 100%;
-
-    min-width: 0;
-
-    border: 1px solid #8d9aae;
-
-    border-radius: 4px;
-
-    background: white;
-
-    color: #172033;
-
-    text-align: center;
-
-    font-size: clamp(1rem, 3vw, 1.5rem);
-
-    font-weight: 900;
-
-    outline: none;
-
-    text-transform: uppercase;
-
-    cursor: text;
-}
-
-
-/* CASILLAS VACÍAS */
-
-.cross-cell.block {
-    background: #080d16;
-
-    border: none;
-
-    cursor: default;
-}
-
-
-/* CASILLA ACTIVA */
-
-.cross-cell:focus {
-    background: #fff3df;
-
-    border: 3px solid #ff7043;
-
-    transform: scale(.95);
-
-    z-index: 2;
-}
-
-
-/* RESPUESTA CORRECTA */
-
-.cross-cell.correct-cell {
-    background: #dff8e8;
-
-    border-color: #3bb273;
-
-    color: #176b43;
-
-}
-
-
-/* PISTAS */
-
-#clues {
-    text-align: left;
-
-    padding: 20px;
-
-    background: rgba(255,255,255,.06);
-
-    border: 1px solid rgba(255,255,255,.1);
-
-    border-radius: 15px;
-}
-
-#clues::before {
-    content: "💡 PISTAS";
-
-    display: block;
-
-    margin-bottom: 15px;
-
-    color: #ff9a75;
-
-    font-weight: 900;
-
-    font-size: .85rem;
-
-    letter-spacing: 1px;
-}
-
-.clue {
-    padding: 10px 0;
-
-    color: #d5dbe5;
-
-    font-size: .88rem;
-
-    line-height: 1.4;
-
-    border-bottom: 1px solid rgba(255,255,255,.08);
-}
-
-.clue:last-child {
-    border-bottom: none;
-}
-
-.clue strong {
-    color: #ff9a75;
-}
-
-.clue small {
-    display: block;
-
-    margin-top: 3px;
-
-    color: #8994a7;
-}
-
-
-/* BOTONES */
-
-.challenge-controls {
-    margin-top: 25px;
-
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-
-    flex-wrap: wrap;
-}
-
-#restartChallenge,
-#closeChallenge {
-    min-height: 42px;
-
-    padding: 0 20px;
-
-    border-radius: 9px;
-
-    font-size: .85rem;
-    font-weight: 800;
-
-    cursor: pointer;
-
-    transition: .2s ease;
-}
-
-#restartChallenge {
-    border: none;
-
-    background: #ff7043;
-
-    color: white;
-}
-
-#closeChallenge {
-    border: 1px solid rgba(255,255,255,.2);
-
-    background: transparent;
-
-    color: white;
-}
-
-#restartChallenge:hover,
-#closeChallenge:hover {
-    transform: translateY(-2px);
-}
-
-
-/* MÓVIL */
-
-@media (max-width: 750px) {
-
-    #challengeGame {
-        padding: 50px 5%;
-    }
-
     .challenge-content {
         grid-template-columns: 1fr;
-        gap: 20px;
     }
 
     #crossword {
@@ -1822,190 +1787,78 @@ footer small {
     #clues {
         width: 100%;
     }
-
 }
 
 
-@media (max-width: 450px) {
-
-    #crossword {
-        gap: 2px;
-        padding: 5px;
-    }
-
-    .cross-cell {
-        border-radius: 2px;
-
-        font-size: .9rem;
-    }
-
-    .challenge-info {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-}
 /* =====================================================
-   MEJORA VISUAL - TARJETAS DE JUEGOS
-===================================================== */
-
-.games-grid .game-card {
-    position: relative;
-    overflow: hidden;
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-}
-
-.games-grid .game-card::before {
-    content: "";
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 4px;
-
-    background: linear-gradient(
-        90deg,
-        #2878e3,
-        #ff7043
-    );
-}
-
-.games-grid .game-card:hover {
-    transform: translateY(-7px);
-
-    box-shadow:
-        0 18px 35px rgba(0,0,0,.14);
-}
-
-
-/* ICONO DEL JUEGO */
-
-.games-grid .game-icon {
-    transition: transform .25s ease;
-}
-
-.games-grid .game-card:hover .game-icon {
-    transform: scale(1.15) rotate(-4deg);
-}
-
-
-/* BOTÓN */
-
-.games-grid .game-btn {
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-.games-grid .game-btn:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 7px 18px rgba(0,0,0,.15);
-}
-
-
-/* ANIMACIÓN SUAVE */
-
-@keyframes juegoEntrada {
-
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-}
-
-.games-grid .game-card {
-    animation: juegoEntrada .5s ease both;
-}
-
-.games-grid .game-card:nth-child(2) {
-    animation-delay: .08s;
-}
-
-.games-grid .game-card:nth-child(3) {
-    animation-delay: .16s;
-}
-
-
-/* MÓVIL */
-
-@media (max-width: 600px) {
-
-    .games-grid .game-card:hover {
-        transform: none;
-    }
-
-}
-/* =====================================================
-   LINGUAGO - AJUSTE FINAL PARA CELULAR
+   RESPONSIVE - MÓVIL
 ===================================================== */
 
 @media (max-width: 600px) {
-
-    /* CONTENIDO GENERAL */
 
     body {
         overflow-x: hidden;
     }
 
-    section {
-        width: 100%;
+    .navbar {
+        min-height: 68px;
     }
 
+    .navbar nav {
+        top: 68px;
+    }
 
-    /* TÍTULOS */
+    .section {
+        padding: 60px 5%;
+    }
 
-    h1 {
+    .hero {
+        min-height: auto;
+
+        padding: 55px 5% 45px;
+    }
+
+    .hero h1 {
         font-size: 2rem;
         line-height: 1.15;
+
+        animation: tituloEntrada 1s ease-out;
     }
 
-    h2 {
-        font-size: 1.6rem;
+    .hero p {
+        font-size: 0.92rem;
     }
 
-    p {
-        font-size: .92rem;
-    }
-
-
-    /* TARJETAS DE JUEGOS */
-
-    .games-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
-
-    .games-grid .game-card {
+    .hero-buttons {
         width: 100%;
     }
 
-
-    /* BOTONES */
-
-    .game-btn,
-    .card-btn {
+    .hero-buttons .btn {
         width: 100%;
-        min-height: 44px;
     }
 
+    .logo-tierra,
+    .hero-logo,
+    .earth-logo {
+        animation: tierraFlotando 4s ease-in-out infinite;
+    }
 
-    /* MEMORIA */
+    .lingo-bubble {
+        right: 5%;
+    }
+
+    .memory-game-section,
+    .correct-word-game,
+    .challenge-section,
+    #challengeGame {
+        padding: 45px 5%;
+    }
 
     .memory-board {
         width: 100%;
+
         grid-template-columns: repeat(3, 1fr);
+
         gap: 7px;
     }
 
@@ -2018,68 +1871,15 @@ footer small {
     }
 
     .memory-back {
-        font-size: .75rem;
         padding: 4px;
+
+        font-size: 0.75rem;
     }
-
-
-    /* PALABRA CORRECTA */
-
-    .correct-word-game {
-        padding: 35px 5%;
-    }
-
-    .correct-word-box {
-        width: 100%;
-        padding: 22px 15px;
-    }
-
-    .correct-options {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .correct-option {
-        min-height: 48px;
-    }
-
-
-    /* CRUCIGRAMA */
-
-    #challengeGame {
-        padding: 40px 4%;
-    }
-
-    .challenge-content {
-        width: 100%;
-        grid-template-columns: 1fr;
-    }
-
-    #crossword {
-        width: 100%;
-        max-width: 390px;
-        margin: auto;
-
-        gap: 2px;
-        padding: 5px;
-    }
-
-    .cross-cell {
-        font-size: .85rem;
-        border-radius: 3px;
-    }
-
-    #clues {
-        width: 100%;
-        padding: 16px;
-    }
-
-
-    /* INFORMACIÓN DE JUEGOS */
 
     .memory-info,
     .challenge-info {
         width: 100%;
+
         gap: 8px;
     }
 
@@ -2088,8 +1888,61 @@ footer small {
         padding: 10px 5px;
     }
 
+    .correct-word-box {
+        width: 100%;
 
-    /* CONTROLES */
+        padding: 22px 15px;
+    }
+
+    .correct-options {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+    .correct-option {
+        min-height: 48px;
+    }
+
+    #challengeGame {
+        padding: 40px 4%;
+    }
+
+    .challenge-content {
+        width: 100%;
+
+        grid-template-columns: 1fr;
+    }
+
+    #crossword {
+        width: 100%;
+        max-width: 390px;
+
+        gap: 2px;
+        padding: 5px;
+    }
+
+    .cross-cell {
+        font-size: 0.85rem;
+        border-radius: 3px;
+    }
+
+    #clues {
+        width: 100%;
+
+        padding: 16px;
+    }
+
+    .activity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .game-btn,
+    .card-btn {
+        width: 100%;
+
+        min-height: 44px;
+    }
 
     .memory-controls,
     .challenge-controls {
@@ -2101,219 +1954,96 @@ footer small {
     #restartChallenge,
     #closeChallenge {
         flex: 1;
+
         min-width: 130px;
     }
 
-}
-/* =====================================================
-   LINGUAGO - PORTADA DINÁMICA
-===================================================== */
-
-/* 🌎 TIERRA / LOGO */
-
-.logo-tierra,
-.hero-logo,
-.earth-logo {
-    animation:
-        tierraFlotando 4s ease-in-out infinite,
-        tierraEntrada 1s ease-out;
-    transform-origin: center;
-}
-
-@keyframes tierraFlotando {
-
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
+    .games-grid .game-card:hover,
+    .game-card:hover {
+        transform: none;
     }
 
-    50% {
-        transform: translateY(-10px) rotate(3deg);
+    .message-content {
+        padding: 30px 22px;
     }
-
-}
-
-@keyframes tierraEntrada {
-
-    from {
-        opacity: 0;
-        transform: scale(.75);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-
 }
 
 
 /* =====================================================
-   TÍTULO PRINCIPAL
+   RESPONSIVE - CELULARES PEQUEÑOS
 ===================================================== */
 
-.hero h1 {
+@media (max-width: 450px) {
 
-    animation:
-        tituloEntrada 1s ease-out,
-        tituloFlotando 4s ease-in-out 1s infinite;
-
-    text-shadow:
-        0 4px 18px rgba(40,120,227,.25);
-
-    letter-spacing: .5px;
-}
-
-
-/* ENTRADA DEL TÍTULO */
-
-@keyframes tituloEntrada {
-
-    from {
-        opacity: 0;
-        transform: translateY(25px) scale(.96);
+    .logo {
+        font-size: 1.15rem;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+    .logo-icon {
+        font-size: 1.4rem;
     }
 
-}
-
-
-/* MOVIMIENTO SUAVE */
-
-@keyframes tituloFlotando {
-
-    0%, 100% {
-        transform: translateY(0);
+    .section-title h2 {
+        font-size: 1.8rem;
     }
 
-    50% {
-        transform: translateY(-5px);
+    .memory-board {
+        gap: 5px;
     }
 
+    .memory-card {
+        height: 82px;
+    }
+
+    .memory-front {
+        font-size: 1.15rem;
+    }
+
+    .memory-back {
+        font-size: 0.68rem;
+    }
+
+    #crossword {
+        gap: 2px;
+        padding: 5px;
+    }
+
+    .cross-cell {
+        border-radius: 2px;
+
+        font-size: 0.78rem;
+    }
+
+    .challenge-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 
 /* =====================================================
-   TEXTO DE LA PORTADA
+   ACCESIBILIDAD
 ===================================================== */
 
-.hero p {
-
-    animation:
-        textoEntrada 1s ease-out .25s both;
-
-}
-
-@keyframes textoEntrada {
-
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 3px solid rgba(40, 120, 227, 0.45);
+    outline-offset: 3px;
 }
 
 
 /* =====================================================
-   BOTONES PRINCIPALES
+   REDUCIR ANIMACIONES
 ===================================================== */
 
-.hero .btn,
-.hero a {
+@media (prefers-reduced-motion: reduce) {
 
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-
-}
-
-.hero .btn:hover,
-.hero a:hover {
-
-    transform: translateY(-4px) scale(1.03);
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.15);
-
-}
-
-
-/* =====================================================
-   EFECTO DE VIDA EN LA PORTADA
-===================================================== */
-
-.hero {
-
-    overflow: hidden;
-}
-
-.hero::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 220px;
-    height: 220px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,.18),
-            transparent 70%
-        );
-
-    top: 10%;
-    right: -80px;
-
-    animation:
-        luzFlotante 7s ease-in-out infinite;
-
-    pointer-events: none;
-
-}
-
-@keyframes luzFlotante {
-
-    0%, 100% {
-        transform: translateY(0);
-        opacity: .4;
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
-
-    50% {
-        transform: translateY(35px);
-        opacity: .7;
-    }
-
-}
-
-
-/* =====================================================
-   CELULAR
-===================================================== */
-
-@media (max-width: 600px) {
-
-    .hero h1 {
-        animation:
-            tituloEntrada 1s ease-out;
-    }
-
-    .logo-tierra,
-    .hero-logo,
-    .earth-logo {
-        animation:
-            tierraFlotando 4s ease-in-out infinite;
-    }
-
 }
