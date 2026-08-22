@@ -2258,3 +2258,517 @@ input:focus-visible {
         padding: 13px;
     }
 }
+/* =====================================================
+   SISTEMA DE LECCIONES LINGUAGO
+===================================================== */
+
+.lesson-panel {
+    display: none;
+
+    padding: 70px 7%;
+
+    background:
+        radial-gradient(
+            circle at 90% 10%,
+            #dcecff,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #f8fbff,
+            #eef5ff
+        );
+}
+
+.lesson-panel.active {
+    display: block;
+
+    animation: gameAppear 0.4s ease;
+}
+
+.lesson-container {
+    position: relative;
+
+    width: min(1050px, 100%);
+
+    margin: auto;
+    padding: 35px;
+
+    background: white;
+
+    border: 1px solid #e0e8f2;
+    border-radius: 28px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(23, 32, 51, 0.10);
+}
+
+.lesson-close {
+    position: absolute;
+
+    top: 18px;
+    right: 20px;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #eef5ff;
+    color: #172033;
+
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.lesson-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding-right: 45px;
+}
+
+.lesson-top > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 65px;
+    height: 65px;
+
+    border-radius: 20px;
+
+    background: #e7f1ff;
+
+    font-size: 2.3rem;
+}
+
+.lesson-top small {
+    color: #2878e3;
+
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.lesson-top h2 {
+    margin-top: 4px;
+
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+}
+
+.lesson-progress-area {
+    margin: 30px 0;
+}
+
+.lesson-progress-text {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+
+    color: #697487;
+
+    font-size: 0.85rem;
+}
+
+.lesson-progress-text strong {
+    color: #2878e3;
+}
+
+.lesson-progress {
+    height: 10px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #e8edf4;
+}
+
+.lesson-progress span {
+    display: block;
+
+    width: 0;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2878e3,
+            #5aa0ff
+        );
+
+    transition: width 0.4s ease;
+}
+
+
+/* RUTA */
+
+.lesson-path-large {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 35px;
+}
+
+.lesson-step {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 70px;
+
+    padding: 10px;
+
+    border: 1px solid #e1e8f1;
+    border-radius: 14px;
+
+    background: #f8fafc;
+
+    text-align: left;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.lesson-step:not(:disabled):hover {
+    transform: translateY(-3px);
+}
+
+.lesson-step.current {
+    border-color: #2878e3;
+
+    background: #eef5ff;
+}
+
+.lesson-step.completed {
+    border-color: #3bb273;
+
+    background: #effbf4;
+}
+
+.lesson-step-number {
+    flex: 0 0 34px;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e3e9f2;
+    color: #697487;
+
+    font-weight: 900;
+}
+
+.lesson-step.current
+.lesson-step-number {
+    background: #2878e3;
+    color: white;
+}
+
+.lesson-step.completed
+.lesson-step-number {
+    background: #3bb273;
+    color: white;
+}
+
+.lesson-step-info {
+    min-width: 0;
+}
+
+.lesson-step-info strong {
+    display: block;
+
+    color: #172033;
+
+    font-size: 0.85rem;
+}
+
+.lesson-step-info small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #7a8495;
+
+    font-size: 0.7rem;
+}
+
+
+/* CONTENIDO */
+
+.lesson-content {
+    max-width: 750px;
+
+    margin: auto;
+
+    text-align: center;
+}
+
+.lesson-character {
+    font-size: 4rem;
+
+    animation:
+        lessonLingo 2s ease-in-out infinite;
+}
+
+@keyframes lessonLingo {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+}
+
+.lesson-bubble {
+    width: fit-content;
+    max-width: 600px;
+
+    margin: 5px auto 25px;
+    padding: 15px 20px;
+
+    border-radius: 18px;
+
+    background: #eef5ff;
+
+    text-align: left;
+}
+
+.lesson-bubble strong {
+    color: #2878e3;
+}
+
+.lesson-bubble p {
+    margin-top: 4px;
+
+    color: #697487;
+
+    line-height: 1.5;
+}
+
+.lesson-question {
+    padding: 30px;
+
+    border-radius: 22px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e3e9f1;
+}
+
+.lesson-question > span {
+    font-size: 2.5rem;
+}
+
+.lesson-question h3 {
+    margin: 15px 0 22px;
+
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+.lesson-options {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+}
+
+.lesson-option {
+    min-height: 55px;
+
+    padding: 10px;
+
+    border: 2px solid #dfe6ef;
+    border-radius: 13px;
+
+    background: white;
+    color: #172033;
+
+    font-weight: 800;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.lesson-option:hover:not(:disabled) {
+    transform: translateY(-3px);
+
+    border-color: #2878e3;
+
+    background: #eef5ff;
+}
+
+.lesson-option.correct {
+    border-color: #3bb273;
+
+    background: #dff8e8;
+
+    color: #176b43;
+}
+
+.lesson-option.incorrect {
+    border-color: #ff7043;
+
+    background: #fff0eb;
+
+    color: #b74724;
+}
+
+.lesson-feedback {
+    min-height: 55px;
+
+    margin-top: 18px;
+}
+
+.feedback-success,
+.feedback-error {
+    padding: 14px;
+
+    border-radius: 12px;
+
+    font-weight: 800;
+}
+
+.feedback-success {
+    background: #dff8e8;
+    color: #176b43;
+}
+
+.feedback-error {
+    background: #fff0eb;
+    color: #b74724;
+}
+
+
+/* FINAL */
+
+.lesson-finished {
+    padding: 35px;
+
+    text-align: center;
+}
+
+.finished-icon {
+    font-size: 5rem;
+
+    animation:
+        lessonLingo 2s ease-in-out infinite;
+}
+
+.lesson-finished h2 {
+    margin: 15px 0 8px;
+
+    font-size: 2rem;
+}
+
+.lesson-finished p {
+    color: #697487;
+}
+
+.finished-score {
+    margin: 25px 0;
+
+    color: #ff7043;
+
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.lesson-restart {
+    min-height: 48px;
+
+    padding: 0 24px;
+
+    border: none;
+    border-radius: 11px;
+
+    background: #2878e3;
+    color: white;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   LECCIONES — MÓVIL
+===================================================== */
+
+@media (max-width: 800px) {
+
+    .lesson-panel {
+        padding: 50px 5%;
+    }
+
+    .lesson-container {
+        padding: 25px 18px;
+    }
+
+    .lesson-path-large {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .lesson-options {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .lesson-panel {
+        padding: 35px 4%;
+    }
+
+    .lesson-top > span {
+        width: 52px;
+        height: 52px;
+
+        font-size: 1.8rem;
+    }
+
+    .lesson-top h2 {
+        font-size: 1.5rem;
+    }
+
+    .lesson-path-large {
+        grid-template-columns: 1fr;
+    }
+
+    .lesson-question {
+        padding: 20px 15px;
+    }
+
+    .lesson-question h3 {
+        font-size: 1rem;
+    }
+
+}
