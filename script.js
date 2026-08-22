@@ -131,39 +131,696 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* =================================================
-       CURSOS
-    ================================================= */
+   /* =================================================
+   CURSOS — SISTEMA DE LECCIONES LINGUAGO
+================================================= */
 
-    document.querySelectorAll(".card-btn").forEach((boton) => {
+const datosCursos = {
 
-        boton.addEventListener("click", () => {
+    "Español": {
+        idioma: "🇪🇸",
+        titulo: "Aprende Español",
+        descripcion: "Descubre palabras, construye frases y mejora tu comprensión.",
+        lecciones: [
+            {
+                titulo: "Palabras y sonidos",
+                icono: "🔤",
+                descripcion: "Aprende palabras básicas y reconoce sus sonidos.",
+                pregunta: "¿Cuál de estas palabras es un animal?",
+                opciones: ["Casa", "Perro", "Libro"],
+                correcta: "Perro"
+            },
+            {
+                titulo: "Construye palabras",
+                icono: "🧩",
+                descripcion: "Organiza palabras para formar una oración.",
+                pregunta: "¿Cuál oración está correctamente escrita?",
+                opciones: [
+                    "El niño juega.",
+                    "Niño el juega.",
+                    "Juega niño el."
+                ],
+                correcta: "El niño juega."
+            },
+            {
+                titulo: "Lee y comprende",
+                icono: "📖",
+                descripcion: "Lee una pequeña situación y demuestra lo que comprendiste.",
+                pregunta: "Ana tiene un libro rojo. ¿Qué tiene Ana?",
+                opciones: ["Un balón", "Un libro", "Una mochila"],
+                correcta: "Un libro"
+            },
+            {
+                titulo: "Reto LinguaGO",
+                icono: "🎮",
+                descripcion: "Completa el desafío final de esta ruta.",
+                pregunta: "¿Cuál palabra significa lo contrario de GRANDE?",
+                opciones: ["Alto", "Pequeño", "Largo"],
+                correcta: "Pequeño"
+            }
+        ]
+    },
 
-            const curso = boton.dataset.course;
+    "Inglés": {
+        idioma: "🇬🇧",
+        titulo: "Learn English",
+        descripcion: "Learn vocabulary, expressions and basic English step by step.",
+        lecciones: [
+            {
+                titulo: "Words & Sounds",
+                icono: "🔤",
+                descripcion: "Learn your first English words.",
+                pregunta: "How do you say CASA in English?",
+                opciones: ["House", "Horse", "Mouse"],
+                correcta: "House"
+            },
+            {
+                titulo: "Build Words",
+                icono: "🧩",
+                descripcion: "Build simple English expressions.",
+                pregunta: "Choose the correct sentence.",
+                opciones: [
+                    "I am a student.",
+                    "Student am I.",
+                    "Am student a I."
+                ],
+                correcta: "I am a student."
+            },
+            {
+                titulo: "Read & Understand",
+                icono: "📖",
+                descripcion: "Read a simple sentence and understand its meaning.",
+                pregunta: "Tom has a blue book. What does Tom have?",
+                opciones: ["A ball", "A blue book", "A dog"],
+                correcta: "A blue book"
+            },
+            {
+                titulo: "LinguaGO Challenge",
+                icono: "🎮",
+                descripcion: "Complete the final English challenge.",
+                pregunta: "What is the opposite of BIG?",
+                opciones: ["Small", "Long", "Tall"],
+                correcta: "Small"
+            }
+        ]
+    }
 
-            if (curso === "Español") {
+};
 
-                mostrarMensaje(
-                    "¡Vamos con Español! 🇪🇸",
-                    "Lingo está listo para acompañarte.",
-                    "📚"
-                );
 
-            } else {
+let cursoActual = null;
+let leccionActual = 0;
+let puntosCurso = 0;
 
-                mostrarMensaje(
-                    "Let's learn English! 🇬🇧",
-                    "Lingo está listo para comenzar.",
-                    "🦊"
+
+/* =================================================
+   CREAR PANEL DE LECCIONES
+================================================= */
+
+function crearPanelLecciones() {
+
+    if (document.getElementById("lessonPanel")) return;
+
+    const panel = document.createElement("section");
+
+    panel.id = "lessonPanel";
+    panel.className = "lesson-panel";
+
+    panel.innerHTML = `
+
+        <div class="lesson-container">
+
+            <button
+                class="lesson-close"
+                id="lessonClose">
+                ✕
+            </button>
+
+            <div class="lesson-top">
+
+                <span id="lessonLanguage">
+                    🇪🇸
+                </span>
+
+                <div>
+                    <small>APRENDIENDO CON LINGO</small>
+                    <h2 id="lessonCourseTitle">
+                        Aprende Español
+                    </h2>
+                </div>
+
+            </div>
+
+            <div class="lesson-progress-area">
+
+                <div class="lesson-progress-text">
+
+                    <span>
+                        Progreso
+                    </span>
+
+                    <strong id="lessonProgressText">
+                        0%
+                    </strong>
+
+                </div>
+
+                <div class="lesson-progress">
+
+                    <span id="lessonProgressBar"></span>
+
+                </div>
+
+            </div>
+
+            <div
+                class="lesson-path-large"
+                id="lessonPathLarge">
+            </div>
+
+            <div
+                class="lesson-content"
+                id="lessonContent">
+            </div>
+
+        </div>
+    `;
+
+    document.body.appendChild(panel);
+
+    document
+        .getElementById("lessonClose")
+        .addEventListener(
+            "click",
+            cerrarLecciones
+        );
+
+}
+
+
+/* =================================================
+   INICIAR CURSO
+================================================= */
+
+function iniciarCurso(curso) {
+
+    const datos = datosCursos[curso];
+
+    if (!datos) return;
+
+    cursoActual = curso;
+    leccionActual = 0;
+
+    const guardado =
+        localStorage.getItem(
+            `linguago-${curso}-progreso`
+        );
+
+    if (guardado) {
+
+        leccionActual =
+            Math.min(
+                parseInt(guardado),
+                datos.lecciones.length - 1
+            );
+
+    }
+
+    crearPanelLecciones();
+
+    const panel =
+        document.getElementById("lessonPanel");
+
+    panel.classList.add("active");
+
+    document
+        .getElementById("lessonLanguage")
+        .textContent = datos.idioma;
+
+    document
+        .getElementById("lessonCourseTitle")
+        .textContent = datos.titulo;
+
+    crearRutaLecciones();
+
+    mostrarLeccion();
+
+    panel.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}
+
+
+/* =================================================
+   RUTA DE LECCIONES
+================================================= */
+
+function crearRutaLecciones() {
+
+    const contenedor =
+        document.getElementById("lessonPathLarge");
+
+    if (!contenedor) return;
+
+    const datos =
+        datosCursos[cursoActual];
+
+    contenedor.innerHTML = "";
+
+    datos.lecciones.forEach(
+        (leccion, indice) => {
+
+            const item =
+                document.createElement("button");
+
+            item.className =
+                "lesson-step";
+
+            if (indice < leccionActual) {
+                item.classList.add("completed");
+            }
+
+            if (indice === leccionActual) {
+                item.classList.add("current");
+            }
+
+            item.innerHTML = `
+
+                <span class="lesson-step-number">
+                    ${
+                        indice < leccionActual
+                            ? "✓"
+                            : indice + 1
+                    }
+                </span>
+
+                <span class="lesson-step-info">
+
+                    <strong>
+                        ${leccion.icono}
+                        ${leccion.titulo}
+                    </strong>
+
+                    <small>
+                        ${
+                            indice < leccionActual
+                                ? "Completada"
+                                : indice === leccionActual
+                                    ? "Actual"
+                                    : "Bloqueada"
+                        }
+                    </small>
+
+                </span>
+
+            `;
+
+            if (indice <= leccionActual) {
+
+                item.addEventListener(
+                    "click",
+                    () => {
+
+                        leccionActual = indice;
+
+                        mostrarLeccion();
+
+                    }
                 );
 
             }
 
+            contenedor.appendChild(item);
+
+        }
+    );
+
+}
+
+
+/* =================================================
+   MOSTRAR LECCIÓN
+================================================= */
+
+function mostrarLeccion() {
+
+    const datos =
+        datosCursos[cursoActual];
+
+    const leccion =
+        datos.lecciones[leccionActual];
+
+    if (!leccion) return;
+
+    const total =
+        datos.lecciones.length;
+
+    const porcentaje =
+        Math.round(
+            (leccionActual / total) * 100
+        );
+
+    document
+        .getElementById("lessonProgressText")
+        .textContent = `${porcentaje}%`;
+
+    document
+        .getElementById("lessonProgressBar")
+        .style.width = `${porcentaje}%`;
+
+    crearRutaLecciones();
+
+    const contenido =
+        document.getElementById("lessonContent");
+
+    contenido.innerHTML = `
+
+        <div class="lesson-character">
+            🦊
+        </div>
+
+        <div class="lesson-bubble">
+
+            <strong>
+                ¡Hola! Soy Lingo
+            </strong>
+
+            <p>
+                ${leccion.descripcion}
+            </p>
+
+        </div>
+
+        <div class="lesson-question">
+
+            <span>
+                ${leccion.icono}
+            </span>
+
+            <h3>
+                ${leccion.pregunta}
+            </h3>
+
+            <div class="lesson-options">
+            </div>
+
+        </div>
+
+        <div
+            class="lesson-feedback"
+            id="lessonFeedback">
+        </div>
+
+    `;
+
+    const opciones =
+        contenido.querySelector(
+            ".lesson-options"
+        );
+
+    [...leccion.opciones]
+        .sort(() => Math.random() - 0.5)
+        .forEach((opcion) => {
+
+            const boton =
+                document.createElement("button");
+
+            boton.className =
+                "lesson-option";
+
+            boton.textContent = opcion;
+
+            boton.addEventListener(
+                "click",
+                () => {
+
+                    responderLeccion(
+                        opcion,
+                        boton
+                    );
+
+                }
+            );
+
+            opciones.appendChild(boton);
+
         });
+
+}
+
+
+/* =================================================
+   RESPONDER LECCIÓN
+================================================= */
+
+function responderLeccion(
+    respuesta,
+    botonSeleccionado
+) {
+
+    const datos =
+        datosCursos[cursoActual];
+
+    const leccion =
+        datos.lecciones[leccionActual];
+
+    const botones =
+        document.querySelectorAll(
+            ".lesson-option"
+        );
+
+    botones.forEach((boton) => {
+
+        boton.disabled = true;
+
+        if (
+            boton.textContent ===
+            leccion.correcta
+        ) {
+
+            boton.classList.add(
+                "correct"
+            );
+
+        }
 
     });
 
 
+    const feedback =
+        document.getElementById(
+            "lessonFeedback"
+        );
+
+
+    if (respuesta === leccion.correcta) {
+
+        puntosCurso += 100;
+
+        botonSeleccionado.classList.add(
+            "correct"
+        );
+
+        feedback.innerHTML = `
+            <div class="feedback-success">
+                🎉 ¡Excelente! +100 puntos
+            </div>
+        `;
+
+    } else {
+
+        botonSeleccionado.classList.add(
+            "incorrect"
+        );
+
+        feedback.innerHTML = `
+            <div class="feedback-error">
+                💡 La respuesta correcta es:
+                <strong>${leccion.correcta}</strong>
+            </div>
+        `;
+
+    }
+
+
+    setTimeout(() => {
+
+        if (
+            respuesta ===
+            leccion.correcta
+        ) {
+
+            localStorage.setItem(
+                `linguago-${cursoActual}-progreso`,
+                leccionActual + 1
+            );
+
+        }
+
+
+        if (
+            leccionActual <
+            datos.lecciones.length - 1
+        ) {
+
+            leccionActual++;
+
+            mostrarLeccion();
+
+        } else {
+
+            terminarCurso();
+
+        }
+
+    }, 1200);
+
+}
+
+
+/* =================================================
+   FINALIZAR CURSO
+================================================= */
+
+function terminarCurso() {
+
+    const contenido =
+        document.getElementById(
+            "lessonContent"
+        );
+
+    const datos =
+        datosCursos[cursoActual];
+
+    localStorage.setItem(
+        `linguago-${cursoActual}-progreso`,
+        datos.lecciones.length
+    );
+
+
+    document
+        .getElementById(
+            "lessonProgressText"
+        )
+        .textContent = "100%";
+
+    document
+        .getElementById(
+            "lessonProgressBar"
+        )
+        .style.width = "100%";
+
+
+    crearRutaLecciones();
+
+
+    contenido.innerHTML = `
+
+        <div class="lesson-finished">
+
+            <div class="finished-icon">
+                🏆
+            </div>
+
+            <h2>
+                ¡Curso completado!
+            </h2>
+
+            <p>
+                Has completado todas las lecciones
+                de ${datos.titulo}.
+            </p>
+
+            <div class="finished-score">
+                ⭐ ${puntosCurso} puntos
+            </div>
+
+            <button
+                class="lesson-restart"
+                id="lessonRestart">
+                🔄 Repetir curso
+            </button>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById("lessonRestart")
+        .addEventListener(
+            "click",
+            () => {
+
+                leccionActual = 0;
+                puntosCurso = 0;
+
+                mostrarLeccion();
+
+            }
+        );
+
+}
+
+
+/* =================================================
+   CERRAR LECCIONES
+================================================= */
+
+function cerrarLecciones() {
+
+    const panel =
+        document.getElementById(
+            "lessonPanel"
+        );
+
+    if (panel) {
+
+        panel.classList.remove(
+            "active"
+        );
+
+    }
+
+    const lecciones =
+        document.getElementById(
+            "lecciones"
+        );
+
+    if (lecciones) {
+
+        lecciones.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+}
+
+
+/* =================================================
+   BOTONES DE CURSO
+================================================= */
+
+document
+    .querySelectorAll(".card-btn")
+    .forEach((boton) => {
+
+        boton.addEventListener(
+            "click",
+            () => {
+
+                const curso =
+                    boton.dataset.course;
+
+                iniciarCurso(curso);
+
+            }
+        );
+
+    });
     /* =================================================
        BOTONES DE LOS JUEGOS
     ================================================= */
